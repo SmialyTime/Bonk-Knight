@@ -6,7 +6,7 @@ namespace Bonk_Knight
     {
         public static void Main(string[] args)
         {
-            Console.WriteLine("Hello dude!");
+            Console.WriteLine("my dude!");
         }
     }
 }
