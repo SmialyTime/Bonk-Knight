@@ -11,12 +11,29 @@ namespace Bonk_Knight
         //ON start up
         public Events()
         {
-
+            Console.WriteLine("Test button press a");
+            var key = Convert.ToString(Console.ReadKey());
+            if (key == "a")
+            {
+                KeyPress();
+            }
         }
-        public event EventHandler KeyDown;
+        public static void KeyPress()
+        {
+            button but = new button();
+        }
+        /*public event EventHandler KeyDown;
         public static void checkKeyDown()
         {
-
+            
+        }*/
+    }
+    public class button
+    {
+        public event EventHandler OnSpacePressed;
+        public void OnClick()
+        {
+            OnSpacePressed.Invoke(this, EventArgs.Empty);
         }
 
     }
