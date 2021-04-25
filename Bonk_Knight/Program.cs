@@ -15,7 +15,9 @@ namespace Bonk_Knight
             //Console.WriteLine("my dude thats cool!");
             //AsciiArtTesting.funWAscii();
             Console.WriteLine("having fun?");
-            Animations.MovingCloud(1);
+            //Animations.MovingCloud(1);
+
+            buttons EventRunnerGo = new buttons();
 
             //come back to - Animations.HoleInRect();
             //remove later
