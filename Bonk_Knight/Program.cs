@@ -17,7 +17,7 @@ namespace Bonk_Knight
             Console.WriteLine("having fun?");
             //Animations.MovingCloud(1);
 
-            buttons EventRunnerGo = new buttons();
+            TestingEvents EventRunnerGo = new TestingEvents();
 
             //come back to - Animations.HoleInRect();
             //remove later

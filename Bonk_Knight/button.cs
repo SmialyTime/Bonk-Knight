@@ -44,6 +44,7 @@ namespace Bonk_Knight
 
         public void OnClick()
         {
+            //way to pass in multipel args clearly
             myCustomArgs myCustomArgs = new myCustomArgs();
             myCustomArgs.Name = "Mimi";
             myCustomArgs.num = 19;
