@@ -95,33 +95,39 @@ namespace Bonk_Knight
             Console.SetCursorPosition(oXCur+20, oYCur+20);
 
         }
-        public static void MovingCloud(int LineNumberUP)
+        public static void MovingCloud(int ofSetY)
         {
             //make take in -ves
             //could cause problems if you want to change screen size
             var width = Globals.SSWidth;
-            int animationOX = Console.CursorTop;
-            int animationOY = Console.CursorLeft+1;
+            int animationOX = Console.CursorLeft;
+            int animationOY = Console.CursorTop+ofSetY-1;
             String Cloud = "(██████)";
             int cloudLen = Cloud.Length;
             String aCloud = Cloud;
             int aCloudLen = aCloud.Length;
+
             while (! Console.KeyAvailable) {
-                if (aCloud.TrimEnd(' ').Length<width) {
+                if (aCloud.TrimEnd('░').Length<width) {
                     //may be right?
-                    aCloud = " " + aCloud.TrimEnd(' ') + new String(' ',width - aCloud.TrimEnd(' ').Count()) ;
+                    aCloud = "░" + aCloud.TrimEnd('░') + new String('░', width - aCloud.TrimEnd('░').Count()) ;
                     
                 }
                 else
                 {
                     //only errors if cloud doesn't fit on screen
-                    aCloud = Cloud + new String(' ',width-Cloud.Length);
+                    aCloud = Cloud + new String('░', width-Cloud.Length);
                 }
                 Console.SetCursorPosition(animationOX, animationOY);
                 Console.Write(aCloud);
                 Thread.Sleep(500);
             }
-            
+            Console.SetCursorPosition(animationOX, animationOY);
+            Console.Write(new String(' ',aCloud.Length));
+            Console.SetCursorPosition(animationOX, animationOY);
+
+
+
         }
     
         public static void ControlableAni(String keyToPress)

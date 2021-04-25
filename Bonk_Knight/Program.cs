@@ -9,17 +9,20 @@ namespace Bonk_Knight
     }
     class MainClass
     {
+         
         public static void Main(string[] args)
         {
-            Console.WriteLine("my dude thats cool!");
+            //Console.WriteLine("my dude thats cool!");
             //AsciiArtTesting.funWAscii();
-            Animations.MovingCloud(5);
-            
+            Console.WriteLine("having fun?");
+            Animations.MovingCloud(1);
+
             //come back to - Animations.HoleInRect();
             //remove later
 
             Console.ResetColor();
-            Console.Write("\n press any button to continue");
+            Console.WriteLine("press any button to continue");
+            Console.ReadLine();
             Console.ReadKey();
         }
     }
