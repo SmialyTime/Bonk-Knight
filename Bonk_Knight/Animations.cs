@@ -97,6 +97,9 @@ namespace Bonk_Knight
         }
         public static void MovingCloud(int ofSetY)
         {
+            //clears input so doesn't automatically stop
+            var prevKey = (Console.KeyAvailable) ? Convert.ToString(Console.ReadKey()):"";
+
             //make take in -ves
             //could cause problems if you want to change screen size
             var width = Globals.SSWidth;
@@ -107,6 +110,7 @@ namespace Bonk_Knight
             String aCloud = Cloud;
             int aCloudLen = aCloud.Length;
 
+            //checks if input avalible  
             while (! Console.KeyAvailable) {
                 if (aCloud.TrimEnd('░').Length<width) {
                     //may be right?
@@ -122,6 +126,8 @@ namespace Bonk_Knight
                 Console.Write(aCloud);
                 Thread.Sleep(500);
             }
+            //gets rid of key input
+            Console.ReadKey();
             Console.SetCursorPosition(animationOX, animationOY);
             Console.Write(new String(' ',aCloud.Length));
             Console.SetCursorPosition(animationOX, animationOY);

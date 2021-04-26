@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading;
 namespace Bonk_Knight
 {
     public class TestingEvents /* : EventArgs  <- not nessisary*/
@@ -26,18 +27,22 @@ namespace Bonk_Knight
         public void TestOSP(object sender,  EventArgs e /*makes sure to change if custom*/)
         {
             Console.WriteLine("ya");
-            Console.ReadKey();
+            //Console.ReadKey(); 
+            Animations.MovingCloud(1);
 
         }
         public void Test2OSP(object sender, EventArgs e)
         {
             Console.WriteLine("we got it");
 
-
+            //pressing a key before will stop the animation already
+            //----------- clear console Input first??-----------------------???
+            Thread.Sleep(100);
+            Animations.MovingCloud(1);
 
             //making an event with more info passed in
-            person Robby = new person("big R", 100);
-            manRobed?.Invoke(this, Robby); 
+            //person Robby = new person("big R", 100);
+            //manRobed?.Invoke(this, Robby); 
         }
 
         public void copsTime(object sender, person inno)
