@@ -37,5 +37,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TestingEvents.cs" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>
