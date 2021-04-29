@@ -20,9 +20,30 @@ namespace Bonk_Knight
         public static void Main(string[] args)
         {
             InitializeComponents();
-            //testing background
+            CursorBellowScreen();
+            char Continue = keyInput();
+            while(Continue != ''/*esc*/)
+            {
+                //use key 
+                switch (Continue)
+                {
+                    case 'a':
+                        //left
+                        break;
+                    case 'd':
+                        //right
+                        break;
+                    case 'n':
+                        //displays next background
+                        ChangeScreen(0,0,Art.Background(Map.nextBg()));
+                        break;
+                }
 
-            ChangeScreen(0,0,Art.Background("m"));
+                //make better
+                Continue = ' ';
+                Continue = keyInput();
+                CursorBellowScreen();
+            }
             Console.ResetColor();
             Console.WriteLine("press Enter button to continue");
             Console.ReadLine();
@@ -120,6 +141,23 @@ namespace Bonk_Knight
             Console.SetCursorPosition(Console.CursorLeft + xPlus, Console.CursorTop + yPlus);
         }
 
+        public static char keyInput()
+        {
+            if (Console.KeyAvailable)
+            {
+                var input = Console.ReadKey();
+                if (input.Key != ConsoleKey.Enter && input.Key != ConsoleKey.Backspace) {
+                    System.Diagnostics.Debug.WriteLine(input.Key != ConsoleKey.Enter);
+                    System.Diagnostics.Debug.WriteLine(input.Key + "!=" + ConsoleKey.Enter);
+                    char ltr = Convert.ToChar(input.KeyChar);
+                    Console.SetCursorPosition(Console.CursorLeft - 1, Console.CursorTop);
+                    Console.Write(' ');
+                    //clears character stuff
+                    while (Console.KeyAvailable == true) { Console.ReadKey(); Console.SetCursorPosition(Console.CursorLeft - 1, Console.CursorTop);Console.Write(' ');}
+                    return ltr;
+                }else{/*place holder for enter*/System.Diagnostics.Debug.WriteLine("WOOOOOOOOOw"); while (Console.KeyAvailable == true) { Console.ReadKey(); Console.SetCursorPosition(Console.CursorLeft - 1, Console.CursorTop); Console.Write(' '); } return '回';}
+            }else{return ' ';}
+        }
         public static ConsoleColor GC(char color)
         {
             String colour = "";
