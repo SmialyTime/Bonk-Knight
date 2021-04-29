@@ -102,7 +102,7 @@ namespace Bonk_Knight
 
             //make take in -ves
             //could cause problems if you want to change screen size
-            var width = Globals.SSWidth;
+            var width = 20;
             int animationOX = Console.CursorLeft;
             int animationOY = Console.CursorTop+ofSetY-1;
             String Cloud = "(██████)";

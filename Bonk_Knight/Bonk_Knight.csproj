@@ -32,6 +32,7 @@
   <ItemGroup>
     <Compile Include="Animations.cs" />
     <Compile Include="button.cs" />
+    <Compile Include="Art.cs" />
     <Compile Include="funWithAscii.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
