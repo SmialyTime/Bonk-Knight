@@ -105,6 +105,7 @@ namespace Bonk_Knight
             {
                 for (int cl = 0; cl < 30; cl++)
                 {
+                    setColor(Globals.Screen[rw, cl]);
                     Console.Write(Globals.Screen[rw,cl]);
                 }
                 Console.SetCursorPosition(Globals.Sx, Console.CursorTop+1);
@@ -113,7 +114,6 @@ namespace Bonk_Knight
             resetCursor();
             CursorBellowScreen();
         }
-
         public static void RenderOutline(int w,int h){
             int OrigX = Globals.Sx-1;
             int OrigY = Globals.Sy-1;
@@ -140,23 +140,92 @@ namespace Bonk_Knight
         {
             Console.SetCursorPosition(Console.CursorLeft + xPlus, Console.CursorTop + yPlus);
         }
-
         public static char keyInput()
         {
             if (Console.KeyAvailable)
             {
                 var input = Console.ReadKey();
                 if (input.Key != ConsoleKey.Enter && input.Key != ConsoleKey.Backspace) {
-                    System.Diagnostics.Debug.WriteLine(input.Key != ConsoleKey.Enter);
-                    System.Diagnostics.Debug.WriteLine(input.Key + "!=" + ConsoleKey.Enter);
                     char ltr = Convert.ToChar(input.KeyChar);
                     Console.SetCursorPosition(Console.CursorLeft - 1, Console.CursorTop);
                     Console.Write(' ');
                     //clears character stuff
-                    while (Console.KeyAvailable == true) { Console.ReadKey(); Console.SetCursorPosition(Console.CursorLeft - 1, Console.CursorTop);Console.Write(' ');}
+                    while (Console.KeyAvailable == true)
+                    {
+                        input = Console.ReadKey();
+                        if (input.Key != ConsoleKey.Enter && input.Key != ConsoleKey.Backspace)
+                        {
+                            Console.SetCursorPosition(Console.CursorLeft - 1, Console.CursorTop);
+                            Console.Write(' ');
+                        }
+                    }
                     return ltr;
-                }else{/*place holder for enter*/System.Diagnostics.Debug.WriteLine("WOOOOOOOOOw"); while (Console.KeyAvailable == true) { Console.ReadKey(); Console.SetCursorPosition(Console.CursorLeft - 1, Console.CursorTop); Console.Write(' '); } return '回';}
-            }else{return ' ';}
+                }
+                else
+                {
+                    while (Console.KeyAvailable == true)
+                    {
+                        input = Console.ReadKey();
+                        if (input.Key != ConsoleKey.Enter && input.Key != ConsoleKey.Backspace)
+                        {
+                            Console.SetCursorPosition(Console.CursorLeft - 1, Console.CursorTop);
+                            Console.Write(' ');
+                        }
+                    } 
+                    return '回';/*place holder for enter*/}
+            }
+            else{return ' ';}
+        }
+
+        public static void setColor(char inChar)
+        {
+            ConsoleColor forgColor;
+            switch (inChar)
+            {
+                case '*':
+                    forgColor = GC('?');
+                    break;
+                case 'τ':
+                    forgColor = GC('r');
+                    break;
+                case 'c':
+                    forgColor = GC('y');
+                    break;
+                case '~':
+                case '╬':
+                    forgColor = GC('m');
+                    break;
+                case '⌡':
+                case '⌠':
+                    forgColor = GC('B');
+                    break;
+                case '╘':
+                case 'δ':
+                case 'Φ':
+                case '╛':
+                    forgColor = GC('M');
+                    break;
+                case '(':
+                case ')':
+                case '′':
+                case '″':
+                case '‴':
+                    forgColor = GC('g');
+                    break;
+                case '‘':         
+                case '’':
+                case ',':
+                case '‛':
+                case '“':
+                case '”':
+                case '„':
+                    forgColor = GC('E');
+                    break;
+                default:
+                    forgColor = GC('w');
+                    break;
+            }
+            Console.ForegroundColor = forgColor;
         }
         public static ConsoleColor GC(char color)
         {
@@ -165,19 +234,35 @@ namespace Bonk_Knight
             switch (color)
             {
                 case 'b':
+                    colour = "Blue";
+                    break;
+                case 'B':
                     colour = "DarkBlue";
+                    break;
+                case 'y':
+                    colour = "Yellow";
+                    break;
+                case 'M':
+                    colour = "DarkMagenta";
+                    break;
+                case 'm':
+                    colour = "Magenta";
                     break;
                 case 'r':
                     colour = "DarkRed";
                     break;
                 case 'g':
-                    colour = "Grey";
+                    colour = "DarkGray";
                     break;
                 case 'e':
                     colour = "Green";
                     break;
-                case 'd':
-                    colour = "DarkGrey";
+                case 'E':
+                    colour = "DarkGreen";
+                    break;
+                case '?':
+                    List<char> allCol = new List<char>{'b','r','g','e','d','w'};
+                    return GC(allCol[(new Random()).Next(allCol.Count)]);
                     break;
                 default:
                     colour = "White";
