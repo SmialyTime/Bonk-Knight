@@ -31,14 +31,15 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Animations.cs" />
-    <Compile Include="button.cs" />
+    <Compile Include="RefCode\button.cs" />
     <Compile Include="Art.cs" />
+    <Compile Include="Functions.cs" />
     <Compile Include="funWithAscii.cs" />
     <Compile Include="Map.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Render.cs" />
-    <Compile Include="TestingEvents.cs" />
+    <Compile Include="RefCode\TestingEvents.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />

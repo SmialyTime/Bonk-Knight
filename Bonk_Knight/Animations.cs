@@ -6,8 +6,52 @@ using System.Threading;
 
 namespace Bonk_Knight
 {
-    class Animations
+    class Animations:Render
     {
+        public static void ControlableAni(int Position,List<String> Animation)
+        {
+            if (Globals.AnimationRunning == false) {
+                if (Position>6 || Position<1){
+                    Globals.AnimationRunning = true;
+                    List<List<int>> Location = new List<List<int>>() { };
+                    //set up the position to print for each ani
+                    foreach (var AnimationFram in Animation)
+                    {
+                        List<int> FrameCoords = new List<int>(){ };
+                        //row
+                        FrameCoords[0] = ( Position - 1 )* 5;
+                        //Column
+                        FrameCoords[1] = Globals.GroundInGameY - AnimationFram.Count(f => f == '%');
+                        Location.Add(FrameCoords);
+                    }
+                    //Runs for each Frame of animation ------------add time for each animation
+                    for (int Frame = 0; Frame<Animation.Count;Frame++)
+                    {
+                        //do frame
+                        /// ------------------need to check works
+                        ChangeScreen(Convert.ToInt32(Location[0]),Convert.ToInt32(Location[1]),Animation[Frame]);
+                        //wait to next frame
+                        Thread.Sleep(100);
+                    }
+                }
+                else
+                {
+                    //catches bugs
+                    MakeErrorMessage("Position should be from 1-6 on screen");
+                    //maybe check for next positon on map??????????????????????
+                }
+            }
+            else
+            {
+                //catches bugs
+                MakeErrorMessage("Couldn't run animation as one already runnign");
+            }
+        }
+
+        public static void doubleAniWhat()
+        {
+
+        }
         public static void HoleInRect()
         {
             //o = original , co = current original
@@ -136,14 +180,5 @@ namespace Bonk_Knight
 
         }
     
-        public static void ControlableAni(String keyToPress)
-        {
-
-        }
-
-        public static void doubleAniWhat()
-        {
-
-        }
     }
 }
