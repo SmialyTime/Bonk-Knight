@@ -13,15 +13,17 @@ namespace Bonk_Knight
             if (Globals.AnimationRunning == false) {
                 if (!(Position > 6 || Position < 1)) {
                     Globals.AnimationRunning = true;
+                    bool AnimationOffScreen = false;
+
                     List<List<int>> Location = new List<List<int>>() { };
                     //set up the position to print for each ani
                     foreach (var AnimationFram in Animation)
                     {
                         List<int> FrameCoords = new List<int>() { };
                         //row
-                        FrameCoords.Add((Position - 1) * 5);
-                        //Column
                         FrameCoords.Add(Globals.GroundInGameY - AnimationFram.Count(f => f == '%'));
+                        //Column
+                        FrameCoords.Add(((Position - 1) * 5)+1);
                         Location.Add(FrameCoords);
                     }
                     //Runs for each Frame of animation ------------add time for each animation
@@ -30,10 +32,10 @@ namespace Bonk_Knight
                         //do frame
                         /// ------------------need to check works-----------------------
                         ChangeScreen(Convert.ToInt32(Location[Frame][0]), Convert.ToInt32(Location[Frame][1]), Animation[Frame]);
-                        RenderScreen($"{Convert.ToInt32(Location[Frame][0])},{Convert.ToInt32(Location[Frame][1])},9,30");
+                        RenderScreen("all");
                         //wait to next frame
                         System.Diagnostics.Debug.WriteLine($"Completed Frame {Frame}");
-                        Thread.Sleep(4000);
+                        Thread.Sleep(1000);
                     }
                     Globals.AnimationRunning = true;
                 }
@@ -204,8 +206,12 @@ namespace Bonk_Knight
             //5
             @"    (τ)%"+
             @"    /|\%"+
-            @"    / \%"};
-            ControlableAni(2,WalkCycle);
+            @"    / \%",
+            //6
+            @"     (τ)%"+
+            @"     /|\%"+
+            @"     / \%"};
+            ControlableAni(6,WalkCycle);
         }
     }
 }

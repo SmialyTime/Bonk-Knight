@@ -31,6 +31,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Animations.cs" />
+    <Compile Include="RefCode\basic game.cs" />
     <Compile Include="RefCode\button.cs" />
     <Compile Include="Art.cs" />
     <Compile Include="Functions.cs" />
@@ -42,5 +43,14 @@
     <Compile Include="RefCode\TestingEvents.cs" />
   </ItemGroup>
   <ItemGroup />
+  <ItemGroup>
+    <Content Include="Art\bonk Knight ref art.txt" />
+    <Content Include="Art\CharacterArt.txt" />
+    <Content Include="Art\CharAnimation.txt" />
+    <Content Include="Art\EnemyArt.txt" />
+    <Content Include="Art\RandomAsciiStuff.txt" />
+    <Content Include="Art\TerainArt.txt" />
+    <Content Include="Art\WeponArt+Animation.txt" />
+  </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>

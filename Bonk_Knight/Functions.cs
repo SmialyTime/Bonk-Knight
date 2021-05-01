@@ -17,6 +17,19 @@ namespace Bonk_Knight
         {
             Console.SetCursorPosition(Globals.Sx, Console.CursorTop + yPlus);
         }
+
+        public static void ClearKeyIntputs()
+        {
+            while (Console.KeyAvailable == true)
+            {
+                var input = Console.ReadKey();
+                if (input.Key != ConsoleKey.Enter && input.Key != ConsoleKey.Backspace)
+                {
+                    Console.SetCursorPosition(Console.CursorLeft - 1, Console.CursorTop);
+                    Console.Write(' ');
+                }
+            }
+        }
         public static void mmcL(int yPlus)
         {
             Console.SetCursorPosition(Globals.Ox, Console.CursorTop + yPlus);

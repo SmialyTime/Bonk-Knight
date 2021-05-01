@@ -89,31 +89,12 @@ namespace Bonk_Knight
                         Console.SetCursorPosition(Console.CursorLeft - 1, Console.CursorTop);
                         Console.Write(' ');
                         //clears character stuff
-                        while (Console.KeyAvailable == true)
-                        {
-                            input = Console.ReadKey();
-                            if (input.Key != ConsoleKey.Enter && input.Key != ConsoleKey.Backspace)
-                            {
-                                Console.SetCursorPosition(Console.CursorLeft - 1, Console.CursorTop);
-                                Console.Write(' ');
-                            }
-                        }
+                        Functions.ClearKeyIntputs();
                         return ltr;
                     }
-                    else
-                    {
-                        while (Console.KeyAvailable == true)
-                        {
-                            input = Console.ReadKey();
-                            if (input.Key != ConsoleKey.Enter && input.Key != ConsoleKey.Backspace)
-                            {
-                                Console.SetCursorPosition(Console.CursorLeft - 1, Console.CursorTop);
-                                Console.Write(' ');
-                            }
-                        }
-                        return '回';/*place holder for enter*/}
+                    else{Functions.ClearKeyIntputs();return '回';/*place holder for enter*/}
                 }
-                else { return ' '; }
+                else{Functions.ClearKeyIntputs(); return '㊅'; }
             }
             else{return ' ';}
         }

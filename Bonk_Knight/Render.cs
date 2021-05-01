@@ -34,6 +34,8 @@ namespace Bonk_Knight
                     {
                         //renders from left to right not top to bottom
                         Console.SetCursorPosition(Bounderies[0] + Globals.Sx, Bounderies[1] + Globals.Sy);
+                        //The screen is right
+
                         for (int CLM = Bounderies[1];CLM <= Bounderies[3];CLM++)
                         {
                             for (int ROW = Bounderies[0]; ROW <= Bounderies[2]; ROW++)
@@ -92,7 +94,8 @@ namespace Bonk_Knight
                 {
                     if (rw >= 9 || cl >= 30)
                     {
-                        junk += ToAdd[rw + cl];
+                        //only works for whole screen rendering
+                        junk += ToAdd[elm];
                     }
                     else
                     {
