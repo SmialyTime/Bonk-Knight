@@ -40,7 +40,7 @@ namespace Bonk_Knight
                     case 'n':
                         //displays next background
                         Render.ChangeScreen(0,0,Art.Background(Map.nextBg()));
-                        Render.RenderScreen();
+                        Render.RenderScreen("all");
                         break;
                 }
 
@@ -49,6 +49,10 @@ namespace Bonk_Knight
                 Continue = keyInput();
                 Functions.CursorBellowScreen();
             }
+            Functions.CursorBellowScreen();
+            TESTAni.RunWalkCycle();
+
+
             Console.ResetColor();
             Console.WriteLine("press Enter button to continue");
             Console.ReadLine();
@@ -75,7 +79,7 @@ namespace Bonk_Knight
         }
         public static char keyInput()
         {
-            if (Globals.AnimationRunning == true) 
+            if (Globals.AnimationRunning == false) 
             {
                 if (Console.KeyAvailable)
                 {

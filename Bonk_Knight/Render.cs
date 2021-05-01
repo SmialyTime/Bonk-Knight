@@ -10,18 +10,67 @@ namespace Bonk_Knight
     {
         public static void RenderScreen(String Part)
         {
-            //Part == all
-            Console.SetCursorPosition(Globals.Sx, Globals.Sy);
-            for (int rw = 0; rw < 9; rw++)
-            {
-                for (int cl = 0; cl < 30; cl++)
+            if (Part.Contains(',')) {
+                //renders a box defined by 2 points start and end
+                //pass in a part that has form "initalX, initalY,finalX,FinalY"
+                List<int> Bounderies = new List<int>(); 
+                bool ValidData = true;
+                //converts into usefull form in List
+                foreach (var prt in Part.Split(','))
                 {
-                    setColor(Globals.Screen[rw, cl]);
-                    Console.Write(Globals.Screen[rw, cl]);
+                    if (int.TryParse(prt, out _)) {
+                        Bounderies.Add(Convert.ToInt32(prt));
+                    }
+                    else
+                    {
+                        MakeErrorMessage($"Boundaries wrong {Part}");
+                        ValidData = false;
+                    }
                 }
-                Console.SetCursorPosition(Globals.Sx, Console.CursorTop + 1);
+                if (ValidData)
+                //Change to check if within screen size---------------------------
+                {
+                    if (Bounderies[0] < Bounderies[2] && Bounderies[1] < Bounderies[3])
+                    {
+                        //renders from left to right not top to bottom
+                        Console.SetCursorPosition(Bounderies[0] + Globals.Sx, Bounderies[1] + Globals.Sy);
+                        for (int CLM = Bounderies[1];CLM <= Bounderies[3];CLM++)
+                        {
+                            for (int ROW = Bounderies[0]; ROW <= Bounderies[2]; ROW++)
+                            {
+                                //setColor(Globals.Screen[ROW, CLM]);
+                                Console.Write(Globals.Screen[ROW-1, CLM-1]);
+                            }
+                            Console.SetCursorPosition(Console.CursorTop + 1, Bounderies[1] + Globals.Sy);
+                        }
+                    }
+                    else{MakeErrorMessage($"Can't Render Backwards: {Bounderies[0]} > {Bounderies[2]} || {Bounderies[1]} > {Bounderies[3]}");}
+                }
             }
-            //to ref the screen array use Screen[row][columb] & double nested for loops
+            else if (Part.Length == 2 && int.TryParse(Part, out _))
+            {
+                //renders multiple lines
+                //Change to check if within screen size---------------------------
+                for (var StartH = Convert.ToInt32(Part[0]); StartH < Convert.ToInt32(Part[1]); StartH++)
+                {
+
+                }
+            }
+            else
+            {
+                //renders whole screen
+                Console.SetCursorPosition(Globals.Sx, Globals.Sy);
+                for (int rw = 0; rw < 9; rw++)
+                {
+                    for (int cl = 0; cl < 30; cl++)
+                    {
+                        setColor(Globals.Screen[rw, cl]);
+                        //to ref the screen multi-array use Screen[row][columb] in double nested for loops
+                        Console.Write(Globals.Screen[rw, cl]);
+                    }
+                    Console.SetCursorPosition(Globals.Sx, Console.CursorTop + 1);
+                }
+            }
             resetCursor();
             CursorBellowScreen();
         }
