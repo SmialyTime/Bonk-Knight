@@ -197,7 +197,15 @@ namespace Bonk_Knight
                     break;
                 case '⌡':
                 case '⌠':
+                case '║':
+                case '╦':
                     forgColor = GC('B');
+                    break;
+                case '╢':
+                case '╖':
+                case '╓':
+                case '╟':
+                    forgColor = GC('b');
                     break;
                 case '╘':
                 case 'δ':
