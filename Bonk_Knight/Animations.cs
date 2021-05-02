@@ -64,7 +64,7 @@ namespace Bonk_Knight
                         System.Diagnostics.Debug.WriteLine($"Completed Frame {Frame}");
                         Thread.Sleep(1000);
                     }
-                    Globals.AnimationRunning = true;
+                    Globals.AnimationRunning = false;
                 }
                 else
                 {
@@ -212,8 +212,7 @@ namespace Bonk_Knight
     {
         public static void RunWalkCycle()
         {
-            List<String> WalkCycle = new List<String>()
-        {
+            List<String> WalkCycle = new List<String>(){
             // 1
             @" (τ)%"+
             @" /|\%"+
@@ -239,7 +238,36 @@ namespace Bonk_Knight
             @"      (τ)%"+
             @"      /|\%"+
             @"      / \%"};
-            ControlableEntityAni(3,WalkCycle);
+            List<String> TestAni = new List<String>(){
+            // 1
+            @" (τ)%"+
+            @" /|\%"+
+            @" / \%",
+            // 2
+            @"  (τ)%"+
+            @"  /|\%"+
+            @"  / 7%",
+            // 3
+            @"   (τ)%"+
+            @"   (|)%"+
+            @"    |>%",
+            // 4
+            @"    (τ)%"+
+            @"    /|\%"+
+            @"     |7%",
+            // 5
+            @"     (τ)%"+
+            @"     /|\%"+
+            @"     / >%",
+            // 6
+            //012345678
+            @"---._   %"+
+            @"     `· %"+
+            @"       \%"+
+            @" (τ)  ▄▄%"+
+            @"  |=x──┤%"+
+            @"  >>  ▀▀%"};
+            ControlableEntityAni(1, TestAni);
         }
     }
 }

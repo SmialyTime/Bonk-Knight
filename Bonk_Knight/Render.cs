@@ -28,7 +28,7 @@ namespace Bonk_Knight
                     }
                 }
                 if (ValidData)
-                //Change to check if within screen size---------------------------
+                //Change to check if within screen size
                 {
                     //Bounderies[0] : RowInitial
                     //Bounderies[1] : ColumnInital
@@ -43,7 +43,7 @@ namespace Bonk_Knight
                         {
                             for (int ROW = Bounderies[0]; ROW <= Bounderies[2]; ROW++)
                             {
-                                //setColor(Globals.Screen[ROW, CLM]);
+                                //setColor(Globals.Screen[ROW, CLM]);-----------------------------------------------------------
                                 Console.Write(Globals.Screen[ROW, CLM]); //-1 because 0 indexed
                                 Console.SetCursorPosition(Console.CursorLeft-1, Console.CursorTop + 1);
                             }

@@ -43,6 +43,9 @@ namespace Bonk_Knight
                         Render.ChangeScreen(0,0,Art.Background(Map.nextBg()));
                         Render.RenderScreen("all");
                         break;
+                    case 't':
+                        TESTAni.RunWalkCycle();
+                        break;
                 }
 
                 //make better
@@ -50,8 +53,6 @@ namespace Bonk_Knight
                 Continue = keyInput();
                 Functions.CursorBellowScreen();
             }
-            Functions.CursorBellowScreen();
-            TESTAni.RunWalkCycle();
 
 
             Console.ResetColor();
