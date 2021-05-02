@@ -18,19 +18,11 @@ namespace Bonk_Knight
         public TestingEvents()
         {
             //now testOSP will trigger when OSP does
-            OSP += TestOSP;
             OSP += Test2OSP;
             manRobed += copsTime;
             up();
         }
 
-        public void TestOSP(object sender,  EventArgs e /*makes sure to change if custom*/)
-        {
-            Console.WriteLine("ya");
-            //Console.ReadKey(); 
-            Animations.MovingCloud(1);
-
-        }
         public void Test2OSP(object sender, EventArgs e)
         {
             Console.WriteLine("we got it");
@@ -58,6 +50,7 @@ namespace Bonk_Knight
             OSP?.Invoke(this, EventArgs.Empty);
         }
 
+
     }
 
     public class person
@@ -77,6 +70,6 @@ namespace Bonk_Knight
         public bool cancel { get; set; } = false;
         public bool ContinueYN { get; set; } = true;
 
-        
+
     }
 }

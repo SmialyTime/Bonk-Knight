@@ -13,21 +13,27 @@ namespace Bonk_Knight
         public static int Sy = 1;
         public static int GroundInGameY = 8;
         public static bool AnimationRunning = false;
+        public static bool GameGoing = false;
         //to print to position x,y do Console.SetCursorPosition(x,y); <remember 0 indexed
         //Globals.Screen[rw,cl]
         public static String LastEvent = "";
         public static char[,] Screen = new char[9, 30];
     }
-
     class MainClass
     {
-         
+        public static KeyHandler Keys = new KeyHandler();
         public static void Main(string[] args)
         {
-            InitializeComponents();
+            //InitializeComponents();
+
+
             Render.CursorBellowScreen();
+
+            Globals.GameGoing = true;
+            //makes an event for when Key input
+            KeyHandler KeyPressedHandler = new KeyHandler();
             char Continue = keyInput();
-            while(Continue != ''/*esc*/)
+            while (Globals.GameGoing == true)
             {
                 //use key 
                 switch (Continue)
@@ -40,11 +46,14 @@ namespace Bonk_Knight
                         break;
                     case 'n':
                         //displays next background
-                        Render.ChangeScreen(0,0,Art.Background(Map.nextBg()));
+                        Render.ChangeScreen(0, 0, Art.Background(Map.nextBg()));
                         Render.RenderScreen("all");
                         break;
                     case 't':
                         TESTAni.RunWalkCycle();
+                        break;
+                    case ''/*Esc*/:
+                        Globals.GameGoing = false;
                         break;
                 }
 
@@ -54,10 +63,15 @@ namespace Bonk_Knight
                 Functions.CursorBellowScreen();
             }
 
-
+            //change later
             Console.ResetColor();
             Console.WriteLine("press Enter button to continue");
             Console.ReadLine();
+        }
+        public void TestKeyWasPressed(object sender, EventArgs e /*makes sure to change if custom*/)
+        {
+            System.Diagnostics.Debug.WriteLine("Ye");
+
         }
         public static void InitializeComponents()
         {
@@ -85,6 +99,7 @@ namespace Bonk_Knight
             {
                 if (Console.KeyAvailable)
                 {
+                    Keys.KeyI();
                     var input = Console.ReadKey();
                     if (input.Key != ConsoleKey.Enter && input.Key != ConsoleKey.Backspace) {
                         char ltr = Convert.ToChar(input.KeyChar);
@@ -101,5 +116,21 @@ namespace Bonk_Knight
             }
             else{System.Diagnostics.Debug.WriteLine($"Animation running"); return ' ';}
         }
+    }
+    public class KeyHandler
+    {
+        public event EventHandler<KeyPressedInfo> KeyPressed;
+        public void KeyI()
+        {
+            //way to pass in multipel args clearly
+            KeyPressedInfo myCustomArgs = new KeyPressedInfo();
+            myCustomArgs.Key = "c";
+            //runs all events named clickEvent
+            KeyPressed?.Invoke(this, myCustomArgs);
+        }
+    }
+    public class KeyPressedInfo
+    {
+        public string Key { get; set; }
     }
 }

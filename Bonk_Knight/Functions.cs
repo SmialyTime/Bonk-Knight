@@ -8,7 +8,6 @@ namespace Bonk_Knight
 {
     class Functions
     {
-
         public static void mc(int xPlus, int yPlus)
         {
             Console.SetCursorPosition(Console.CursorLeft + xPlus, Console.CursorTop + yPlus);
@@ -17,7 +16,10 @@ namespace Bonk_Knight
         {
             Console.SetCursorPosition(Globals.Sx, Console.CursorTop + yPlus);
         }
-
+        public static void w(String a)
+        {
+            Console.Write(a);
+        }
         public static void ClearKeyIntputs()
         {
             while (Console.KeyAvailable == true)

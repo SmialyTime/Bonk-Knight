@@ -32,10 +32,11 @@
   <ItemGroup>
     <Compile Include="Animations.cs" />
     <Content Include="RefCode\basic game.txt" />
+    <Compile Include="GameRunning.cs" />
     <Compile Include="RefCode\button.cs" />
     <Compile Include="Art.cs" />
     <Compile Include="Functions.cs" />
-    <Compile Include="funWithAscii.cs" />
+    <Compile Include="RefCode\funWithAscii.cs" />
     <Compile Include="Map.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

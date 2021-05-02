@@ -11,12 +11,7 @@ namespace Bonk_Knight
         //ON start up
         public buttons()
         {
-            Console.WriteLine("Test button press a");
-            var keyPre = Console.ReadKey().Key;
-            if (keyPre == ConsoleKey.A)
-            {
-                KeyPress();
-            }
+            KeyPress();            
         }
 
 
@@ -28,9 +23,6 @@ namespace Bonk_Knight
             {
                 Console.WriteLine($"I know you are {args.num} {args.Name}");
             };
-
-            //run to test
-            but.OnClick();
         }
         /*public event EventHandler KeyDown;
         public static void checkKeyDown()
@@ -49,7 +41,7 @@ namespace Bonk_Knight
             myCustomArgs.Name = "Mimi";
             myCustomArgs.num = 19;
             //runs all events named clickEvent
-            ClickEvent.Invoke(this, myCustomArgs);
+            ClickEvent?.Invoke(this, myCustomArgs);
         }
     }
     public class myCustomArgs

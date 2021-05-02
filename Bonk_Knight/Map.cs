@@ -11,7 +11,7 @@ namespace Bonk_Knight
         public static List<String> bg = new List<string>() { "Throne", "Mountain","Caves", "ForestEntrance", "ForestExit", "KingdomEntrance", "Wall","Wall2","Wall3","Courtyard"};
         public static int CurrentBg = 0;
     }
-    class Map
+    class Map : Render
     {
         public static String nextBg()
         {
@@ -25,5 +25,17 @@ namespace Bonk_Knight
             }
             return Areas.bg[Areas.CurrentBg];
         }
+
+        /*
+        //must open and load this function from the inital stuff first to get it linked 
+        public void EventMap()
+        {
+            MainClass.Keys.KeyPressed += Keys_KeyPressed;
+        }
+
+        private void Keys_KeyPressed(object sender, KeyPressedInfo e)
+        {
+            System.Diagnostics.Debug.WriteLine("ME too");
+        }*/
     }
 }
