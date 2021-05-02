@@ -8,7 +8,7 @@ namespace Bonk_Knight
 {
     public static class Areas
     {
-        public static List<String> bg = new List<string>() { "Throne", "Mountain","Caves", "KingdomEntrance", "Wall","Wall2","Wall3","Courtyard"};
+        public static List<String> bg = new List<string>() { "Throne", "Mountain","Caves", "ForestEntrance", "ForestExit", "KingdomEntrance", "Wall","Wall2","Wall3","Courtyard"};
         public static int CurrentBg = 0;
     }
     class Map

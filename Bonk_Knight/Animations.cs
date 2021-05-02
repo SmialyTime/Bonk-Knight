@@ -8,31 +8,58 @@ namespace Bonk_Knight
 {
     class Animations : Render
     {
-        public static void ControlableAni(int Position, List<String> Animation)
+        public static void ControlableEntityAni(int Position, List<String> Animation)
         {
+            //meant for player and enemy
             if (Globals.AnimationRunning == false) {
                 if (!(Position > 6 || Position < 1)) {
                     Globals.AnimationRunning = true;
-                    bool AnimationOffScreen = false;
 
+                    //note the animtaion starts from the ground
+                    //all animations are square
+
+                    //Work out Max area animation happens so you can just render that area
+                    //Max row above the surface of the ground
+                    int RowFinal = Globals.GroundInGameY-1;
+                    //Starting row of animation
+                    int RowInitial = RowFinal;
+                    //Starting Column of animation
+                    int ColumnInitial = ((Position - 1) * 5);
+                    //Max Column
+                    int ColumnFinal = ColumnInitial;
+                    foreach (var AnimationFrames in Animation)
+                    {
+                        //checks for the max height of animation
+                        RowInitial = Math.Min(RowInitial, Globals.GroundInGameY - AnimationFrames.Count(f => f == '%'));
+                        //checks for the max width of animation
+                        ColumnFinal = Math.Max(ColumnFinal, ColumnInitial+((AnimationFrames.Length - AnimationFrames.Count(f => f == '%')) / AnimationFrames.Count(f => f == '%')));
+                    }
+                    //IDK why
+                    ColumnFinal--;
+                    System.Diagnostics.Debug.WriteLine($"{RowInitial},{ColumnInitial},{RowFinal},{ColumnFinal}");
+
+                    //set up the Location of the Animation to change the screen list
                     List<List<int>> Location = new List<List<int>>() { };
-                    //set up the position to print for each ani
                     foreach (var AnimationFram in Animation)
                     {
                         List<int> FrameCoords = new List<int>() { };
                         //row
                         FrameCoords.Add(Globals.GroundInGameY - AnimationFram.Count(f => f == '%'));
                         //Column
-                        FrameCoords.Add(((Position - 1) * 5)+1);
+                        FrameCoords.Add((Position - 1) * 5);
                         Location.Add(FrameCoords);
                     }
+
+
                     //Runs for each Frame of animation ------------add time for each animation
                     for (int Frame = 0; Frame < Animation.Count; Frame++)
                     {
-                        //do frame
-                        /// ------------------need to check works-----------------------
+                        //Layer on animation
                         ChangeScreen(Convert.ToInt32(Location[Frame][0]), Convert.ToInt32(Location[Frame][1]), Animation[Frame]);
-                        RenderScreen("all");
+
+                        //Render animation
+                        RenderScreen($"{RowInitial},{ColumnInitial},{RowFinal},{ColumnFinal}");
+                        //RenderScreen("all");
                         //wait to next frame
                         System.Diagnostics.Debug.WriteLine($"Completed Frame {Frame}");
                         Thread.Sleep(1000);
@@ -187,31 +214,32 @@ namespace Bonk_Knight
         {
             List<String> WalkCycle = new List<String>()
         {
-            //1
-            @"(τ)%"+
-            @"/|\%"+
-            @"/ \%",
-            //2
+            // 1
             @" (τ)%"+
             @" /|\%"+
-            @" / 7%",
-            //3
+            @" / \%",
+            // 2
             @"  (τ)%"+
-            @"  (|)%"+
-            @"   |>%",
-            //4
+            @"  /|\%"+
+            @"  / 7%",
+            // 3
             @"   (τ)%"+
-            @"   /|\%"+
-            @"    |7%",
-            //5
+            @"   (|)%"+
+            @"    |>%",
+            // 4
             @"    (τ)%"+
             @"    /|\%"+
-            @"    / \%",
-            //6
+            @"     |7%",
+            // 5
             @"     (τ)%"+
             @"     /|\%"+
-            @"     / \%"};
-            ControlableAni(6,WalkCycle);
+            @"     / >%",
+            // 6
+            //012345678
+            @"      (τ)%"+
+            @"      /|\%"+
+            @"      / \%"};
+            ControlableEntityAni(3,WalkCycle);
         }
     }
 }

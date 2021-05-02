@@ -13,6 +13,7 @@ namespace Bonk_Knight
         public static int Sy = 1;
         public static int GroundInGameY = 8;
         public static bool AnimationRunning = false;
+        //to print to position x,y do Console.SetCursorPosition(x,y); <remember 0 indexed
         //Globals.Screen[rw,cl]
         public static String LastEvent = "";
         public static char[,] Screen = new char[9, 30];
@@ -57,7 +58,6 @@ namespace Bonk_Knight
             Console.WriteLine("press Enter button to continue");
             Console.ReadLine();
         }
-
         public static void InitializeComponents()
         {
             //changes it so more characters can be used
@@ -79,6 +79,7 @@ namespace Bonk_Knight
         }
         public static char keyInput()
         {
+            //missing some key inputs
             if (Globals.AnimationRunning == false) 
             {
                 if (Console.KeyAvailable)
@@ -86,17 +87,18 @@ namespace Bonk_Knight
                     var input = Console.ReadKey();
                     if (input.Key != ConsoleKey.Enter && input.Key != ConsoleKey.Backspace) {
                         char ltr = Convert.ToChar(input.KeyChar);
+                        System.Diagnostics.Debug.WriteLine($"{ltr} pressed");
                         Console.SetCursorPosition(Console.CursorLeft - 1, Console.CursorTop);
                         Console.Write(' ');
                         //clears character stuff
                         Functions.ClearKeyIntputs();
                         return ltr;
                     }
-                    else{Functions.ClearKeyIntputs();return '回';/*place holder for enter*/}
+                    else{ System.Diagnostics.Debug.WriteLine($"Enter+stuff"); Functions.ClearKeyIntputs();return '回';/*place holder for enter*/}
                 }
                 else{Functions.ClearKeyIntputs(); return '㊅'; }
             }
-            else{return ' ';}
+            else{System.Diagnostics.Debug.WriteLine($"Animation running"); return ' ';}
         }
     }
 }

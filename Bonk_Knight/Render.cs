@@ -12,7 +12,7 @@ namespace Bonk_Knight
         {
             if (Part.Contains(',')) {
                 //renders a box defined by 2 points start and end
-                //pass in a part that has form "initalX, initalY,finalX,FinalY"
+                //pass in a part that has form "RowInitial, ColumnInital,RowFinal,ColumnFinal"
                 List<int> Bounderies = new List<int>(); 
                 bool ValidData = true;
                 //converts into usefull form in List
@@ -30,20 +30,24 @@ namespace Bonk_Knight
                 if (ValidData)
                 //Change to check if within screen size---------------------------
                 {
-                    if (Bounderies[0] < Bounderies[2] && Bounderies[1] < Bounderies[3])
+                    //Bounderies[0] : RowInitial
+                    //Bounderies[1] : ColumnInital
+                    //Bounderies[2] : RowFinal
+                    //Bounderies[3] : ColumnFinal
+                    if (Bounderies[0] <= Bounderies[2] && Bounderies[1] <= Bounderies[3])
                     {
                         //renders from left to right not top to bottom
-                        Console.SetCursorPosition(Bounderies[0] + Globals.Sx, Bounderies[1] + Globals.Sy);
-                        //The screen is right
+                        Console.SetCursorPosition(Bounderies[1] + Globals.Sx, Bounderies[0] + Globals.Sy);
 
                         for (int CLM = Bounderies[1];CLM <= Bounderies[3];CLM++)
                         {
                             for (int ROW = Bounderies[0]; ROW <= Bounderies[2]; ROW++)
                             {
                                 //setColor(Globals.Screen[ROW, CLM]);
-                                Console.Write(Globals.Screen[ROW-1, CLM-1]);
+                                Console.Write(Globals.Screen[ROW, CLM]); //-1 because 0 indexed
+                                Console.SetCursorPosition(Console.CursorLeft-1, Console.CursorTop + 1);
                             }
-                            Console.SetCursorPosition(Console.CursorTop + 1, Bounderies[1] + Globals.Sy);
+                            Console.SetCursorPosition(Console.CursorLeft + 1, Bounderies[0] + Globals.Sy);
                         }
                     }
                     else{MakeErrorMessage($"Can't Render Backwards: {Bounderies[0]} > {Bounderies[2]} || {Bounderies[1]} > {Bounderies[3]}");}
@@ -99,7 +103,23 @@ namespace Bonk_Knight
                     }
                     else
                     {
-                        Globals.Screen[rw, cl] = ToAdd[elm];
+                        if (Globals.AnimationRunning == false)
+                        {
+                            Globals.Screen[rw, cl] = ToAdd[elm];
+                        }
+                        else
+                        {
+                            //it is an animation
+                            if (ToAdd[elm] != ' ')
+                            {
+                                Globals.Screen[rw, cl] = ToAdd[elm];
+                            }
+                            else
+                            {
+                                //current map char behind
+                                Globals.Screen[rw, cl] = '#';
+                            }
+                        }
                     }
                     cl++;
                 }
@@ -169,6 +189,7 @@ namespace Bonk_Knight
                 case '(':
                 case ')':
                 case '′':
+                case '#':
                 case '″':
                 case '‴':
                     forgColor = Functions.GC('g');

@@ -31,7 +31,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Animations.cs" />
-    <Compile Include="RefCode\basic game.cs" />
+    <Content Include="RefCode\basic game.txt" />
     <Compile Include="RefCode\button.cs" />
     <Compile Include="Art.cs" />
     <Compile Include="Functions.cs" />
