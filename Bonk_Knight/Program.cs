@@ -29,7 +29,7 @@ namespace Bonk_Knight
             InitializeComponents();
             Render.CursorBellowScreen();
 
-            Map GameMap = new Map()
+            Map GameMap = new Map("Medium");
 
             Globals.GameGoing = true;
             char Continue = keyInput();
@@ -100,7 +100,7 @@ namespace Bonk_Knight
                     var input = Console.ReadKey();
                     if (input.Key != ConsoleKey.Enter && input.Key != ConsoleKey.Backspace) {
                         char ltr = Convert.ToChar(input.KeyChar);
-                        System.Diagnostics.Debug.WriteLine($"{ltr} pressed");
+                        //2System.Diagnostics.Debug.WriteLine($"{ltr} pressed");
                         Console.SetCursorPosition(Console.CursorLeft - 1, Console.CursorTop);
                         Console.Write(' ');
                         //clears character stuff
