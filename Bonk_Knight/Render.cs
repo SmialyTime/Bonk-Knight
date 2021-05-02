@@ -164,6 +164,9 @@ namespace Bonk_Knight
                 case 'c':
                     forgColor = Functions.GC('y');
                     break;
+                case 'σ':
+                    forgColor = Functions.GC('z');
+                    break;
                 case '~':
                 case '╬':
                     forgColor = Functions.GC('m');
@@ -202,6 +205,39 @@ namespace Bonk_Knight
                 case '”':
                 case '„':
                     forgColor = Functions.GC('E');
+                    break;
+                case '|':
+                    if (Globals.Terrain == "Forest" && Globals.AnimationRunning == false)
+                    {
+                        forgColor = Functions.GC('z');
+                    }
+                    else
+                    {
+                        forgColor = Functions.GC('w');
+                    }
+                    break;
+                case '`':
+                case '´':
+                case '^':
+                    if (Globals.Terrain == "Forest" && Globals.AnimationRunning == false)
+                    {
+                        forgColor = Functions.GC('e');
+                    }
+                    else
+                    {
+                        forgColor = Functions.GC('w');
+                    }
+                    break;
+                case '\\':
+                case '/':
+                    if (Globals.Terrain == "Forest" && Globals.AnimationRunning == false)
+                    {
+                        forgColor = Functions.GC('E');
+                    }
+                    else
+                    {
+                        forgColor = Functions.GC('w');
+                    }
                     break;
                 default:
                     forgColor = Functions.GC('w');

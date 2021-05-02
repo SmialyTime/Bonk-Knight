@@ -78,6 +78,12 @@ namespace Bonk_Knight
                 case 'g':
                     colour = "DarkGray";
                     break;
+                case 'z':
+                    colour = "DarkYellow";
+                    break;
+                case 'x':
+                    colour = "DarkRed";
+                    break;
                 case 'e':
                     colour = "Green";
                     break;
@@ -85,9 +91,8 @@ namespace Bonk_Knight
                     colour = "DarkGreen";
                     break;
                 case '?':
-                    List<char> allCol = new List<char> { 'b', 'r', 'g', 'e', 'd', 'w' };
+                    List<char> allCol = new List<char> { 'b', 'r', 'g', 'e', 'd', 'w','z','x','y','E','m','M','B' };
                     return GC(allCol[(new Random()).Next(allCol.Count)]);
-                    break;
                 default:
                     colour = "White";
                     break;

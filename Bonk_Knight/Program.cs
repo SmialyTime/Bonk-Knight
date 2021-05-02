@@ -14,6 +14,7 @@ namespace Bonk_Knight
         public static int GroundInGameY = 8;
         public static bool AnimationRunning = false;
         public static bool GameGoing = false;
+        public static String Terrain = "Uknown";
         //to print to position x,y do Console.SetCursorPosition(x,y); <remember 0 indexed
         //Globals.Screen[rw,cl]
         public static String LastEvent = "";
@@ -21,17 +22,16 @@ namespace Bonk_Knight
     }
     class MainClass
     {
+        //makes an eventHandler to be called and referenced for the event of Key input
         public static KeyHandler Keys = new KeyHandler();
         public static void Main(string[] args)
         {
-            //InitializeComponents();
-
-
+            InitializeComponents();
             Render.CursorBellowScreen();
 
+            Map GameMap = new Map()
+
             Globals.GameGoing = true;
-            //makes an event for when Key input
-            KeyHandler KeyPressedHandler = new KeyHandler();
             char Continue = keyInput();
             while (Globals.GameGoing == true)
             {
@@ -65,13 +65,9 @@ namespace Bonk_Knight
 
             //change later
             Console.ResetColor();
+            Console.ForegroundColor = Functions.GC('z');
             Console.WriteLine("press Enter button to continue");
             Console.ReadLine();
-        }
-        public void TestKeyWasPressed(object sender, EventArgs e /*makes sure to change if custom*/)
-        {
-            System.Diagnostics.Debug.WriteLine("Ye");
-
         }
         public static void InitializeComponents()
         {
@@ -81,6 +77,7 @@ namespace Bonk_Knight
             //
             //player
             //map
+            Map GameMap = new Map("Medium");
             //Initialise Screen dict
             for (int dic = 0; dic < 9; dic++)
             {
