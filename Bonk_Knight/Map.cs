@@ -60,6 +60,25 @@ namespace Bonk_Knight
 
             //initalize the new enemies
         }
+        public static void PrevScreen()
+        {
+            //need to change --------------------check enemies = 0
+            CurrentSection--;
+            //check player position edge of screen and enemies = 0;
+            if (CurrentSection < GameSectionMap.Count && CurrentSection != 0)
+            {
+                //System.Diagnostics.Debug.WriteLine($"{CurrentSection}: {GameSectionMap[CurrentSection].SectionName}");
+                Render.ChangeScreen(0, 0, Art.Background($"{GameSectionMap[CurrentSection].SectionName}"));
+                Render.RenderScreen("all");
+            }
+            else
+            {
+                //game ended??
+                System.Diagnostics.Debug.WriteLine("GameEnd?????");
+            }
+
+            //initalize the new enemies
+        }
         public Map(String Difficulty)
         {
             var dif = 2;// 1  = easy , 2 = medium, 3 = hard

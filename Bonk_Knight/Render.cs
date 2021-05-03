@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Bonk_Knight
 {
-    class Render : Functions
+    public class Render : Functions
     {
         public static void RenderScreen(String Part)
         {
@@ -181,6 +181,9 @@ namespace Bonk_Knight
                 case 'c':
                     forgColor = Functions.GC('y');
                     break;
+                case '▒':
+                case '▓':
+                case '░':
                 case 'σ':
                     forgColor = Functions.GC('z');
                     break;

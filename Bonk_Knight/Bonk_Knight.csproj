@@ -32,6 +32,8 @@
   <ItemGroup>
     <Compile Include="Animations.cs" />
     <Content Include="RefCode\basic game.txt" />
+    <Compile Include="Enemy.cs" />
+    <Compile Include="Entity.cs" />
     <Compile Include="GameRunning.cs" />
     <Compile Include="RefCode\button.cs" />
     <Compile Include="Art.cs" />

@@ -41,6 +41,7 @@ namespace Bonk_Knight
                 {
                     case 'a':
                         //left
+                        Map.PrevScreen();
                         break;
                     case 'd':
                         //right

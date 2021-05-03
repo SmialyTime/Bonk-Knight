@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Bonk_Knight
 {
-    class Functions
+    public class Functions
     {
         public static void mc(int xPlus, int yPlus)
         {
