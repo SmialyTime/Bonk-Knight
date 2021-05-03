@@ -24,6 +24,7 @@ namespace Bonk_Knight
     {
         //makes an eventHandler to be called and referenced for the event of Key input
         public static KeyHandler Keys = new KeyHandler();
+        public static Map GameMap = new Map("Medium");
         public static void Main(string[] args)
         {
             InitializeComponents();
@@ -77,7 +78,6 @@ namespace Bonk_Knight
             //
             //player
             //map
-            Map GameMap = new Map("Medium");
             //Initialise Screen dict
             for (int dic = 0; dic < 9; dic++)
             {

@@ -80,6 +80,23 @@ namespace Bonk_Knight
             resetCursor();
             CursorBellowScreen();
         }
+        public static void RenderCustomScreen(char[,] ScreenToTender)
+        {
+            //renders whole screen
+            Console.SetCursorPosition(Globals.Sx, Globals.Sy);
+            for (int rw = 0; rw < 9; rw++)
+            {
+                for (int cl = 0; cl < 30; cl++)
+                {
+                    setColor(ScreenToTender[rw, cl]);
+                    //to ref the screen multi-array use Screen[row][columb] in double nested for loops
+                    Console.Write(ScreenToTender[rw, cl]);
+                }
+                Console.SetCursorPosition(Globals.Sx, Console.CursorTop + 1);
+            }
+            resetCursor();
+            CursorBellowScreen();
+        }
         public static void ChangeScreen(int Row, int Column, String ToAdd)
         {
             //adds ToAdd it at the Row and Columb (from top left corner) if it will fix
@@ -243,6 +260,13 @@ namespace Bonk_Knight
                     forgColor = Functions.GC('w');
                     break;
             }
+
+            //set for specific terrains
+            switch (Globals.Terrain)
+            {
+
+            }
+
             Console.ForegroundColor = forgColor;
         }
     }

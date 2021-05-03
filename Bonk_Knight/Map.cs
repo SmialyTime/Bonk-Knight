@@ -28,6 +28,8 @@ namespace Bonk_Knight
 
     class Map : Render
     {
+        public static int CurrentSection = 0;
+        public static List<Section> GameSectionMap = new List<Section>() { };
         public static String nextBg()
         {
             if (Areas.bg.Count - 1 == Areas.CurrentBg)
@@ -59,12 +61,12 @@ namespace Bonk_Knight
                     dif = 3;
                     break;
             }
-            CreateGameMap(dif,5);
+            CreateGameMap(dif,4);
         }
         public static void CreateGameMap(int difficulty, int SectionPerStage)
         {
-            //basic hard coded layout home -> Mountains -> Cave -> Forest -> Village -> castle -> throneRoom
-            List<Section> GameSectionMap = new List<Section>() { };
+            GameSectionMap = new List<Section>() { };
+            //basic hard coded layout home -> Mountains -> Cave -> Forest -> Village -> Castle -> throneRoom
             //home
             //add tutorial to home??
             Section home = new Section();
@@ -77,14 +79,77 @@ namespace Bonk_Knight
             for (var MountainRange = 0 ; MountainRange <= SectionPerStage; MountainRange++) {
                 Section Mount = new Section();
                 Mount.Enemies = (new Random()).Next(1,1);
-                Mount.EnemyDifficulty = 0;
+                Mount.EnemyDifficulty = difficulty/2 + (MountainRange / 20);
                 Mount.Type = "Mountain";
                 if (MountainRange == 0){Mount.SectionName = "MountainEnterance";}
                 else if (MountainRange == SectionPerStage){Mount.SectionName = "MountainExit";}
                 else{Mount.SectionName = "Mountain" + MountainRange;}
                 GameSectionMap.Add(Mount);
             }
+            //Cave
+            for (var CaveVein = 0 ; CaveVein <= SectionPerStage; CaveVein++) {
+                Section Caven = new Section();
+                Caven.Enemies = (new Random()).Next(1,2);
+                Caven.EnemyDifficulty = difficulty/2 + (CaveVein / 20);
+                Caven.Type = "Cave";
+                if (CaveVein == 0){Caven.SectionName = "CaveEnterance";}
+                else if (CaveVein == SectionPerStage){Caven.SectionName = "CaveExit"; }
+                else{Caven.SectionName = "Cave" + CaveVein; }
+                GameSectionMap.Add(Caven);
+            }
+            //Forest
+            for (var ForestPart = 0 ; ForestPart <= SectionPerStage; ForestPart++) {
+                Section Forst = new Section();
+                Forst.Enemies = (new Random()).Next(1,2);
+                Forst.EnemyDifficulty = difficulty/2 + (ForestPart / 20);
+                Forst.Type = "Forest";
+                if (ForestPart == 0){Forst.SectionName = "ForestEnterance"; }
+                else if (ForestPart == SectionPerStage){Forst.SectionName = "ForestExit"; }
+                else{Forst.SectionName = "Forest" + ForestPart; }
+                GameSectionMap.Add(Forst);
+            }
+            //Village
+            for (var VillageNum = 0 ; VillageNum <= SectionPerStage; VillageNum++) {
+                Section Vill = new Section();
+                Vill.Enemies = (new Random()).Next(1,2);
+                Vill.EnemyDifficulty = difficulty/2 + (VillageNum / 20);
+                Vill.Type = "Village";
+                if (VillageNum == 0){Vill.SectionName = "VillageEnterance"; }
+                else if (VillageNum == SectionPerStage){Vill.SectionName = "VillageExit"; }
+                else{Vill.SectionName = "Village" + VillageNum; }
+                GameSectionMap.Add(Vill);
+            }
+            //Kingdom/Castle
+            for (var CastleNum = 0 ; CastleNum <= SectionPerStage; CastleNum++) {
+                Section Castle = new Section();
+                Castle.Enemies = (new Random()).Next(1,2);
+                Castle.EnemyDifficulty = difficulty/2 + (CastleNum / 10);
+                Castle.Type = "Kingdom";
+                if (CastleNum == 0){Castle.SectionName = "KingdomEntrance"; }
+                else if (CastleNum == SectionPerStage){Castle.SectionName = "Courtyard"; }
+                else{Castle.SectionName = "Wall" + CastleNum; }
+                GameSectionMap.Add(Castle);
+            }
+            //ThroneRoom
+            Section ThroneRoom = new Section();
+            ThroneRoom.Enemies = 1;
+            ThroneRoom.EnemyDifficulty = difficulty/2;
+            ThroneRoom.Type = "ThroneRoom";
+            ThroneRoom.SectionName = "Throne";
+            GameSectionMap.Add(ThroneRoom);
+
         }
+
+        public static void NextScreen()
+        {
+            CurrentSection++;
+            Render.ChangeScreen(0, 0, Art.Background($"{GameSectionMap[CurrentSection].SectionName}"));
+            Render.RenderScreen("all");
+
+            //initalize the new enemies
+        }
+
+
 
         /*
         //must open and load this function from the inital stuff first to get it linked 

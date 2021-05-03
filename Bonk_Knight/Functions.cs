@@ -97,6 +97,7 @@ namespace Bonk_Knight
                     colour = "White";
                     break;
             }
+
             return (ConsoleColor)Enum.Parse(typeof(ConsoleColor), colour);
         }
     }
