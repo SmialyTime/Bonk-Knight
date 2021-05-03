@@ -44,10 +44,10 @@ namespace Bonk_Knight
         }
         public static void NextScreen()
         {
-            CurrentSection++;
             //check player position edge of screen and enemies = 0;
-            if (CurrentSection < GameSectionMap.Count)
+            if (CurrentSection < GameSectionMap.Count-1)
             {
+                CurrentSection++;
                 //System.Diagnostics.Debug.WriteLine($"{CurrentSection}: {GameSectionMap[CurrentSection].SectionName}");
                 Render.ChangeScreen(0, 0, Art.Background($"{GameSectionMap[CurrentSection].SectionName}"));
                 Render.RenderScreen("all");
@@ -63,10 +63,10 @@ namespace Bonk_Knight
         public static void PrevScreen()
         {
             //need to change --------------------check enemies = 0
-            CurrentSection--;
             //check player position edge of screen and enemies = 0;
-            if (CurrentSection < GameSectionMap.Count && CurrentSection != 0)
+            if (CurrentSection > 0)
             {
+                CurrentSection--;
                 //System.Diagnostics.Debug.WriteLine($"{CurrentSection}: {GameSectionMap[CurrentSection].SectionName}");
                 Render.ChangeScreen(0, 0, Art.Background($"{GameSectionMap[CurrentSection].SectionName}"));
                 Render.RenderScreen("all");
@@ -74,7 +74,7 @@ namespace Bonk_Knight
             else
             {
                 //game ended??
-                System.Diagnostics.Debug.WriteLine("GameEnd?????");
+                System.Diagnostics.Debug.WriteLine("at start");
             }
 
             //initalize the new enemies
