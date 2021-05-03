@@ -44,6 +44,7 @@ namespace Bonk_Knight
                         break;
                     case 'd':
                         //right
+                        Map.NextScreen();
                         break;
                     case 'n':
                         //displays next background

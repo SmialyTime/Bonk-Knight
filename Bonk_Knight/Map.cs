@@ -28,7 +28,7 @@ namespace Bonk_Knight
 
     class Map : Render
     {
-        public static int CurrentSection = 0;
+        public static int CurrentSection = -1;
         public static List<Section> GameSectionMap = new List<Section>() { };
         public static String nextBg()
         {
@@ -42,7 +42,24 @@ namespace Bonk_Knight
             }
             return Areas.bg[Areas.CurrentBg];
         }
+        public static void NextScreen()
+        {
+            CurrentSection++;
+            //check player position edge of screen and enemies = 0;
+            if (CurrentSection < GameSectionMap.Count)
+            {
+                //System.Diagnostics.Debug.WriteLine($"{CurrentSection}: {GameSectionMap[CurrentSection].SectionName}");
+                Render.ChangeScreen(0, 0, Art.Background($"{GameSectionMap[CurrentSection].SectionName}"));
+                Render.RenderScreen("all");
+            }
+            else
+            {
+                //game ended??
+                System.Diagnostics.Debug.WriteLine("GameEnd?????");
+            }
 
+            //initalize the new enemies
+        }
         public Map(String Difficulty)
         {
             var dif = 2;// 1  = easy , 2 = medium, 3 = hard
@@ -81,7 +98,7 @@ namespace Bonk_Knight
                 Mount.Enemies = (new Random()).Next(1,1);
                 Mount.EnemyDifficulty = difficulty/2 + (MountainRange / 20);
                 Mount.Type = "Mountain";
-                if (MountainRange == 0){Mount.SectionName = "MountainEnterance";}
+                if (MountainRange == 0){Mount.SectionName = "MountainEntrance";}
                 else if (MountainRange == SectionPerStage){Mount.SectionName = "MountainExit";}
                 else{Mount.SectionName = "Mountain" + MountainRange;}
                 GameSectionMap.Add(Mount);
@@ -92,7 +109,7 @@ namespace Bonk_Knight
                 Caven.Enemies = (new Random()).Next(1,2);
                 Caven.EnemyDifficulty = difficulty/2 + (CaveVein / 20);
                 Caven.Type = "Cave";
-                if (CaveVein == 0){Caven.SectionName = "CaveEnterance";}
+                if (CaveVein == 0){Caven.SectionName = "CaveEntrance";}
                 else if (CaveVein == SectionPerStage){Caven.SectionName = "CaveExit"; }
                 else{Caven.SectionName = "Cave" + CaveVein; }
                 GameSectionMap.Add(Caven);
@@ -103,7 +120,7 @@ namespace Bonk_Knight
                 Forst.Enemies = (new Random()).Next(1,2);
                 Forst.EnemyDifficulty = difficulty/2 + (ForestPart / 20);
                 Forst.Type = "Forest";
-                if (ForestPart == 0){Forst.SectionName = "ForestEnterance"; }
+                if (ForestPart == 0){Forst.SectionName = "ForestEntrance"; }
                 else if (ForestPart == SectionPerStage){Forst.SectionName = "ForestExit"; }
                 else{Forst.SectionName = "Forest" + ForestPart; }
                 GameSectionMap.Add(Forst);
@@ -114,7 +131,7 @@ namespace Bonk_Knight
                 Vill.Enemies = (new Random()).Next(1,2);
                 Vill.EnemyDifficulty = difficulty/2 + (VillageNum / 20);
                 Vill.Type = "Village";
-                if (VillageNum == 0){Vill.SectionName = "VillageEnterance"; }
+                if (VillageNum == 0){Vill.SectionName = "VillageEntrance"; }
                 else if (VillageNum == SectionPerStage){Vill.SectionName = "VillageExit"; }
                 else{Vill.SectionName = "Village" + VillageNum; }
                 GameSectionMap.Add(Vill);
@@ -140,17 +157,7 @@ namespace Bonk_Knight
 
         }
 
-        public static void NextScreen()
-        {
-            CurrentSection++;
-            Render.ChangeScreen(0, 0, Art.Background($"{GameSectionMap[CurrentSection].SectionName}"));
-            Render.RenderScreen("all");
-
-            //initalize the new enemies
-        }
-
-
-
+        
         /*
         //must open and load this function from the inital stuff first to get it linked 
         public void EventMap()
