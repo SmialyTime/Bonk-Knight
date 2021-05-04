@@ -176,16 +176,10 @@ namespace Bonk_Knight
                     forgColor = Functions.GC('?');
                     break;
                 case 'τ':
-                    forgColor = Functions.GC('r');
+                    forgColor = Functions.GC('c');
                     break;
                 case 'c':
                     forgColor = Functions.GC('y');
-                    break;
-                case '▒':
-                case '▓':
-                case '░':
-                case 'σ':
-                    forgColor = Functions.GC('z');
                     break;
                 case '~':
                 case '╬':
@@ -226,48 +220,170 @@ namespace Bonk_Knight
                 case '„':
                     forgColor = Functions.GC('E');
                     break;
-                case '|':
-                    if (Globals.Terrain == "Forest" && Globals.AnimationRunning == false)
-                    {
-                        forgColor = Functions.GC('z');
-                    }
-                    else
-                    {
-                        forgColor = Functions.GC('w');
-                    }
-                    break;
-                case '`':
-                case '´':
-                case '^':
-                    if (Globals.Terrain == "Forest" && Globals.AnimationRunning == false)
-                    {
-                        forgColor = Functions.GC('e');
-                    }
-                    else
-                    {
-                        forgColor = Functions.GC('w');
-                    }
-                    break;
-                case '\\':
-                case '/':
-                    if (Globals.Terrain == "Forest" && Globals.AnimationRunning == false)
-                    {
-                        forgColor = Functions.GC('E');
-                    }
-                    else
-                    {
-                        forgColor = Functions.GC('w');
-                    }
-                    break;
                 default:
                     forgColor = Functions.GC('w');
                     break;
             }
 
             //set for specific terrains
-            switch (Globals.Terrain)
+            if (Globals.AnimationRunning != true)
             {
-
+                switch (Globals.Terrain)
+                {
+                    case "home":
+                        switch (inChar)
+                        {
+                            case '░':
+                                forgColor = Functions.GC('C');
+                                break;
+                            //case 'o':
+                                //forgColor = Functions.GC('m');
+                                //break;
+                            case '▒':
+                                forgColor = Functions.GC('c');
+                                break;
+                            case '#':
+                                forgColor = Functions.GC('b');
+                                break;
+                            case 'σ':
+                                forgColor = Functions.GC('r');
+                                break;
+                            case '·':
+                            case 'O':
+                                forgColor = Functions.GC('y');
+                                break;
+                            case 'U':
+                            case '╢':
+                            case '╟':
+                            case '│':
+                            case '-':
+                            case '_':
+                                forgColor = Functions.GC('z');
+                                break;
+                            case ']':
+                            case '[':
+                            case 'n':
+                                forgColor = Functions.GC('g');
+                                break;
+                        }
+                        break;
+                    case "ThroneRoom":
+                        switch (inChar)
+                        {
+                            case '│':
+                                forgColor = Functions.GC('m');
+                                break;
+                            case 'o':
+                                forgColor = Functions.GC('c');
+                                break;
+                            case '#':
+                                forgColor = Functions.GC('b');
+                                break;
+                            case 'n':
+                            case 'σ':
+                                forgColor = Functions.GC('r');
+                                break;
+                            case '·':
+                            case '_':
+                                forgColor = Functions.GC('y');
+                                break;
+                            case '.':
+                            case '´':
+                            case '`':
+                            case '¯':
+                                forgColor = Functions.GC('g');
+                                break;
+                        }
+                        break;
+                    case "Cave":
+                        switch (inChar)
+                        {
+                            case '╢':
+                            case '║':
+                            case '╖':
+                            case '╓':
+                            case '╟':
+                                forgColor = Functions.GC('B');
+                                break;
+                            case '┐':
+                            case '│':
+                            case '┤':
+                            case '├':
+                            case '┌':
+                                forgColor = Functions.GC('b');
+                                break;
+                            case '‛':
+                            case '“':
+                            case '”':
+                            case '„':
+                                forgColor = Functions.GC('E');
+                                break;
+                            case '(':
+                            case ')':
+                            case '′':
+                            case '[':
+                            case ']':
+                            case '#':
+                            case '/':
+                            case '\\':
+                            case '|':
+                            case '`':
+                            case '´':
+                            case '^':
+                            case '‘':
+                            case '’':
+                            case ',':
+                            case '.':
+                            case '-':
+                            case '¯':
+                            case '_':
+                                forgColor = Functions.GC('g');
+                                break;
+                            case '‴':
+                                forgColor = Functions.GC('M');
+                                break;
+                            case '″':
+                                forgColor = Functions.GC('C');
+                                break;
+                        }
+                        break;
+                    case "Forest":
+                        switch (inChar)
+                        {
+                            case '|':
+                                forgColor = Functions.GC('y');
+                                break;
+                            case '\\':
+                            case '/':
+                                forgColor = Functions.GC('E');
+                                break;
+                            case '`':
+                            case '´':
+                            case '^':
+                            case '#':
+                            case '(':
+                            case ')':
+                                forgColor = Functions.GC('e');
+                                break;
+                            case 'σ':
+                                forgColor = Functions.GC('z');
+                                break;
+                        }
+                        break;
+                    case "Village":
+                        switch (inChar)
+                        {
+                            case '▒':
+                            case '▓':
+                            case '░':
+                                forgColor = Functions.GC('z');
+                                break;
+                            case 'σ':
+                                forgColor = Functions.GC('r');
+                                break;
+                        }
+                        break;
+                }
             }
 
             Console.ForegroundColor = forgColor;

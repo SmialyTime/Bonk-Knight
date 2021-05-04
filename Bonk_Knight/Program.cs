@@ -27,6 +27,7 @@ namespace Bonk_Knight
         public static Map GameMap = new Map("Medium");
         public static void Main(string[] args)
         {
+            Console.SetWindowSize(32,15);
             InitializeComponents();
             Render.CursorBellowScreen();
 

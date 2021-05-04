@@ -49,6 +49,7 @@ namespace Bonk_Knight
             {
                 CurrentSection++;
                 //System.Diagnostics.Debug.WriteLine($"{CurrentSection}: {GameSectionMap[CurrentSection].SectionName}");
+                Globals.Terrain = GameSectionMap[CurrentSection].Type;
                 Render.ChangeScreen(0, 0, Art.Background($"{GameSectionMap[CurrentSection].SectionName}"));
                 Render.RenderScreen("all");
             }
@@ -68,6 +69,7 @@ namespace Bonk_Knight
             {
                 CurrentSection--;
                 //System.Diagnostics.Debug.WriteLine($"{CurrentSection}: {GameSectionMap[CurrentSection].SectionName}");
+                Globals.Terrain = GameSectionMap[CurrentSection].Type;
                 Render.ChangeScreen(0, 0, Art.Background($"{GameSectionMap[CurrentSection].SectionName}"));
                 Render.RenderScreen("all");
             }
@@ -108,7 +110,7 @@ namespace Bonk_Knight
             Section home = new Section();
                 home.Enemies = 0;
                 home.EnemyDifficulty = 0;
-                home.Type = "Regular";
+                home.Type = "home";
                 home.SectionName = "Home";
                 GameSectionMap.Add(home);
             //Mountains 

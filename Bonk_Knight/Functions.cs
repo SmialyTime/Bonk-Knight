@@ -63,6 +63,12 @@ namespace Bonk_Knight
                 case 'B':
                     colour = "DarkBlue";
                     break;
+                case 'C':
+                    colour = "DarkCyan";
+                    break;
+                case 'c':
+                    colour = "Cyan";
+                    break;
                 case 'y':
                     colour = "Yellow";
                     break;
