@@ -430,7 +430,77 @@ namespace Bonk_Knight
             }
             return EnemyBack;
         }
+        public static String MapUI(String Type, int ScreenNum)
+        {
+            List<string> Mount = new List<string>() {
+                                                     @"┌────┐%" +
+                                                     @"│ /^\│%" +
+                                                     @"└────┘%" ,
+                                                     @"┌────┐%" +
+                                                     @"│^-,^│%" +
+                                                     @"└────┘%" ,
+                                                     @"┌────┐%" +
+                                                     @"│^^^^│%" +
+                                                     @"└────┘%" ,
+                                                     @"┌────┐%" +
+                                                     @"│^.^.│%" +
+                                                     @"└────┘%" ,
+                                                     @"┌────┐%" +
+                                                     @"│/^\ │%" +
+                                                     @"└────┘%"};
+            List<string> Villg = new List<string>() {
+                                                     @"┌────┐%" +
+                                                     @"│╒╡░░│%" +
+                                                     @"└────┘%" ,
+                                                     @"┌────┐%" +
+                                                     @"│o#░░│%" +
+                                                     @"└────┘%" ,
+                                                     @"┌────┐%" +
+                                                     @"│░░X░│%" +
+                                                     @"└────┘%" ,
+                                                     @"┌────┐%" +
+                                                     @"│░░▒▒│%" +
+                                                     @"└────┘%" ,
+                                                     @"┌────┐%" +
+                                                     @"│░░╞┘│%" +
+                                                     @"└────┘%"};
+            List<string> KingD = new List<string>() {
+                                                     @"┌────┐%" +
+                                                     @"│][|~│%" +
+                                                     @"└────┘%" ,
+                                                     @"┌────┐%" +
+                                                     @"│|‚’|│%" +
+                                                     @"└────┘%" ,
+                                                     @"┌────┐%" +
+                                                     @"│|‘‚|│%" +
+                                                     @"└────┘%" ,
+                                                     @"┌────┐%" +
+                                                     @"│|‚’|│%" +
+                                                     @"└────┘%" ,
+                                                     @"┌────┐%" +   
+                                                     @"│*⌠╬⌡│%" +   
+                                                     @"└────┘%"};   
+            String MapBack = "";
+            switch (Type)
+            {
+                case "Home":
+                    MapBack = @"/¯/\ │%" +
+                              @"|'||*│%" +
+                              @"─────┘%" ;
+                    break;
+                case "Mountain":
+                    MapBack = Mount[ScreenNum];
+                    break;
+                case "Village":
+                    MapBack = Villg[ScreenNum];
+                    break;
+                case "Kingdom":
+                    MapBack = KingD[ScreenNum];
+                    break;
 
+            }
+            return MapBack;
+        }
         public static String Menu(String Type)
         {
             String Menu = "";
