@@ -9,9 +9,11 @@ namespace Bonk_Knight
     class Player : Entity
     {
         public int Money { get; set; }
+        public List<String> Inventory { get; set; }
         public Player()
         {
             Map.EnemyDied.EnemyDied += EnemyDied_EnemyDied;
+            this.Name = "Player";
         }
 
         private void EnemyDied_EnemyDied(object sender, string e)

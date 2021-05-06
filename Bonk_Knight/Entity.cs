@@ -22,14 +22,16 @@ namespace Bonk_Knight
             this.Name = "Blank";
             this.Health = 100;
             this.Defence = 1;
-            this.CritChance = 0.2;
+            this.CritChance = 0.1;
             this.Range = 1;
             this.Position = 1;
         }
         public void TakeDamage(float AtkStrength)
         {
+            //LOG
+            int dmg = Crit() ? Convert.ToInt32(AtkStrength / this.Defence) : Convert.ToInt32(AtkStrength * 2 / this.Defence);
             //EVENT dodge
-            this.Health = Crit()?Convert.ToInt32(AtkStrength / this.Defence):Convert.ToInt32(AtkStrength*2 / this.Defence);
+            this.Health -= dmg;
             CheckLiving();
         }
         public void CheckLiving()
@@ -37,9 +39,13 @@ namespace Bonk_Knight
             if (this.Health <=0)
             {
                 //EVENT dead 
-                
                 //will remove the enemy if dead
-
+                if (this.Name != "Player") {
+                    Map.EnemyDied.Enemyded(this.Name);
+                }
+                else{
+                    MainClass.PlayerEventSystem.PlayerDied();
+                }
             }
         }
         public void Attack()
@@ -54,6 +60,7 @@ namespace Bonk_Knight
             }
             else
             {
+                System.Diagnostics.Debug.WriteLine("CRIT");
                 return true;
             }
         }

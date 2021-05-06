@@ -30,7 +30,6 @@ namespace Bonk_Knight
             //pressing a key before will stop the animation already
             //----------- clear console Input first??-----------------------???
             Thread.Sleep(100);
-            Animations.MovingCloud(1);
 
             //making an event with more info passed in
             //person Robby = new person("big R", 100);

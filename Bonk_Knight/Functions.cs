@@ -27,8 +27,10 @@ namespace Bonk_Knight
                 var input = Console.ReadKey();
                 if (input.Key != ConsoleKey.Enter && input.Key != ConsoleKey.Backspace)
                 {
-                    Console.SetCursorPosition(Console.CursorLeft - 1, Console.CursorTop);
-                    Console.Write(' ');
+                    if (Console.CursorLeft > 0) {
+                        Console.SetCursorPosition(Console.CursorLeft - 1, Console.CursorTop);
+                        Console.Write(' ');
+                    }
                 }
             }
         }

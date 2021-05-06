@@ -23,11 +23,6 @@ namespace Bonk_Knight
                     case 'd':
                         //right
                         break;
-                    case 'n':
-                        //displays next background
-                        Render.ChangeScreen(0, 0, Art.Background(Map.nextBg()));
-                        Render.RenderScreen("all");
-                        break;
                     case 't':
                         TESTAni.RunWalkCycle();
                         break;
@@ -42,7 +37,6 @@ namespace Bonk_Knight
         }
         public static char keyInput()
         {
-            //missing some key inputs
             if (Globals.AnimationRunning == false)
             {
                 if (Console.KeyAvailable)
@@ -63,8 +57,20 @@ namespace Bonk_Knight
                 }
                 else { Functions.ClearKeyIntputs(); return '㊅'; }
             }
-            else { System.Diagnostics.Debug.WriteLine($"Animation running"); return ' '; }
+            else { /*Doesn't run*/  Functions.ClearKeyIntputs(); System.Diagnostics.Debug.WriteLine($"Animation running"); return ' '; }
         }
 
+
+        /*
+        //must open and load this function from the inital stuff first to get it linked 
+        public void EventMap()
+        {
+            MainClass.Keys.KeyPressed += Keys_KeyPressed;
+        }
+
+        private void Keys_KeyPressed(object sender, KeyPressedInfo e)
+        {
+            System.Diagnostics.Debug.WriteLine("ME too");
+        }*/
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Text;
+using System.Drawing;
 using System.Collections.Generic;
 using System.Threading;
 
@@ -24,7 +25,8 @@ namespace Bonk_Knight
     class MainClass
     {
         //makes an eventHandler to be called and referenced for the event of Key input
-        public static KeyHandler Keys = new KeyHandler();
+        //public static KeyHandler Keys = new KeyHandler();
+        public static PlayerHandler PlayerEventSystem = new PlayerHandler();
         public static Map GameMap = new Map("Medium");
         public static void Main(string[] args)
         {
@@ -49,10 +51,9 @@ namespace Bonk_Knight
                         //right
                         GameMap.NextScreen();
                         break;
-                    case 'n':
-                        //displays next background
-                        Render.ChangeScreen(0, 0, Art.Background(Map.nextBg()));
-                        Render.RenderScreen("all");
+                    case 'm':
+                        //displays Map Screen
+                        //make it so any button after changes to the normal screen
                         break;
                     case 't':
                         TESTAni.RunWalkCycle();
@@ -60,6 +61,10 @@ namespace Bonk_Knight
                     case ''/*Esc*/:
                         Globals.GameGoing = false;
                         break;
+                }
+                if (Continue == '%')
+                {
+                    System.Diagnostics.Debug.WriteLine('w');
                 }
 
                 //make better
@@ -96,14 +101,14 @@ namespace Bonk_Knight
         }
         public static char keyInput()
         {
-            //missing some key inputs
-            if (Globals.AnimationRunning == false) 
+            if (Globals.AnimationRunning == false)
             {
                 if (Console.KeyAvailable)
                 {
-                    Keys.KeyI();
+                    //Keys.KeyI();
                     var input = Console.ReadKey();
-                    if (input.Key != ConsoleKey.Enter && input.Key != ConsoleKey.Backspace) {
+                    if (input.Key != ConsoleKey.Enter && input.Key != ConsoleKey.Backspace)
+                    {
                         char ltr = Convert.ToChar(input.KeyChar);
                         //2System.Diagnostics.Debug.WriteLine($"{ltr} pressed");
                         Console.SetCursorPosition(Console.CursorLeft - 1, Console.CursorTop);
@@ -112,27 +117,27 @@ namespace Bonk_Knight
                         Functions.ClearKeyIntputs();
                         return ltr;
                     }
-                    else{ System.Diagnostics.Debug.WriteLine($"Enter+stuff"); Functions.ClearKeyIntputs();return '回';/*place holder for enter*/}
+                    else { System.Diagnostics.Debug.WriteLine($"Enter+stuff"); Functions.ClearKeyIntputs(); return '回';/*place holder for enter*/}
                 }
-                else{Functions.ClearKeyIntputs(); return '㊅'; }
+                else { Functions.ClearKeyIntputs(); return '㊅'; }
             }
-            else{System.Diagnostics.Debug.WriteLine($"Animation running"); return ' ';}
+            else { /*Doesn't run*/  Functions.ClearKeyIntputs(); System.Diagnostics.Debug.WriteLine($"Animation running"); return '㊀'; }
         }
     }
-    public class KeyHandler
+    public class PlayerHandler
     {
-        public event EventHandler<KeyPressedInfo> KeyPressed;
-        public void KeyI()
+        public event EventHandler<PlayerStats> Deaded;
+        public void PlayerDied()
         {
             //way to pass in multipel args clearly
-            KeyPressedInfo myCustomArgs = new KeyPressedInfo();
-            myCustomArgs.Key = "c";
+            PlayerStats myCustomArgs = new PlayerStats();
+            myCustomArgs.Score = 100;
             //runs all events named clickEvent
-            KeyPressed?.Invoke(this, myCustomArgs);
+            Deaded?.Invoke(this, myCustomArgs);
         }
     }
-    public class KeyPressedInfo
+    public class PlayerStats
     {
-        public string Key { get; set; }
+        public int Score { get; set; }
     }
 }

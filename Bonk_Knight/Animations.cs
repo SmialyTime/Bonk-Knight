@@ -10,6 +10,7 @@ namespace Bonk_Knight
     {
         public static void ControlableEntityAni(int Position, List<String> Animation)
         {
+            //FIX
             //meant for player and enemy
             if (Globals.AnimationRunning == false) {
                 if (!(Position > 6 || Position < 1)) {
@@ -64,7 +65,7 @@ namespace Bonk_Knight
                         System.Diagnostics.Debug.WriteLine($"Completed Frame {Frame}");
                         Thread.Sleep(1000);
                     }
-                    Globals.AnimationRunning = false;
+                    EndAni();
                 }
                 else
                 {
@@ -78,6 +79,12 @@ namespace Bonk_Knight
                 //catches bugs
                 MakeErrorMessage("Couldn't run animation as one already runnign");
             }
+        }
+        public static void EndAni()
+        {
+            //add event??
+            Functions.ClearKeyIntputs();
+            Globals.AnimationRunning = false;
         }
         public static void HoleInRect()
         {
@@ -240,22 +247,37 @@ namespace Bonk_Knight
             @"      / \%"};
             List<String> TestAni = new List<String>(){
             // 1
-            @" (τ)%"+
-            @" /|\%"+
-            @" / \%",
+            @"        %"+
+            @"        %"+
+            @"        %"+
+            @" (τ)    %"+
+            @" /|\    %"+
+            @" / \    %",
             // 2
-            @"  (τ)%"+
-            @"  /|\%"+
-            @"  / 7%",
+            @"        %"+
+            @"        %"+
+            @"        %"+
+            @"  (τ)   %"+
+            @"  /|\   %"+
+            @"  / 7   %",
             // 3
-            @"   (τ)%"+
-            @"   (|)%"+
-            @"    |>%",
+            @"        %"+
+            @"        %"+
+            @"        %"+
+            @"   (τ)  %"+
+            @"   (|)  %"+
+            @"    |>  %",
             // 4
-            @"    (τ)%"+
-            @"    /|\%"+
-            @"     |7%",
+            @"        %"+
+            @"        %"+
+            @"        %"+
+            @"    (τ) %"+
+            @"    /|\ %"+
+            @"     |7 %",
             // 5
+            @"        %"+
+            @"        %"+
+            @"        %"+
             @"     (τ)%"+
             @"     /|\%"+
             @"     / >%",

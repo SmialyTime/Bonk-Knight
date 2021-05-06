@@ -34,7 +34,7 @@
     <Content Include="RefCode\basic game.txt" />
     <Compile Include="Enemy.cs" />
     <Compile Include="Entity.cs" />
-    <Compile Include="GameRunning.cs" />
+    <Compile Include="RefCode\GameRunning.cs" />
     <Compile Include="Player.cs" />
     <Compile Include="RefCode\button.cs" />
     <Compile Include="Art.cs" />
@@ -48,13 +48,13 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
-    <Content Include="Art\bonk Knight ref art.txt" />
-    <Content Include="Art\CharacterArt.txt" />
-    <Content Include="Art\CharAnimation.txt" />
-    <Content Include="Art\EnemyArt.txt" />
-    <Content Include="Art\RandomAsciiStuff.txt" />
-    <Content Include="Art\TerainArt.txt" />
-    <Content Include="Art\WeponArt+Animation.txt" />
+    <Content Include="Art TextFiles\bonk Knight ref art.txt" />
+    <Content Include="Art TextFiles\CharacterArt.txt" />
+    <Content Include="Art TextFiles\CharAnimation.txt" />
+    <Content Include="Art TextFiles\EnemyArt.txt" />
+    <Content Include="Art TextFiles\RandomAsciiStuff.txt" />
+    <Content Include="Art TextFiles\TerainArt.txt" />
+    <Content Include="Art TextFiles\WeponArt+Animation.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>

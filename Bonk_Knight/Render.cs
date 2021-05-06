@@ -134,7 +134,7 @@ namespace Bonk_Knight
                             else
                             {
                                 //current map char behind
-                                Globals.Screen[rw, cl] = '#';
+                                Globals.Screen[rw, cl] = Globals.CurrentBackground[rw, cl];
                             }
                         }
                     }
@@ -149,7 +149,7 @@ namespace Bonk_Knight
             int rw = 0;
             int cl = 0;
             int elm = 0;
-            String MapToSwitchTo = map.GameSectionMap[map.CurrentSection].SectionName;
+            String MapToSwitchTo = Art.Background(map.GameSectionMap[map.CurrentSection].SectionName);
             String junk = "";
             for (int i = 0; i < MapToSwitchTo.Length; i++)
             {
@@ -167,23 +167,7 @@ namespace Bonk_Knight
                     }
                     else
                     {
-                        if (Globals.AnimationRunning == false)
-                        {
-                            Globals.Screen[rw, cl] = MapToSwitchTo[elm];
-                        }
-                        else
-                        {
-                            //it is an animation
-                            if (MapToSwitchTo[elm] != ' ')
-                            {
-                                Globals.Screen[rw, cl] = MapToSwitchTo[elm];
-                            }
-                            else
-                            {
-                                //current map char behind
-                                Globals.Screen[rw, cl] = '#';
-                            }
-                        }
+                        Globals.CurrentBackground[rw, cl] = MapToSwitchTo[elm];
                     }
                     cl++;
                 }
