@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Bonk_Knight
 {
-    class Art
+    public class Art
     {
         public static String Background(String Type)
         {
@@ -429,7 +429,7 @@ namespace Bonk_Knight
                     break;
             }
             return EnemyBack;
-        }
+        }                      
         public static String MapUI(String Type, int ScreenNum)
         {
             List<string> Mount = new List<string>() {
@@ -447,6 +447,38 @@ namespace Bonk_Knight
                                                      @"└────┘%" ,
                                                      @"┌────┐%" +
                                                      @"│/^\ │%" +
+                                                     @"└────┘%"};
+            List<string> Cavy = new List<string>() {
+                                                     @"┌────┐%" +  
+                                                     @"│ /O\│%" +  
+                                                     @"└────┘%" ,  
+                                                     @"┌────┐%" +
+                                                     @"│¯`´'│%" +
+                                                     @"└────┘%" ,
+                                                     @"┌────┐%" +
+                                                     @"│`″-´│%" +
+                                                     @"└────┘%" ,
+                                                     @"┌────┐%" +
+                                                     @"│-(╖´│%" +
+                                                     @"└────┘%" ,
+                                                     @"┌────┐%" +
+                                                     @"│/O\,│%" +
+                                                     @"└────┘%"};
+            List<string> Fst = new List<string>() {
+                                                     @"┌────┐%" + 
+                                                     @"│ (#)│%" + 
+                                                     @"└────┘%" , 
+                                                     @"┌────┐%" +
+                                                     @"│****│%" +
+                                                     @"└────┘%" ,
+                                                     @"┌────┐%" +
+                                                     @"│^||^│%" +
+                                                     @"└────┘%" ,
+                                                     @"┌────┐%" +
+                                                     @"│`σ||│%" +
+                                                     @"└────┘%" ,
+                                                     @"┌────┐%" +
+                                                     @"│(#) │%" +
                                                      @"└────┘%"};
             List<string> Villg = new List<string>() {
                                                      @"┌────┐%" +
@@ -479,17 +511,28 @@ namespace Bonk_Knight
                                                      @"└────┘%" ,
                                                      @"┌────┐%" +   
                                                      @"│*⌠╬⌡│%" +   
-                                                     @"└────┘%"};   
+                                                     @"└────┘%"};
             String MapBack = "";
             switch (Type)
             {
-                case "Home":
+                case "HomeIcon":
                     MapBack = @"/¯/\ │%" +
                               @"|'||*│%" +
                               @"─────┘%" ;
                     break;
+                case "ThroneIcon":
+                    MapBack = @"┌─────%" +
+                              @"│|  |~%" +
+                              @"│+ ╕╬╒%";
+                    break;
                 case "Mountain":
                     MapBack = Mount[ScreenNum];
+                    break;  
+                case "Cave":
+                    MapBack = Cavy[ScreenNum];
+                    break;
+                case "Forest":
+                    MapBack = Fst[ScreenNum];
                     break;
                 case "Village":
                     MapBack = Villg[ScreenNum];
@@ -497,10 +540,14 @@ namespace Bonk_Knight
                 case "Kingdom":
                     MapBack = KingD[ScreenNum];
                     break;
-
+                default:
+                    MapBack = @"      %" +
+                              @"      %" +
+                              @"      %";
+                    break;
             }
             return MapBack;
-        }
+        }       
         public static String Menu(String Type)
         {
             String Menu = "";
@@ -574,6 +621,144 @@ namespace Bonk_Knight
                     break;
             }
             return Menu;
+        }                       
+    }                                                                   
+    public class Animations                                             
+    {                                                                   
+        public static List<String> PlayerAni(String AniName)            
+        {                                                               
+            List<String> backAni = new List<String>() { };              
+            switch (AniName)                                            
+            {                                                           
+                case "LiftHammer":                                      
+                    backAni = new List<String>(){                       
+                              // 1                                      
+                              @"     %" +                               
+                              @"(τ█┬█%" +                               
+                              @"/|\| %" +    
+                              @"/ \' %",     
+                              // 2                                                                                    
+                              @"     %" +                                                                             
+                              @"(τ█┬█%" +
+                              @" |„| %" +
+                              @"/ \' %",  
+                              // 3
+                              @"     %" +                                                                             
+                              @"(τ█┬█%" +                                                                             
+                              @" |=| %" +
+                              @"/ \' %",  
+                              // 4
+                              @"  █┬█%" +                                                                             
+                              @"(τ)| %" +                                                                             
+                              @" |″' %" +
+                              @"/ \  %",
+                              // 5
+                              @"  █┬█%" +                                                                             
+                              @"(τ)| %" +
+                              @" |”' %" +
+                              @"/ \  %"};
+                    break;
+                default://tester
+                    backAni = new List<String>(){ 
+                              // 1
+                              @"        %" +
+                              @"        %" +
+                              @"        %" +
+                              @" (τ)    %" +
+                              @" /|\    %" +
+                              @" / \    %",
+                              // 2
+                              @"        %" +
+                              @"        %" +
+                              @"        %" +
+                              @"  (τ)   %" +
+                              @"  /|\   %" +
+                              @"  / 7   %",
+                              // 3
+                              @"        %" +
+                              @"        %" +
+                              @"        %" +
+                              @"   (τ)  %" +
+                              @"   (|)  %" +
+                              @"    |>  %",
+                              // 4
+                              @"        %" +
+                              @"        %" +
+                              @"        %" +
+                              @"    (τ) %" +
+                              @"    /|\ %" +
+                              @"     |7 %",
+                              // 5
+                              @"        %" +
+                              @"        %" +
+                              @"        %" +
+                              @"     (τ)%" +
+                              @"     /|\%" +
+                              @"     / >%",
+                              // 6
+                              //012345678
+                              @"---._   %" +
+                              @"     `· %" +
+                              @"       \%" +
+                              @" (τ)  ▄▄%" +
+                              @"  |=x──┤%" +
+                              @"  >>  ▀▀%"};
+                    break;
+            }
+
+            return backAni;
+        }
+    }
+
+    class TESTAni : Animate
+    {
+        public static void RunWalkCycle()
+        {
+            List<String> TestAni = new List<String>(){
+            // 1
+            @"        %"+
+            @"        %"+
+            @"        %"+
+            @" (τ)    %"+
+            @" /|\    %"+
+            @" / \    %",
+            // 2
+            @"        %"+
+            @"        %"+
+            @"        %"+
+            @"  (τ)   %"+
+            @"  /|\   %"+
+            @"  / 7   %",
+            // 3
+            @"        %"+
+            @"        %"+
+            @"        %"+
+            @"   (τ)  %"+
+            @"   (|)  %"+
+            @"    |>  %",
+            // 4
+            @"        %"+
+            @"        %"+
+            @"        %"+
+            @"    (τ) %"+
+            @"    /|\ %"+
+            @"     |7 %",
+            // 5
+            @"        %"+
+            @"        %"+
+            @"        %"+
+            @"     (τ)%"+
+            @"     /|\%"+
+            @"     / >%",
+            // 6
+            //012345678
+            @"---._   %"+
+            @"     `· %"+
+            @"       \%"+
+            @" (τ)  ▄▄%"+
+            @"  |=x──┤%"+
+            @"  >>  ▀▀%"};
+            ControlableEntityAni(1, TestAni);
         }
     }
 }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Bonk_Knight
 {
-    public partial class Entity
+    public partial class Entity : Animate
     {
         public double Strength { get; set; }
         public String Name { get; set; }
@@ -28,9 +28,10 @@ namespace Bonk_Knight
         }
         public void TakeDamage(float AtkStrength)
         {
-            //LOG
+            //IMPROVE
+            //LOG crit hit
             int dmg = Crit() ? Convert.ToInt32(AtkStrength / this.Defence) : Convert.ToInt32(AtkStrength * 2 / this.Defence);
-            //EVENT dodge
+            //EVENT dodge or item activated??
             this.Health -= dmg;
             CheckLiving();
         }
@@ -43,14 +44,11 @@ namespace Bonk_Knight
                 if (this.Name != "Player") {
                     Map.EnemyDied.Enemyded(this.Name);
                 }
-                else{
+                else
+                {
                     MainClass.PlayerEventSystem.PlayerDied();
                 }
             }
-        }
-        public void Attack()
-        {
-
         }
         public bool Crit()
         {

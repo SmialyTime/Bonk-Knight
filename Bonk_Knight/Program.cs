@@ -21,6 +21,7 @@ namespace Bonk_Knight
         public static String LastEvent = "";
         public static char[,] Screen = new char[9, 30];
         public static char[,] CurrentBackground = new char[9, 30];
+        //CHANGE make a dictionary with all items and one for gear
     }
     class MainClass
     {
@@ -56,7 +57,7 @@ namespace Bonk_Knight
                         //make it so any button after changes to the normal screen
                         break;
                     case 't':
-                        TESTAni.RunWalkCycle();
+                        //TESTAni.RunWalkCycle();
                         break;
                     case ''/*Esc*/:
                         Globals.GameGoing = false;
@@ -66,6 +67,7 @@ namespace Bonk_Knight
                 {
                     System.Diagnostics.Debug.WriteLine('w');
                 }
+                Functions.CursorBellowScreen();
 
                 //make better
                 Continue = ' ';
@@ -73,7 +75,7 @@ namespace Bonk_Knight
                 Functions.CursorBellowScreen();
             }
 
-            //change later
+            //CHANGE later
             Console.ResetColor();
             Console.ForegroundColor = Functions.GC('z');
             Console.WriteLine("press Enter button to continue");

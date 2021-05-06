@@ -30,7 +30,7 @@
     <Reference Include="System" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Animations.cs" />
+    <Compile Include="Animate.cs" />
     <Content Include="RefCode\basic game.txt" />
     <Compile Include="Enemy.cs" />
     <Compile Include="Entity.cs" />

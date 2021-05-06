@@ -6,11 +6,11 @@ using System.Threading;
 
 namespace Bonk_Knight
 {
-    class Animations : Render
+    public class Animate : Render
     {
         public static void ControlableEntityAni(int Position, List<String> Animation)
         {
-            //FIX
+            //FIX CHANGE
             //meant for player and enemy
             if (Globals.AnimationRunning == false) {
                 if (!(Position > 6 || Position < 1)) {
@@ -215,81 +215,4 @@ namespace Bonk_Knight
         }
     }
 
-    class TESTAni : Animations
-    {
-        public static void RunWalkCycle()
-        {
-            List<String> WalkCycle = new List<String>(){
-            // 1
-            @" (τ)%"+
-            @" /|\%"+
-            @" / \%",
-            // 2
-            @"  (τ)%"+
-            @"  /|\%"+
-            @"  / 7%",
-            // 3
-            @"   (τ)%"+
-            @"   (|)%"+
-            @"    |>%",
-            // 4
-            @"    (τ)%"+
-            @"    /|\%"+
-            @"     |7%",
-            // 5
-            @"     (τ)%"+
-            @"     /|\%"+
-            @"     / >%",
-            // 6
-            //012345678
-            @"      (τ)%"+
-            @"      /|\%"+
-            @"      / \%"};
-            List<String> TestAni = new List<String>(){
-            // 1
-            @"        %"+
-            @"        %"+
-            @"        %"+
-            @" (τ)    %"+
-            @" /|\    %"+
-            @" / \    %",
-            // 2
-            @"        %"+
-            @"        %"+
-            @"        %"+
-            @"  (τ)   %"+
-            @"  /|\   %"+
-            @"  / 7   %",
-            // 3
-            @"        %"+
-            @"        %"+
-            @"        %"+
-            @"   (τ)  %"+
-            @"   (|)  %"+
-            @"    |>  %",
-            // 4
-            @"        %"+
-            @"        %"+
-            @"        %"+
-            @"    (τ) %"+
-            @"    /|\ %"+
-            @"     |7 %",
-            // 5
-            @"        %"+
-            @"        %"+
-            @"        %"+
-            @"     (τ)%"+
-            @"     /|\%"+
-            @"     / >%",
-            // 6
-            //012345678
-            @"---._   %"+
-            @"     `· %"+
-            @"       \%"+
-            @" (τ)  ▄▄%"+
-            @"  |=x──┤%"+
-            @"  >>  ▀▀%"};
-            ControlableEntityAni(1, TestAni);
-        }
-    }
 }
