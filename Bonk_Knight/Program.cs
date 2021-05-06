@@ -19,6 +19,7 @@ namespace Bonk_Knight
         //Globals.Screen[rw,cl]
         public static String LastEvent = "";
         public static char[,] Screen = new char[9, 30];
+        public static char[,] CurrentBackground = new char[9, 30];
     }
     class MainClass
     {
@@ -42,11 +43,11 @@ namespace Bonk_Knight
                 {
                     case 'a':
                         //left
-                        Map.PrevScreen();
+                        GameMap.PrevScreen();
                         break;
                     case 'd':
                         //right
-                        Map.NextScreen();
+                        GameMap.NextScreen();
                         break;
                     case 'n':
                         //displays next background
@@ -87,6 +88,7 @@ namespace Bonk_Knight
                 for (int gap = 0; gap < 30;gap++)
                 {
                     Globals.Screen[dic, gap] = ' ';
+                    Globals.CurrentBackground[dic, gap] = ' ';
                 }
             }
             //main screen outline

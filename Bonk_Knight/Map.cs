@@ -17,7 +17,7 @@ namespace Bonk_Knight
         public int Enemies { get; set;}
 
         //A multiplyer of the enemy streangth
-        public Decimal EnemyDifficulty { get; set;}
+        public double EnemyDifficulty { get; set;}
 
         //Biome type for Color and Enemy Type
         public String Type { get; set; }
@@ -26,63 +26,29 @@ namespace Bonk_Knight
         public String SectionName { get; set; }
     }
 
-    class Map : Render
+    public class EnemyHandler
     {
-        public static int CurrentSection = -1;
-        public static List<Section> GameSectionMap = new List<Section>() { };
-        public static String nextBg()
+        public event EventHandler<String> EnemyDied;
+        public void Enemyded(String EnemyNm)
         {
-            if (Areas.bg.Count - 1 == Areas.CurrentBg)
-            {
-                Areas.CurrentBg = 0;
-            }
-            else
-            {
-                Areas.CurrentBg++;
-            }
-            return Areas.bg[Areas.CurrentBg];
+            //way to pass in multipel args clearly
+            //runs all events named clickEvent
+            EnemyDied?.Invoke(this, EnemyNm);
         }
-        public static void NextScreen()
-        {
-            //check player position edge of screen and enemies = 0;
-            if (CurrentSection < GameSectionMap.Count-1)
-            {
-                CurrentSection++;
-                //System.Diagnostics.Debug.WriteLine($"{CurrentSection}: {GameSectionMap[CurrentSection].SectionName}");
-                Globals.Terrain = GameSectionMap[CurrentSection].Type;
-                Render.ChangeScreen(0, 0, Art.Background($"{GameSectionMap[CurrentSection].SectionName}"));
-                Render.RenderScreen("all");
-            }
-            else
-            {
-                //game ended??
-                System.Diagnostics.Debug.WriteLine("GameEnd?????");
-            }
+    }
 
-            //initalize the new enemies
-        }
-        public static void PrevScreen()
-        {
-            //need to change --------------------check enemies = 0
-            //check player position edge of screen and enemies = 0;
-            if (CurrentSection > 0)
-            {
-                CurrentSection--;
-                //System.Diagnostics.Debug.WriteLine($"{CurrentSection}: {GameSectionMap[CurrentSection].SectionName}");
-                Globals.Terrain = GameSectionMap[CurrentSection].Type;
-                Render.ChangeScreen(0, 0, Art.Background($"{GameSectionMap[CurrentSection].SectionName}"));
-                Render.RenderScreen("all");
-            }
-            else
-            {
-                //game ended??
-                System.Diagnostics.Debug.WriteLine("at start");
-            }
+    public class Map : Render
+    {
+        public int CurrentSection = -1;
+        public List<Section> GameSectionMap = new List<Section>() { };
+        public static List<Enemy> CurrentEnemies = new List<Enemy>() { };
+        public static EnemyHandler EnemyDied = new EnemyHandler();
 
-            //initalize the new enemies
-        }
+
         public Map(String Difficulty)
         {
+            //add to event stuff  if 'm' => LoadMapWindow()
+
             var dif = 2;// 1  = easy , 2 = medium, 3 = hard
             //easy:   enemies x0.5 as Strong, normaly x1   enemies, 3 Stages per Section,x0.5 total gold to collect
             //medium: enemies x1.0 as Strong, normaly x1-2 enemies, 5 Stages per Section,x1.0 total gold to collect
@@ -99,11 +65,87 @@ namespace Bonk_Knight
                     dif = 3;
                     break;
             }
-            CreateGameMap(dif,4);
+            CreateGameMap(dif, 4);
+
+
+            Map.EnemyDied.EnemyDied += RemoveDeadEnemies;
         }
-        public static void CreateGameMap(int difficulty, int SectionPerStage)
+        private void RemoveDeadEnemies(object sender, string e)
         {
-            GameSectionMap = new List<Section>() { };
+            foreach (Enemy EDeadCheck in CurrentEnemies)
+            {
+                if (EDeadCheck.Health <= 0)
+                {
+                    CurrentEnemies.Remove(EDeadCheck);
+                }
+            }
+        }
+        public static void LoadMapWindow()
+        {
+            Art.MapUI("Home",1);
+        }
+        public static String nextBg()
+        {
+            if (Areas.bg.Count - 1 == Areas.CurrentBg)
+            {
+                Areas.CurrentBg = 0;
+            }
+            else
+            {
+                Areas.CurrentBg++;
+            }
+            return Areas.bg[Areas.CurrentBg];
+        }
+        public void NextScreen()
+        {
+            //check player position edge of screen and enemies = 0;
+            if (CurrentSection < this.GameSectionMap.Count-1)
+            {
+                CurrentSection++;
+                Render.ChangeBackground(this);
+                //System.Diagnostics.Debug.WriteLine($"{CurrentSection}: {this.GameSectionMap[CurrentSection].SectionName}");
+                Globals.Terrain = this.GameSectionMap[CurrentSection].Type;
+                Render.ChangeScreen(0, 0, Art.Background($"{this.GameSectionMap[CurrentSection].SectionName}"));
+                Render.RenderScreen("all");
+
+
+                //initalize the new enemies
+                for (int i = 0; i < this.GameSectionMap[CurrentSection].Enemies ; i++)
+                {
+                    Enemy NewEnemy = new Enemy(this.GameSectionMap[CurrentSection].Type, this.GameSectionMap[CurrentSection].EnemyDifficulty);
+                    NewEnemy.Position = 6 - CurrentEnemies.Count;
+                }
+            }
+            else
+            {
+                //game ended??
+                System.Diagnostics.Debug.WriteLine("GameEnd?????");
+            }
+        }
+        public void PrevScreen()
+        {
+            //need to change --------------------check enemies = 0
+            //check player position edge of screen and enemies = 0;
+            if (CurrentSection > 0)
+            {
+                CurrentSection--;
+                Render.ChangeBackground(this);
+                //System.Diagnostics.Debug.WriteLine($"{CurrentSection}: {this.GameSectionMap[CurrentSection].SectionName}");
+                Globals.Terrain = this.GameSectionMap[CurrentSection].Type;
+                Render.ChangeScreen(0, 0, Art.Background($"{this.GameSectionMap[CurrentSection].SectionName}"));
+                Render.RenderScreen("all");
+            }
+            else
+            {
+                //game ended??
+                System.Diagnostics.Debug.WriteLine("at start");
+            }
+
+            //initalize the new enemies
+        }
+        public void CreateGameMap(int difficulty, int SectionPerStage)
+        {
+            this.GameSectionMap = new List<Section>() { };
             //basic hard coded layout home -> Mountains -> Cave -> Forest -> Village -> Castle -> throneRoom
             //home
             //add tutorial to home??
@@ -112,7 +154,7 @@ namespace Bonk_Knight
                 home.EnemyDifficulty = 0;
                 home.Type = "home";
                 home.SectionName = "Home";
-                GameSectionMap.Add(home);
+                this.GameSectionMap.Add(home);
             //Mountains 
             for (var MountainRange = 0 ; MountainRange <= SectionPerStage; MountainRange++) {
                 Section Mount = new Section();
@@ -122,7 +164,7 @@ namespace Bonk_Knight
                 if (MountainRange == 0){Mount.SectionName = "MountainEntrance";}
                 else if (MountainRange == SectionPerStage){Mount.SectionName = "MountainExit";}
                 else{Mount.SectionName = "Mountain" + MountainRange;}
-                GameSectionMap.Add(Mount);
+                this.GameSectionMap.Add(Mount);
             }
             //Cave
             for (var CaveVein = 0 ; CaveVein <= SectionPerStage; CaveVein++) {
@@ -133,7 +175,7 @@ namespace Bonk_Knight
                 if (CaveVein == 0){Caven.SectionName = "CaveEntrance";}
                 else if (CaveVein == SectionPerStage){Caven.SectionName = "CaveExit"; }
                 else{Caven.SectionName = "Cave" + CaveVein; }
-                GameSectionMap.Add(Caven);
+                this.GameSectionMap.Add(Caven);
             }
             //Forest
             for (var ForestPart = 0 ; ForestPart <= SectionPerStage; ForestPart++) {
@@ -144,7 +186,7 @@ namespace Bonk_Knight
                 if (ForestPart == 0){Forst.SectionName = "ForestEntrance"; }
                 else if (ForestPart == SectionPerStage){Forst.SectionName = "ForestExit"; }
                 else{Forst.SectionName = "Forest" + ForestPart; }
-                GameSectionMap.Add(Forst);
+                this.GameSectionMap.Add(Forst);
             }
             //Village
             for (var VillageNum = 0 ; VillageNum <= SectionPerStage; VillageNum++) {
@@ -155,7 +197,7 @@ namespace Bonk_Knight
                 if (VillageNum == 0){Vill.SectionName = "VillageEntrance"; }
                 else if (VillageNum == SectionPerStage){Vill.SectionName = "VillageExit"; }
                 else{Vill.SectionName = "Village" + VillageNum; }
-                GameSectionMap.Add(Vill);
+                this.GameSectionMap.Add(Vill);
             }
             //Kingdom/Castle
             for (var CastleNum = 0 ; CastleNum <= SectionPerStage; CastleNum++) {
@@ -166,7 +208,7 @@ namespace Bonk_Knight
                 if (CastleNum == 0){Castle.SectionName = "KingdomEntrance"; }
                 else if (CastleNum == SectionPerStage){Castle.SectionName = "Courtyard"; }
                 else{Castle.SectionName = "Wall" + CastleNum; }
-                GameSectionMap.Add(Castle);
+                this.GameSectionMap.Add(Castle);
             }
             //ThroneRoom
             Section ThroneRoom = new Section();
@@ -174,10 +216,9 @@ namespace Bonk_Knight
             ThroneRoom.EnemyDifficulty = difficulty/2;
             ThroneRoom.Type = "ThroneRoom";
             ThroneRoom.SectionName = "Throne";
-            GameSectionMap.Add(ThroneRoom);
+            this.GameSectionMap.Add(ThroneRoom);
 
         }
-
         
         /*
         //must open and load this function from the inital stuff first to get it linked 

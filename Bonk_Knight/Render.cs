@@ -143,6 +143,53 @@ namespace Bonk_Knight
                 elm++;
             }
         }
+        public static void ChangeBackground(Map map)
+        {
+            ///Check if it works?
+            int rw = 0;
+            int cl = 0;
+            int elm = 0;
+            String MapToSwitchTo = map.GameSectionMap[map.CurrentSection].SectionName;
+            String junk = "";
+            for (int i = 0; i < MapToSwitchTo.Length; i++)
+            {
+                if (MapToSwitchTo[elm] == '%')
+                {
+                    rw++;
+                    cl = 0;
+                }
+                else
+                {
+                    if (rw >= 9 || cl >= 30)
+                    {
+                        //only works for whole screen rendering
+                        junk += MapToSwitchTo[elm];
+                    }
+                    else
+                    {
+                        if (Globals.AnimationRunning == false)
+                        {
+                            Globals.Screen[rw, cl] = MapToSwitchTo[elm];
+                        }
+                        else
+                        {
+                            //it is an animation
+                            if (MapToSwitchTo[elm] != ' ')
+                            {
+                                Globals.Screen[rw, cl] = MapToSwitchTo[elm];
+                            }
+                            else
+                            {
+                                //current map char behind
+                                Globals.Screen[rw, cl] = '#';
+                            }
+                        }
+                    }
+                    cl++;
+                }
+                elm++;
+            }
+        }
         public static void RenderOutline(int w, int h)
         {
             int OrigX = Globals.Sx - 1;
