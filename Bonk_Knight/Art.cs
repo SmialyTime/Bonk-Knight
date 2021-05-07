@@ -371,54 +371,52 @@ namespace Bonk_Knight
                                 @"4234567890%" +
                                 @"5234567890%";
                     break;
+                case "Player":
+                    EnemyBack = @"  █┬█%" +
+                                @"(τ)| %" +
+                                @"/|\' %" +
+                                @"/ \  %" ;
+                    break;
                 case "FarmerP":
                     EnemyBack = @"   _ %" +
                                 @"└┼┘O %" +
                                 @" |/|\%" +
-                                @"  / \%" +
-                                @"12345%";
+                                @"  / \%" ;
                     break;
                 case "WoodCutter":
                     EnemyBack = @"   _ %" +
                                 @"<| O %" +
                                 @" |/|\%" +
-                                @"  / \%" +
-                                @"12345%";
+                                @"  / \%" ;
                     break;
                 case "FarmerH":
                     EnemyBack = @" _ _ %" +
                                 @"´|´O`%" +
                                 @" |/|\%" +
-                                @"  / \%" +
-                                @"12345%";
+                                @"  / \%" ;
                     break;
                 case "Croc":
                     EnemyBack = @" __σσ--.__%" +
-                                @" Vv,==,^^`%" +
-                                @"3234567890%" ;
+                                @" Vv,==,^^`%" ;
                     break;
                 case "Slime":
                     EnemyBack = @" ,--. %" +
-                                @"(o o )%" +
-                                @" ¯¯¯¯ %" +
-                                @"123456%" ;
+                                @"(o▫o▫)%" ;
                     break;
                 case "Crab":
                     EnemyBack = @"().--.()%" +
-                                @" `^´`^´ %" +
-                                @"32345678%" ;
+                                @" `^´`^´ %" ;
                     break;
                 case "Bat":
                     EnemyBack = @"   ,_,   %" +
                                 @" /¯)∞(¯\ %" +
-                                @"/.-\_/-.\%" +
-                                @"123456789%" ;
+                                @"/.-\_/-.\%" ;
                     break;
                 case "King":
                     EnemyBack = @" |~%" +
                                 @"╕╬╒%" +
                                 @"/|\%" +
-                                @"/ \%" ;
+                                @"/▫\%";
                     break;
                 default:
                     EnemyBack = @"1234567890%" +

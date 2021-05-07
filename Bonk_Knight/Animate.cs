@@ -83,6 +83,58 @@ namespace Bonk_Knight
                 MakeErrorMessage("Couldn't run animation as one already runnign");
             }
         }
+        public static void ControlableEntityPlace(int Position, String EntityStationary)
+        {
+            //FIX CHANGE IMPROVE make the loading of entities better
+            //meant for player and enemy
+            if (Globals.AnimationRunning == false) {
+                if (!(Position > 6 || Position < 1)) {
+                    Globals.AnimationRunning = true;
+
+                    //note the animtaion starts from the ground
+                    //all animations are within square
+
+                    //Max row above the surface of the ground
+                    int RowFinal = Globals.GroundInGameY-1;
+                    //Starting row of animation
+                    int RowInitial = RowFinal;
+                    //Starting Column of animation
+                    int ColumnInitial = ((Position - 1) * 5);
+                    //Max Column
+                    int ColumnFinal = ColumnInitial;
+
+                    //checks for the max height of animation
+                    RowInitial = Math.Min(RowInitial, Globals.GroundInGameY - EntityStationary.Count(f => f == '%'));
+                    //checks for the max width of animation
+                    ColumnFinal = Math.Max(ColumnFinal, ColumnInitial+((EntityStationary.Length - EntityStationary.Count(f => f == '%')) / EntityStationary.Count(f => f == '%')));
+                    //IDK why probs 0 index
+                    ColumnFinal--;
+                    if (ColumnFinal >= 30){ColumnFinal = 29;}
+
+                    //set up the Location of the Animation to change the screen list
+                    List<int> ThingCoords = new List<int>() { };
+                    //row
+                    ThingCoords.Add(Globals.GroundInGameY - EntityStationary.Count(f => f == '%'));
+                    //Column
+                    ThingCoords.Add((Position - 1) * 5);
+
+                    //Layer on animation
+                    ChangeScreen(Convert.ToInt32(ThingCoords[0]), Convert.ToInt32(ThingCoords[1]), EntityStationary);
+                    EndAni();
+                }
+                else
+                {
+                    //catches bugs
+                    MakeErrorMessage("Position should be from 1-6 on screen");
+                    //maybe check for next positon on map??????????????????????
+                }
+            }
+            else
+            {
+                //catches bugs
+                MakeErrorMessage("Couldn't run animation as one already runnign");
+            }
+        }
         public static void EndAni()
         {
             //add event??

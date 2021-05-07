@@ -54,11 +54,8 @@ namespace Bonk_Knight
             }
             else
             {
-                //loads the next screen
-                System.Diagnostics.Debug.WriteLine("Warping to next area");
-                //next screen
+                //loads the next screen if conditions met - enemies = 0, is at edge of screen, not at end of game
                 MainClass.GameMap.NextScreen();
-                this.Position = 1;
             }
         }
         public void MoveL()
@@ -78,10 +75,8 @@ namespace Bonk_Knight
             }
             else
             {
-                //loads the prev screen
-                System.Diagnostics.Debug.WriteLine("Warping to previous area");
+                //loads the prev screen if conditions met - enemies = 0, is at edge of screen, not at start of game
                 MainClass.GameMap.PrevScreen();
-                this.Position = 6;
             }
         }
         public void Attack()

@@ -39,7 +39,6 @@ namespace Bonk_Knight
         public List<Enemy> CurrentEnemies = new List<Enemy>() { };
         public static EnemyHandler EnemyDied = new EnemyHandler();
 
-
         public Map(String Difficulty)
         {
             //add to event stuff  if 'm' => LoadMapWindow()
@@ -103,9 +102,14 @@ namespace Bonk_Knight
                     //ADD enemies
                     Enemy NewEnemy = new Enemy(this.GameSectionMap[this.CurrentSection].Type, this.GameSectionMap[this.CurrentSection].EnemyDifficulty);
                     NewEnemy.Position = 6 - CurrentEnemies.Count;
+                    this.CurrentEnemies.Add(NewEnemy);
+                    //make it so they appear on screen
+                    this.CurrentEnemies[i].RenderEntity();
                 }
 
                 //render everything
+                MainClass.Player_1.Position = 1;
+                MainClass.Player_1.RenderEntity();
                 Render.RenderScreen("all");
 
             }
@@ -126,6 +130,11 @@ namespace Bonk_Knight
                 //System.Diagnostics.Debug.WriteLine($"{this.CurrentSection}: {this.GameSectionMap[this.CurrentSection].SectionName}");
                 Globals.Terrain = this.GameSectionMap[this.CurrentSection].Type;
                 Render.ChangeScreen(0, 0, Art.Background($"{this.GameSectionMap[this.CurrentSection].SectionName}"));
+
+                //renders the past sceen
+                //IMPROVE make the player walk on from off screen
+                MainClass.Player_1.Position = 6;
+                MainClass.Player_1.RenderEntity();
                 Render.RenderScreen("all");
             }
             else
@@ -133,9 +142,6 @@ namespace Bonk_Knight
                 //game ended??
                 System.Diagnostics.Debug.WriteLine($"@Beginning {this.CurrentSection} {this.CurrentSection > 0 }|| @enterance? {MainClass.Player_1.Position == 1 } {MainClass.Player_1.Position}|| enemies {this.CurrentEnemies.Count} {this.CurrentEnemies.Count == 0}");
             }
-            
-            //initalize the new enemies
-            //render enemies + player
         }
         public void CreateGameMap(int difficulty, int SectionPerStage)
         {

@@ -9,17 +9,21 @@ namespace Bonk_Knight
     public partial class Enemy : Entity
     {
 
-        public Enemy(String EnemyType, double DifficultyLevel)
+        public Enemy(String Biome, double DifficultyLevel)
         {
             //initialise enemy stats + random stuff
             this.Strength = 1;
-            this.Name = "Blank";
+            this.Name = "Slime";
             this.Health = 100;
             this.Defence = 1;
-            this.CritChance = 0.2;
+            this.CritChance = 0.1;
             this.Range = 1;
 
-            switch (EnemyType) 
+            switch (Biome) 
+            {
+                //sets  the type of enemy based on random chance it appears in biome
+            }
+            switch (this.Name) 
             {
                 //sets special stats such as extra range, defence , stregth
             }

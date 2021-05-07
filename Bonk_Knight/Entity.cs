@@ -43,6 +43,11 @@ namespace Bonk_Knight
             this.Health -= dmg;
             CheckLiving();
         }
+        public void RenderEntity()
+        {
+            //make it 1 down?
+            Animate.ControlableEntityPlace(this.Position,Art.Enemy(this.Name));
+        }
         public void CheckLiving()
         {
             if (this.Health <=0)

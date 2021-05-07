@@ -126,10 +126,18 @@ namespace Bonk_Knight
                         }
                         else
                         {
-                            //it is an animation
+                            //animation - replaces the spaces with background
                             if (ToAdd[elm] != ' ')
                             {
-                                Globals.Screen[rw, cl] = ToAdd[elm];
+                                // as the above thing removes the spaces add in a thing that purpousfully makes a space
+                                if (ToAdd[elm] != '▫') 
+                                {
+                                    Globals.Screen[rw, cl] = ToAdd[elm];
+                                }
+                                else
+                                {
+                                    Globals.Screen[rw, cl] = ' ';
+                                }
                             }
                             else
                             {
