@@ -8,7 +8,7 @@ namespace Bonk_Knight
 {
     public class Animate : Render
     {
-        public static void ControlableEntityAni(int Position, List<String> Animation)
+        public static void ControlableEntityAni(int Position, List<String> Animation, int speed)
         {
             //FIX CHANGE
             //meant for player and enemy
@@ -63,7 +63,7 @@ namespace Bonk_Knight
                         //RenderScreen("all");
                         //wait to next frame
                         System.Diagnostics.Debug.WriteLine($"Completed Frame {Frame}");
-                        Thread.Sleep(1000);
+                        Thread.Sleep(speed);
                     }
                     EndAni();
                 }

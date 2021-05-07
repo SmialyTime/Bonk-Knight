@@ -658,6 +658,33 @@ namespace Bonk_Knight
                               @" |”' %" +
                               @"/ \  %"};
                     break;
+                case "WalkRight"://make him be holding his hammer
+                    backAni = new List<String>(){ 
+                              // 1
+                              @" (τ)    %" +
+                              @" /|\    %" +
+                              @" / \    %",
+                              // 2
+                              @"  (τ)   %" +
+                              @"  /|\   %" +
+                              @"  / 7   %",
+                              // 3
+                              @"   (τ)  %" +
+                              @"   (|)  %" +
+                              @"    |>  %",
+                              // 4
+                              @"    (τ) %" +
+                              @"    /|\ %" +
+                              @"     |7 %",
+                              // 5
+                              @"     (τ)%" +
+                              @"     /|\%" +
+                              @"     / >%" ,
+                              // 6
+                              @"     (τ)%" +
+                              @"     /|\%" +
+                              @"     / \%" };
+                    break;
                 default://tester
                     backAni = new List<String>(){ 
                               // 1
@@ -705,7 +732,6 @@ namespace Bonk_Knight
                               @"  >>  ▀▀%"};
                     break;
             }
-
             return backAni;
         }
     }
@@ -758,7 +784,7 @@ namespace Bonk_Knight
             @" (τ)  ▄▄%"+
             @"  |=x──┤%"+
             @"  >>  ▀▀%"};
-            ControlableEntityAni(1, TestAni);
+            ControlableEntityAni(1, TestAni,100);
         }
     }
 }

@@ -34,9 +34,9 @@ namespace Bonk_Knight
 
     public class Map : Render
     {
-        public int CurrentSection = -1;
+        public int CurrentSection = 0;
         public List<Section> GameSectionMap = new List<Section>() { };
-        public static List<Enemy> CurrentEnemies = new List<Enemy>() { };
+        public List<Enemy> CurrentEnemies = new List<Enemy>() { };
         public static EnemyHandler EnemyDied = new EnemyHandler();
 
 
@@ -61,17 +61,15 @@ namespace Bonk_Knight
                     break;
             }
             CreateGameMap(dif, 4);
-
-
             Map.EnemyDied.EnemyDied += RemoveDeadEnemies;
         }
         private void RemoveDeadEnemies(object sender, string e)
         {
-            foreach (Enemy EDeadCheck in CurrentEnemies)
+            foreach (Enemy EDeadCheck in this.CurrentEnemies)
             {
                 if (EDeadCheck.Health <= 0)
                 {
-                    CurrentEnemies.Remove(EDeadCheck);
+                    this.CurrentEnemies.Remove(EDeadCheck);
                 }
             }
         }
@@ -79,37 +77,48 @@ namespace Bonk_Knight
         {
             Art.MapUI("Home",1);
         }
+        public void LoadCurrentScreen()
+        {
+            Render.ChangeBackground(this);
+            Globals.Terrain = this.GameSectionMap[this.CurrentSection].Type;
+            Render.ChangeScreen(0, 0, Art.Background($"{this.GameSectionMap[this.CurrentSection].SectionName}"));
+            Render.RenderScreen("all");
+
+        }
         public void NextScreen()
         {
-            //check player position edge of screen and enemies = 0;
-            if (CurrentSection < this.GameSectionMap.Count-1)
+            //IMPROVE - null case?
+            if (CurrentSection < this.GameSectionMap.Count - 1 && MainClass.Player_1.Position == 6 && this.CurrentEnemies.Count == 0)
             {
-                CurrentSection++;
+                this.CurrentSection++;
                 Render.ChangeBackground(this);
-                //System.Diagnostics.Debug.WriteLine($"{CurrentSection}: {this.GameSectionMap[CurrentSection].SectionName}");
-                Globals.Terrain = this.GameSectionMap[CurrentSection].Type;
-                Render.ChangeScreen(0, 0, Art.Background($"{this.GameSectionMap[CurrentSection].SectionName}"));
-                Render.RenderScreen("all");
+                //System.Diagnostics.Debug.WriteLine($"{this.this.CurrentSection}: {this.GameSectionMap[this.this.CurrentSection].SectionName}");
+                Globals.Terrain = this.GameSectionMap[this.CurrentSection].Type;
+                Render.ChangeScreen(0, 0, Art.Background($"{this.GameSectionMap[this.CurrentSection].SectionName}"));
 
 
                 //initalize the new enemies
-                for (int i = 0; i < this.GameSectionMap[CurrentSection].Enemies ; i++)
+                for (int i = 0; i < this.GameSectionMap[this.CurrentSection].Enemies ; i++)
                 {
-                    Enemy NewEnemy = new Enemy(this.GameSectionMap[CurrentSection].Type, this.GameSectionMap[CurrentSection].EnemyDifficulty);
+                    //ADD enemies
+                    Enemy NewEnemy = new Enemy(this.GameSectionMap[this.CurrentSection].Type, this.GameSectionMap[this.CurrentSection].EnemyDifficulty);
                     NewEnemy.Position = 6 - CurrentEnemies.Count;
                 }
+
+                //render everything
+                Render.RenderScreen("all");
+
             }
             else
             {
                 //game ended??
-                System.Diagnostics.Debug.WriteLine("GameEnd?????");
+                System.Diagnostics.Debug.WriteLine($"at end {CurrentSection < this.GameSectionMap.Count - 1}|| player positon not at enterance {MainClass.Player_1.Position == 6 }|| enemies remaining {this.CurrentEnemies.Count}");
             }
         }
         public void PrevScreen()
         {
-            //need to change --------------------check enemies = 0
-            //check player position edge of screen and enemies = 0;
-            if (CurrentSection > 0)
+            //CHANGE ? can back out even if enemies not dead?
+            if (CurrentSection > 0 && MainClass.Player_1.Position == 1 && this.CurrentEnemies.Count != 0)
             {
                 CurrentSection--;
                 Render.ChangeBackground(this);
@@ -121,9 +130,9 @@ namespace Bonk_Knight
             else
             {
                 //game ended??
-                System.Diagnostics.Debug.WriteLine("at start");
+                System.Diagnostics.Debug.WriteLine($"at start {CurrentSection > 0} {CurrentSection}|| player positon not at enterance {MainClass.Player_1.Position == 1 } {MainClass.Player_1.Position}|| still enemies {this.CurrentEnemies.Count != 0} {this.CurrentEnemies.Count}");
             }
-
+            
             //initalize the new enemies
         }
         public void CreateGameMap(int difficulty, int SectionPerStage)

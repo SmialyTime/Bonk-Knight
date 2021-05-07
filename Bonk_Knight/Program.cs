@@ -29,6 +29,7 @@ namespace Bonk_Knight
         //public static KeyHandler Keys = new KeyHandler();
         public static PlayerHandler PlayerEventSystem = new PlayerHandler();
         public static Map GameMap = new Map("Medium");
+        public static Player Player_1 {get;set;}
         public static void Main(string[] args)
         {
             Console.SetWindowSize(32,15);
@@ -36,6 +37,12 @@ namespace Bonk_Knight
             Render.CursorBellowScreen();
 
             Map GameMap = new Map("Medium");
+            var userName = "Bonk Knight";
+            Player_1 = new Player(userName);
+
+            //CHANGE load first screen
+            GameMap.LoadCurrentScreen();
+
 
             Globals.GameGoing = true;
             char Continue = keyInput();
@@ -46,15 +53,26 @@ namespace Bonk_Knight
                 {
                     case 'a':
                         //left
-                        GameMap.PrevScreen();
                         break;
                     case 'd':
                         //right
+                        Player_1.MoveR();
+                        break;
+                    case 'j':
+                        //prev screen
+                        GameMap.PrevScreen();
+                        break;
+                    case 'l':
+                        //next screen
                         GameMap.NextScreen();
                         break;
                     case 'm':
                         //displays Map Screen
                         //make it so any button after changes to the normal screen
+                        break;
+                    case 'h':
+                        //attack with player
+                        Player_1.Attack();
                         break;
                     case 't':
                         //TESTAni.RunWalkCycle();
