@@ -51,9 +51,17 @@ namespace Bonk_Knight
             {
                 //loads the next screen
                 System.Diagnostics.Debug.WriteLine("Warping to next area");
+                //next screen
+                System.Diagnostics.Debug.WriteLine("bef - " + MainClass.GameMap.CurrentSection);
                 MainClass.GameMap.NextScreen();
+                System.Diagnostics.Debug.WriteLine("done - " + MainClass.GameMap.CurrentSection);
+                MainClass.GameMap.CurrentSection = 1;
                 this.Position = 1;
             }
+        }
+        public void MoveL()
+        {
+            MainClass.GameMap.PrevScreen();
         }
         public void Attack()
         {

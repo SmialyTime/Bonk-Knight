@@ -118,19 +118,20 @@ namespace Bonk_Knight
         public void PrevScreen()
         {
             //CHANGE ? can back out even if enemies not dead?
-            if (CurrentSection > 0 && MainClass.Player_1.Position == 1 && this.CurrentEnemies.Count != 0)
+            if (this.CurrentSection > 0 && MainClass.Player_1.Position == 1 && this.CurrentEnemies.Count == 0)
             {
-                CurrentSection--;
+
+                this.CurrentSection--;
                 Render.ChangeBackground(this);
-                //System.Diagnostics.Debug.WriteLine($"{CurrentSection}: {this.GameSectionMap[CurrentSection].SectionName}");
-                Globals.Terrain = this.GameSectionMap[CurrentSection].Type;
-                Render.ChangeScreen(0, 0, Art.Background($"{this.GameSectionMap[CurrentSection].SectionName}"));
+                //System.Diagnostics.Debug.WriteLine($"{this.CurrentSection}: {this.GameSectionMap[this.CurrentSection].SectionName}");
+                Globals.Terrain = this.GameSectionMap[this.CurrentSection].Type;
+                Render.ChangeScreen(0, 0, Art.Background($"{this.GameSectionMap[this.CurrentSection].SectionName}"));
                 Render.RenderScreen("all");
             }
             else
             {
                 //game ended??
-                System.Diagnostics.Debug.WriteLine($"at start {CurrentSection > 0} {CurrentSection}|| player positon not at enterance {MainClass.Player_1.Position == 1 } {MainClass.Player_1.Position}|| still enemies {this.CurrentEnemies.Count != 0} {this.CurrentEnemies.Count}");
+                System.Diagnostics.Debug.WriteLine($"@Beginning {this.CurrentSection} {this.CurrentSection > 0 }|| @enterance? {MainClass.Player_1.Position == 1 } {MainClass.Player_1.Position}|| enemies {this.CurrentEnemies.Count} {this.CurrentEnemies.Count == 0}");
             }
             
             //initalize the new enemies

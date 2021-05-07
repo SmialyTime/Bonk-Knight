@@ -36,7 +36,6 @@ namespace Bonk_Knight
             InitializeComponents();
             Render.CursorBellowScreen();
 
-            Map GameMap = new Map("Medium");
             var userName = "Bonk Knight";
             Player_1 = new Player(userName);
 
@@ -53,10 +52,12 @@ namespace Bonk_Knight
                 {
                     case 'a':
                         //left
+                        GameMap.LoadCurrentScreen();
                         break;
                     case 'd':
                         //right
                         Player_1.MoveR();
+                        System.Diagnostics.Debug.WriteLine("M -" + GameMap.CurrentSection);
                         break;
                     case 'j':
                         //prev screen
@@ -80,10 +81,6 @@ namespace Bonk_Knight
                     case ''/*Esc*/:
                         Globals.GameGoing = false;
                         break;
-                }
-                if (Continue == '%')
-                {
-                    System.Diagnostics.Debug.WriteLine('w');
                 }
                 Functions.CursorBellowScreen();
 
@@ -139,9 +136,9 @@ namespace Bonk_Knight
                     }
                     else { System.Diagnostics.Debug.WriteLine($"Enter+stuff"); Functions.ClearKeyIntputs(); return '回';/*place holder for enter*/}
                 }
-                else { Functions.ClearKeyIntputs(); return '㊅'; }
+                else { Functions.ClearKeyIntputs(); return '㊀'; }
             }
-            else { /*Doesn't run*/  Functions.ClearKeyIntputs(); System.Diagnostics.Debug.WriteLine($"Animation running"); return '㊀'; }
+            else { /*Doesn't run*/  Functions.ClearKeyIntputs(); System.Diagnostics.Debug.WriteLine($"Animation running"); return '㊅'; }
         }
     }
     public class PlayerHandler
