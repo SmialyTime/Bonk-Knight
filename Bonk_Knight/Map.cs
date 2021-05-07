@@ -135,6 +135,7 @@ namespace Bonk_Knight
             }
             
             //initalize the new enemies
+            //render enemies + player
         }
         public void CreateGameMap(int difficulty, int SectionPerStage)
         {

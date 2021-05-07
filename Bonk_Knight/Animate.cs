@@ -8,7 +8,7 @@ namespace Bonk_Knight
 {
     public class Animate : Render
     {
-        public static void ControlableEntityAni(int Position, List<String> Animation, int speed)
+        public static void ControlableEntityAni(int Position, List<String> Animation, int speed = 240)
         {
             //FIX CHANGE
             //meant for player and enemy
@@ -35,8 +35,11 @@ namespace Bonk_Knight
                         //checks for the max width of animation
                         ColumnFinal = Math.Max(ColumnFinal, ColumnInitial+((AnimationFrames.Length - AnimationFrames.Count(f => f == '%')) / AnimationFrames.Count(f => f == '%')));
                     }
-                    //IDK why
+                    //IDK why probs 0 index
                     ColumnFinal--;
+                    if (ColumnFinal >= 30){
+                        ColumnFinal = 29;
+                    }
                     System.Diagnostics.Debug.WriteLine($"{RowInitial},{ColumnInitial},{RowFinal},{ColumnFinal}");
 
                     //set up the Location of the Animation to change the screen list
@@ -62,7 +65,7 @@ namespace Bonk_Knight
                         RenderScreen($"{RowInitial},{ColumnInitial},{RowFinal},{ColumnFinal}");
                         //RenderScreen("all");
                         //wait to next frame
-                        System.Diagnostics.Debug.WriteLine($"Completed Frame {Frame}");
+                        //System.Diagnostics.Debug.WriteLine($"Completed Frame {Frame}");
                         Thread.Sleep(speed);
                     }
                     EndAni();

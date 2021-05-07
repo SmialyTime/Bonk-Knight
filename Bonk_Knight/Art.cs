@@ -625,7 +625,7 @@ namespace Bonk_Knight
     }                                                                   
     public class Animations                                             
     {                                                                   
-        public static List<String> PlayerAni(String AniName)            
+        public static List<String> PlayerAni(String AniName)
         {                                                               
             List<String> backAni = new List<String>() { };              
             switch (AniName)                                            
@@ -683,8 +683,48 @@ namespace Bonk_Knight
                               // 6
                               @"     (τ)%" +
                               @"     /|\%" +
-                              @"     / \%" };
+                              @"     > \%" ,
+                              // 7
+                              @"      (τ)%" +
+                              @"      /|\%" +
+                              @"      / \%" };
                     break;
+                case "WalkLeft"://make him be holding his hammer
+                    backAni = new List<String>(){ 
+                              // 6
+                              @"     (τ) %" +
+                              @"     /|\ %" +
+                              @"     / \ %",
+                              // 5       
+                              @"     (τ) %" +
+                              @"     /|\ %" +
+                              @"     / > %" ,
+                              // 4       
+                              @"    (τ)  %" +
+                              @"    /|\  %" +
+                              @"     |7  %",
+                              // 3       
+                              @"   (τ)   %" +
+                              @"   (|)   %" +
+                              @"    |>   %",
+                              // 2       
+                              @"  (τ)    %" +
+                              @"  /|\    %" +
+                              @"  / 7    %",
+                              // 1       
+                              @" (τ)     %" +
+                              @" /|\     %" +
+                              @" / \     %",};
+                    break;
+                /*
+                Animations to add
+
+                case "WalkRightHammerUp":
+                    break
+                case "WalkLeftHammerUp":
+                    break
+                
+                */
                 default://tester
                     backAni = new List<String>(){ 
                               // 1

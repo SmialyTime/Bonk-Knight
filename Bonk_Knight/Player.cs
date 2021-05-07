@@ -41,27 +41,48 @@ namespace Bonk_Knight
                 }
                 if (!EnemyInfront)
                 {
+                    if (this.HammerUp == false)
+                    {
+                        Animate.ControlableEntityAni(this.Position, Animations.PlayerAni("WalkRight"),80);
+                    }
+                    else
+                    {
+                        Animate.ControlableEntityAni(this.Position, Animations.PlayerAni("WalkRightHammerUp"),80);
+                    }
                     this.Position++;
-                    System.Diagnostics.Debug.WriteLine("moved to - " + this.Position);
-                    Animations.PlayerAni("WalkRight");
                 }
-                
             }
             else
             {
                 //loads the next screen
                 System.Diagnostics.Debug.WriteLine("Warping to next area");
                 //next screen
-                System.Diagnostics.Debug.WriteLine("bef - " + MainClass.GameMap.CurrentSection);
                 MainClass.GameMap.NextScreen();
-                System.Diagnostics.Debug.WriteLine("done - " + MainClass.GameMap.CurrentSection);
-                MainClass.GameMap.CurrentSection = 1;
                 this.Position = 1;
             }
         }
         public void MoveL()
         {
-            MainClass.GameMap.PrevScreen();
+            //checks if at edge of screen
+            if (this.Position > 1)
+            {
+                //don't need to check if enemy behind
+                if (this.HammerUp == false) {
+                    Animate.ControlableEntityAni(this.Position-1, Animations.PlayerAni("WalkLeft"), 80);
+                }
+                else
+                {
+                    Animate.ControlableEntityAni(this.Position-1, Animations.PlayerAni("WalkLeftHammerUp"), 80);
+                }
+                this.Position--;
+            }
+            else
+            {
+                //loads the prev screen
+                System.Diagnostics.Debug.WriteLine("Warping to previous area");
+                MainClass.GameMap.PrevScreen();
+                this.Position = 6;
+            }
         }
         public void Attack()
         {
@@ -69,7 +90,7 @@ namespace Bonk_Knight
             if (this.HammerUp == false)
             {
                 //lift hammer up
-                Animate.ControlableEntityAni(this.Position, Animations.PlayerAni("LiftHammer"), 240);
+                Animate.ControlableEntityAni(this.Position, Animations.PlayerAni("LiftHammer"));
                 this.HammerUp = true;
             }
             else

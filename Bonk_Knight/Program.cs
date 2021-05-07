@@ -52,12 +52,11 @@ namespace Bonk_Knight
                 {
                     case 'a':
                         //left
-                        GameMap.LoadCurrentScreen();
+                        Player_1.MoveL();
                         break;
                     case 'd':
                         //right
                         Player_1.MoveR();
-                        System.Diagnostics.Debug.WriteLine("M -" + GameMap.CurrentSection);
                         break;
                     case 'j':
                         //prev screen
