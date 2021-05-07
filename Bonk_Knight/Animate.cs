@@ -8,7 +8,7 @@ namespace Bonk_Knight
 {
     public class Animate : Render
     {
-        public static void ControlableEntityAni(int Position, List<String> Animation, int speed = 240)
+        public static void ControlableEntityAni(int Position, int ActualEndPos ,List<String> Animation, int speed = 240)
         {
             //FIX CHANGE
             //meant for player and enemy
@@ -69,7 +69,7 @@ namespace Bonk_Knight
                         Thread.Sleep(speed);
                     }
                     EndAni();
-                    ResetArea(Position, RowInitial, ColumnInitial, RowFinal, ColumnFinal);
+                    ResetArea(Position, ActualEndPos, RowInitial, ColumnInitial, RowFinal, ColumnFinal);
                 }
                 else
                 {
@@ -143,7 +143,7 @@ namespace Bonk_Knight
             Functions.ClearKeyIntputs();
             Globals.AnimationRunning = false;
         }
-        public static void ResetArea(int positon, int RI, int CI, int RF, int CF)
+        public static void ResetArea(int positon,int actualendpos , int RI, int CI, int RF, int CF)
         {
             //IMPROVE FIX CHANGE make this work
             String Gap = "";
@@ -158,9 +158,9 @@ namespace Bonk_Knight
             //use positon to rerender the thing back to original state
             if (MainClass.Player_1.Position == positon)
             {
-                MainClass.Player_1.RenderEntity(1);
+                MainClass.Player_1.RenderEntity(actualendpos - positon);
             }
-            //very hacky FIX IMPROVE ?
+            //FIX IMPROVE solves case of walking backwards only works for 1 backwards from orig
             else if (MainClass.Player_1.Position == positon + 1)
             {
                 MainClass.Player_1.RenderEntity(-1);

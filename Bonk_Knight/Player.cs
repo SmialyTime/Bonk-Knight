@@ -26,6 +26,7 @@ namespace Bonk_Knight
         }
         public void MoveR()
         {
+            this.Moving = true;
             //checks if at edge of screen
             if (this.Position < 6)
             {
@@ -43,11 +44,11 @@ namespace Bonk_Knight
                 {
                     if (this.HammerUp == false)
                     {
-                        Animate.ControlableEntityAni(this.Position, Animations.PlayerAni("WalkRight"),80);
+                        Animate.ControlableEntityAni(this.Position,this.Position + 1, Animations.PlayerAni("WalkRight"),80);
                     }
                     else
                     {
-                        Animate.ControlableEntityAni(this.Position, Animations.PlayerAni("WalkRightHammerUp"),80);
+                        Animate.ControlableEntityAni(this.Position, this.Position + 1, Animations.PlayerAni("WalkRightHammerUp"),80);
                     }
                     this.Position++;
                 }
@@ -60,16 +61,18 @@ namespace Bonk_Knight
         }
         public void MoveL()
         {
+            this.Moving = true;
             //checks if at edge of screen
             if (this.Position > 1)
             {
                 //don't need to check if enemy behind
                 if (this.HammerUp == false) {
-                    Animate.ControlableEntityAni(this.Position - 1, Animations.PlayerAni("WalkLeft"), 80);
+                    //as animation has position of square it goes to
+                    Animate.ControlableEntityAni(this.Position - 1, this.Position - 1, Animations.PlayerAni("WalkLeft"), 80);
                 }
                 else
                 {
-                    Animate.ControlableEntityAni(this.Position - 1, Animations.PlayerAni("WalkLeftHammerUp"), 80);
+                    Animate.ControlableEntityAni(this.Position - 1, this.Position - 1, Animations.PlayerAni("WalkLeftHammerUp"), 80);
                 }
                 this.Position--;
             }
@@ -81,19 +84,27 @@ namespace Bonk_Knight
         }
         public void Attack()
         {
+            this.Moving = false;
             //note it is a charge attack
             if (this.HammerUp == false)
             {
                 //lift hammer up
-                Animate.ControlableEntityAni(this.Position, Animations.PlayerAni("LiftHammer"));
+                Animate.ControlableEntityAni(this.Position,this.Position, Animations.PlayerAni("LiftHammer"));
                 this.HammerUp = true;
             }
             else
             {
                 //swing hammer
                 this.HammerUp = false;
-                Animate.ControlableEntityAni(this.Position, Animations.PlayerAni("Bonk"));
-                foreach (Enemy EnemyToAttack in MainClass.GameMap.CurrentEnemies)
+                Animate.ControlableEntityAni(this.Position,this.Position, Animations.PlayerAni("Bonk"));
+
+                //as can't change list while in foreach loop create new list
+                List<Enemy> EtoCheck = new List<Enemy>() { };
+                foreach (Enemy ETA in MainClass.GameMap.CurrentEnemies)
+                {
+                    EtoCheck.Add(ETA);
+                }
+                foreach (Enemy EnemyToAttack in EtoCheck)
                 {
                     if (this.Position == EnemyToAttack.Position - 1)
                     {

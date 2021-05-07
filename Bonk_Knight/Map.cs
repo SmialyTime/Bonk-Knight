@@ -64,12 +64,19 @@ namespace Bonk_Knight
         }
         private void RemoveDeadEnemies(object sender, string e)
         {
+            List<Enemy> ToRem = new List<Enemy>() { };
             foreach (Enemy EDeadCheck in this.CurrentEnemies)
             {
                 if (EDeadCheck.Health <= 0)
                 {
-                    this.CurrentEnemies.Remove(EDeadCheck);
+                    ToRem.Add(EDeadCheck);
                 }
+            }
+            foreach (Enemy Cull in ToRem)
+            {
+                //LOG
+                System.Diagnostics.Debug.WriteLine($"{Cull.Name} was defeated");
+                this.CurrentEnemies.Remove(Cull);
             }
         }
         public static void LoadMapWindow()
