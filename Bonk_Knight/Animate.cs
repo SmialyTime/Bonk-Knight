@@ -69,6 +69,7 @@ namespace Bonk_Knight
                         Thread.Sleep(speed);
                     }
                     EndAni();
+                    ResetArea(Position, RowInitial, ColumnInitial, RowFinal, ColumnFinal);
                 }
                 else
                 {
@@ -120,6 +121,7 @@ namespace Bonk_Knight
 
                     //Layer on animation
                     ChangeScreen(Convert.ToInt32(ThingCoords[0]), Convert.ToInt32(ThingCoords[1]), EntityStationary);
+                    RenderScreen($"{RowInitial},{ColumnInitial},{RowFinal},{ColumnFinal}");
                     EndAni();
                 }
                 else
@@ -140,6 +142,39 @@ namespace Bonk_Knight
             //add event??
             Functions.ClearKeyIntputs();
             Globals.AnimationRunning = false;
+        }
+        public static void ResetArea(int positon, int RI, int CI, int RF, int CF)
+        {
+            //IMPROVE FIX CHANGE make this work
+            String Gap = "";
+            for (var Ri = RI; Ri <= RF; Ri++)
+            {
+                Gap += new String(' ',(CF - CI)) + '%';
+            }
+            //fills it in
+            ChangeScreen(Convert.ToInt32(Globals.GroundInGameY - Gap.Count(f => f == '%')), Convert.ToInt32((positon - 1) * 5), Gap);
+
+
+            //use positon to rerender the thing back to original state
+            if (MainClass.Player_1.Position == positon)
+            {
+                MainClass.Player_1.RenderEntity(1);
+            }
+            //very hacky FIX IMPROVE ?
+            else if (MainClass.Player_1.Position == positon + 1)
+            {
+                MainClass.Player_1.RenderEntity(-1);
+            }
+            else
+            {
+                foreach (var emy in MainClass.GameMap.CurrentEnemies)
+                {
+                    if (emy.Position == positon)
+                    {
+                        emy.RenderEntity();
+                    }
+                }
+            }
         }
         public static void HoleInRect()
         {

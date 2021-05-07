@@ -33,7 +33,7 @@ namespace Bonk_Knight
             this.Range = 1;
             this.Position = 1;
         }
-        public void TakeDamage(float AtkStrength, String atkType)
+        public void TakeDamage(double AtkStrength, String atkType)
         {
             //ADD differnt attack types - heavy,normal,projectile
             //IMPROVE
@@ -43,10 +43,10 @@ namespace Bonk_Knight
             this.Health -= dmg;
             CheckLiving();
         }
-        public void RenderEntity()
+        public void RenderEntity(int PlusPos = 0)
         {
             //make it 1 down?
-            Animate.ControlableEntityPlace(this.Position,Art.Enemy(this.Name));
+            Animate.ControlableEntityPlace(this.Position + PlusPos, Art.Enemy(this.Name));
         }
         public void CheckLiving()
         {

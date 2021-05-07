@@ -65,11 +65,11 @@ namespace Bonk_Knight
             {
                 //don't need to check if enemy behind
                 if (this.HammerUp == false) {
-                    Animate.ControlableEntityAni(this.Position-1, Animations.PlayerAni("WalkLeft"), 80);
+                    Animate.ControlableEntityAni(this.Position - 1, Animations.PlayerAni("WalkLeft"), 80);
                 }
                 else
                 {
-                    Animate.ControlableEntityAni(this.Position-1, Animations.PlayerAni("WalkLeftHammerUp"), 80);
+                    Animate.ControlableEntityAni(this.Position - 1, Animations.PlayerAni("WalkLeftHammerUp"), 80);
                 }
                 this.Position--;
             }
@@ -91,6 +91,15 @@ namespace Bonk_Knight
             else
             {
                 //swing hammer
+                this.HammerUp = false;
+                Animate.ControlableEntityAni(this.Position, Animations.PlayerAni("Bonk"));
+                foreach (Enemy EnemyToAttack in MainClass.GameMap.CurrentEnemies)
+                {
+                    if (this.Position == EnemyToAttack.Position - 1)
+                    {
+                        EnemyToAttack.TakeDamage(this.Strength, "Heavy");
+                    }
+                }
             }
         }
         private void DefeatedEnemy(object sender, string e)

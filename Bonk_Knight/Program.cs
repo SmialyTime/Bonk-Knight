@@ -38,9 +38,10 @@ namespace Bonk_Knight
 
             var userName = "Bonk Knight";
             Player_1 = new Player(userName);
-
             //CHANGE load first screen
+            Player_1.Position = 4;
             GameMap.LoadCurrentScreen();
+            Player_1.RenderEntity();
 
 
             Globals.GameGoing = true;

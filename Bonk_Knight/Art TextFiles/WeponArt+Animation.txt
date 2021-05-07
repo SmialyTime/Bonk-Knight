@@ -13,9 +13,9 @@ money swords:        Good
 £ ₡ € $ £            ¥  $ ¢ 
 T T T T T            T  T T 
 King Sword
-   |
- $ ║         
- + ┼  ┴┳         
+   | |  | |
+ $ ║ │  $ ¢       
+ + ┼ ┼  ┼ ┼           
 Hammer
  █┬█ {┬} (┬) <┬> [┬] (>|<) 
   |   |   |   |   |    |   
