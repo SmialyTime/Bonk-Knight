@@ -96,8 +96,14 @@ namespace Bonk_Knight
             {
                 //swing hammer
                 //UNCOMMENT
-                //this.HammerUp = false;
-                Animate.ControlableEntityAni(this.Position,this.Position, Animations.PlayerAni("Bonk"));
+                this.HammerUp = false;
+                var cnt = 1;
+                foreach (var frm in Animations.PlayerAni("Bonk"))
+                {
+                    System.Diagnostics.Debug.WriteLine($"frm {cnt} L {frm.Length}");
+                    cnt++;
+                }
+                Animate.ControlableEntityAni(this.Position,this.Position, Animations.PlayerAni("Bonk"),80);
 
                 //as can't change list while in foreach loop create new list
                 List<Enemy> EtoCheck = new List<Enemy>() { };

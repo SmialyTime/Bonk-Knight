@@ -10,13 +10,7 @@ namespace Bonk_Knight
     {
         public Enemy(int otherEns,String Biome, double DifficultyLevel)
         {
-            //initialise enemy stats + random stuff
-            this.Strength = 1;
-            this.Name = "Slime";
-            this.Health = 100;
-            this.Defence = 1;
-            this.CritChance = 0.1;
-            this.Range = 1;
+            this.Name = "null";
             //Mountain,Cave,Forest,Village,Kingdom,ThroneRoom
             Random rand = new Random();
             switch (Biome)
@@ -81,14 +75,78 @@ namespace Bonk_Knight
                 }
             }
 
+            //stats 
+            //set standard stats
+            this.Strength = 1;
+            this.BaseDamage = 20;
+            this.Defence = 1;
+            this.Range = 1;
+            this.CritChance = 0.1;
+            this.Health = 40;
             switch (this.Name) 
             {
-                //sets special stats such as extra range, defence , streagth
-                //slime,crab,bat,croc,WoodCutter,Tiller,Pitchfork,Knight,Archer,King
+                /*sets special stats for special enemies
+                Animals: slime-weak, crab-standard, bat-def, croc-hard,
+                People:  WoodCutter-atk, Tiller-standard, Pitchfork-atk,
+                Guards:  Knight-def, Archer-range, King -special stats CHANGE IMPROVE ADD new special class?
+                */
+                case "slime"://weak
+                    //initialise enemy stats + random stuff
+                    this.Strength = 0.5;
+                    this.Health = 20;
+                    this.BaseDamage = 10;
+                    this.Defence = 0.5;
+                    break;
+                case "crab":
+                case "CRAB":
+                    //standard
+                    break;
+                case "bat":
+                case "BAT"://def
+                    this.Strength = 1;
+                    this.Defence = 1.4;
+                    this.Health = 50;
+                    break;
+                case "croc"://hard
+                    this.Strength = 1.4;
+                    this.Defence = 1.4;
+                    this.Health = 80;
+                    break;
+                case "WoodCutter"://WoodCutter-atk
+                    this.Strength = 2;
+                    this.Defence = 0.7;
+                    this.Health = 100;
+                    break;
+                case "Tiller"://Tiller-standard
+                    this.Strength = 1.6;
+                    this.Defence = 1.6;
+                    this.Health = 100;
+                    break;
+                case "Pitchfork"://Pitchfork-atk
+                    this.Strength = 2.5;
+                    this.Defence = 1;
+                    this.Health = 100;
+                    break;
+                case "Knight"://Knight-def
+                    this.Strength = 2;
+                    this.Defence = 3;
+                    this.Health = 150;
+                    break;
+                case "Archer"://Archer-range
+                    this.Strength = 2;
+                    this.Range = 2;
+                    this.Defence = 0.8;
+                    this.Health = 100;
+                    break;
+                case "King"://King -special
+                    this.Strength = 2;
+                    this.Range = 2;
+                    this.Defence = 2;
+                    this.Health = 200;
+                    break;
             }
             this.Strength = this.Strength*DifficultyLevel;
             this.Defence = this.Strength*DifficultyLevel;
-
 
             this.RenderEntity();
         }

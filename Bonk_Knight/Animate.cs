@@ -149,7 +149,7 @@ namespace Bonk_Knight
             String Gap = "";
             for (var Ri = RI; Ri <= RF; Ri++)
             {
-                Gap += new String(' ',(CF - CI)) + '%';
+                Gap += new String('&',(CF - CI)*2) + '%';
             }
             //fills it in
             ChangeScreen(Convert.ToInt32(Globals.GroundInGameY - Gap.Count(f => f == '%')), Convert.ToInt32((positon - 1) * 5), Gap);
