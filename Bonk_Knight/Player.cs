@@ -116,7 +116,7 @@ namespace Bonk_Knight
         }
         private void DefeatedEnemy(object sender, string e)
         {
-            //loot system??
+            //loot based on terain
             String enemyType = MainClass.GameMap.GameSectionMap[MainClass.GameMap.CurrentSection].Type;
             int extraMoney = 0;
             switch (enemyType)
@@ -138,6 +138,31 @@ namespace Bonk_Knight
                 case "ThroneRoom":
                     extraMoney = 1000;
                     break;
+            }
+
+            //loot based on enemy
+            switch (e.ToLower())
+            { 
+            case "Pitchfork":
+                break;
+            case "WoodCutter":
+                break;
+            case "Tiller":
+                break;
+            case "croc":
+                break;
+            case "slime":
+                break;
+            case "crab":
+                break;
+            case "bat":
+                break;
+            case "Knight":
+                break;
+            case "Archer":
+                break;
+            case "King":
+                break;
             }
 
             //money
