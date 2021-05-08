@@ -105,10 +105,19 @@ namespace Bonk_Knight
                 //initalize the new enemies
                 for (int i = 0; i < this.GameSectionMap[this.CurrentSection].Enemies ; i++)
                 {
-                    Enemy NewEnemy = new Enemy(this.GameSectionMap[this.CurrentSection].Type, this.GameSectionMap[this.CurrentSection].EnemyDifficulty);
+                    Enemy NewEnemy = new Enemy(this.GameSectionMap[this.CurrentSection].Enemies, this.GameSectionMap[this.CurrentSection].Type, this.GameSectionMap[this.CurrentSection].EnemyDifficulty);
                     //randomised enemy spawn if only 1
                     if (this.GameSectionMap[this.CurrentSection].Enemies == 1) { NewEnemy.Position = 6 - (new Random()).Next(1,3); }
-                    else{NewEnemy.Position = 6 - this.CurrentEnemies.Count;}
+                    else
+                    {
+                        if (this.CurrentEnemies.Count >= 1) {
+                            NewEnemy.Position = 5 - this.CurrentEnemies.Count;
+                        }
+                        else
+                        {
+                            NewEnemy.Position = 6 - (new Random()).Next(0,2);
+                        }
+                    }
                     this.CurrentEnemies.Add(NewEnemy);
                     //make it so they appear on screen
                     this.CurrentEnemies[i].RenderEntity();
@@ -162,13 +171,13 @@ namespace Bonk_Knight
                 home.SectionName = "Home";
                 this.GameSectionMap.Add(home);
             //Mountain,Cave,Forest,Village,Kingdom,ThroneRoom
-            List<String> typetst = new List<string>() { "Mountain", "Cave", "Forest", "Village", "Kingdom", "ThroneRoom" };
-            Section Tester = new Section();
-                Tester.Enemies = 1;
-                Tester.EnemyDifficulty = 1;
-                Tester.Type = typetst[(new Random()).Next(0,6)];
-                Tester.SectionName = "Test";
-                this.GameSectionMap.Add(Tester);
+            //List<String> typetst = new List<string>() { "Mountain", "Cave", "Forest", "Village", "Kingdom", "ThroneRoom" };
+            //Section Tester = new Section();
+            //Tester.Enemies = (new Random()).Next(1, 3);
+            //Tester.EnemyDifficulty = 1;
+            //Tester.Type = typetst[(new Random()).Next(0,6)];
+            //Tester.SectionName = "Test";
+            //this.GameSectionMap.Add(Tester);
             //Mountains 
             for (var MountainRange = 0 ; MountainRange <= SectionPerStage; MountainRange++) {
                 Section Mount = new Section();

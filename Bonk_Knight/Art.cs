@@ -402,6 +402,10 @@ namespace Bonk_Knight
                                 @"  / \%" ;
                     break;
                 case "croc":
+                    EnemyBack = @"_σ--._%" +
+                                @"V,=,^^%";
+                    break;
+                case "CROC":
                     EnemyBack = @" __σσ--.__%" +
                                 @" Vv,==,^^`%" ;
                     break;
@@ -410,25 +414,34 @@ namespace Bonk_Knight
                                 @"(o▫o▫)%" ;
                     break;
                 case "crab":
+                    EnemyBack = @").--.(%" +
+                                @"`^´`^´%";
+                    break;
+                case "CRAB":
                     EnemyBack = @"().--.()%" +
                                 @" `^´`^´ %" ;
                     break;
                 case "bat":
+                    EnemyBack = @"  ,_,  %" +
+                                @" /)∞(\ %" +
+                                @"/-\_/-\%";
+                    break;
+                case "BAT":
                     EnemyBack = @"   ,_,   %" +
                                 @" /¯)∞(¯\ %" +
                                 @"/.-\_/-.\%" ;
                     break;
                 case "Knight":
-                    EnemyBack = @" |~%" +
-                                @"╕╬╒%" +
-                                @"/|\%" +
-                                @"/▫\%";
+                    EnemyBack = @"    %" +
+                                @"|[╦]%" +
+                                @"+/|\%" +
+                                @" /▫\%";
                     break;
                 case "Archer":
                     EnemyBack = @"     %" +
                                 @",┐ o %" +
                                 @"<┼/|\%" +
-                                @"`┘/ \%";
+                                @"`┘/▫\%";
                     break;
                 case "King":
                     EnemyBack = @" |~%" +

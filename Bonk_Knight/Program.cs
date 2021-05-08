@@ -21,6 +21,7 @@ namespace Bonk_Knight
         public static String LastEvent = "";
         public static char[,] Screen = new char[9, 30];
         public static char[,] CurrentBackground = new char[9, 30];
+        public static List<String> canBeBigEnemies = new List<String>() {"crab","bat","croc"};
         //CHANGE make a dictionary with all items and one for gear
     }
     class MainClass

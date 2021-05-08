@@ -95,7 +95,7 @@ namespace Bonk_Knight
             else
             {
                 //swing hammer
-                this.HammerUp = false;
+                //this.HammerUp = false;
                 Animate.ControlableEntityAni(this.Position,this.Position, Animations.PlayerAni("Bonk"));
 
                 //as can't change list while in foreach loop create new list
