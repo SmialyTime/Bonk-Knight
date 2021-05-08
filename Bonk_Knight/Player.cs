@@ -48,7 +48,7 @@ namespace Bonk_Knight
                     }
                     else
                     {
-                        Animate.ControlableEntityAni(this.Position, this.Position + 1, Animations.PlayerAni("WalkRightHammerUp"),80);
+                        Animate.ControlableEntityAni(this.Position, this.Position + 1, Animations.PlayerAni("WalkRightHammerUp"),10);
                     }
                     this.Position++;
                 }
@@ -72,7 +72,7 @@ namespace Bonk_Knight
                 }
                 else
                 {
-                    Animate.ControlableEntityAni(this.Position - 1, this.Position - 1, Animations.PlayerAni("WalkLeftHammerUp"), 80);
+                    Animate.ControlableEntityAni(this.Position - 1, this.Position - 1, Animations.PlayerAni("WalkLeftHammerUp"), 10);
                 }
                 this.Position--;
             }
@@ -95,6 +95,7 @@ namespace Bonk_Knight
             else
             {
                 //swing hammer
+                //UNCOMMENT
                 //this.HammerUp = false;
                 Animate.ControlableEntityAni(this.Position,this.Position, Animations.PlayerAni("Bonk"));
 
@@ -117,12 +118,37 @@ namespace Bonk_Knight
         {
             //loot system??
             String enemyType = MainClass.GameMap.GameSectionMap[MainClass.GameMap.CurrentSection].Type;
+            int extraMoney = 0;
+            switch (enemyType)
+            {
+                case "Mountain":
+                    break;
+                case "Cave":
+                    extraMoney = 5;
+                    break;
+                case "Forest":
+                    extraMoney = 15;
+                    break;
+                case "Village":
+                    extraMoney = 30;
+                    break;
+                case "Kingdom":
+                    extraMoney = 50;
+                    break;
+                case "ThroneRoom":
+                    extraMoney = 1000;
+                    break;
+            }
+
             //money
 
             double enemyDiff = MainClass.GameMap.GameSectionMap[MainClass.GameMap.CurrentSection].EnemyDifficulty;
 
+            //LOG
+            int moneyLoot = extraMoney + Convert.ToInt32((new Random()).Next(1, 11) * enemyDiff);
+            this.Money += moneyLoot;
 
-            this.Money += Convert.ToInt32((new Random()).Next(1, 11) * enemyDiff);
+            System.Diagnostics.Debug.WriteLine($"Player earned {moneyLoot} current purse {this.Money}");
         }
     }
     public class Item
