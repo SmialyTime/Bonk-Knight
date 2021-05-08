@@ -48,9 +48,23 @@ namespace Bonk_Knight
             //LOG crit hit
             double dmgMultiplier = AtkStrength / this.Defence;
             dmgMultiplier *= Crit()? 2 : 1;
-            dmgMultiplier *= Dodge()? 0 : 1;
             dmgMultiplier *= RandomMultiplier();
             //EVENT dodge or item activated??
+            if (this.Dodging == true)
+            {
+                //LOG the dodge
+                System.Diagnostics.Debug.WriteLine($"{this.Name} Dodged");
+                //loads the enemy again
+                Animate.ControlableEntityAni(this.Position, this.Position, Animations.PlayerAni(this.Name));
+                this.Dodging = false;
+                dmgMultiplier *= 0;
+            }
+            else
+            {
+                //IMPROVE ADD FIX make a take damage flash? function
+                Animate.ControlableEntityAni(this.Position, this.Position, Animations.PlayerAni(this.Name));
+                dmgMultiplier *= 1;
+            }
             this.Health -= Convert.ToInt32(this.BaseDamage*dmgMultiplier);
             System.Diagnostics.Debug.WriteLine($"Enemy {this.Name} took {this.BaseDamage * dmgMultiplier} and now is at {this.Health}/100");
             CheckLiving();
@@ -99,25 +113,12 @@ namespace Bonk_Knight
                 return false;
             }
         }
-        private bool Dodge()
-        {
-            if (this.Dodging == true)
-            {
-                System.Diagnostics.Debug.WriteLine($"{this.Name} Dodged");
-                this.Dodging = false;
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-        }
         private double RandomMultiplier()
         {
             double Rmulti = 1;
             //gives a multiplier of 1-1.2
-            Rmulti += Convert.ToDouble((new Random()).Next(0,20))/100;
-            System.Diagnostics.Debug.WriteLine("rando - " + Rmulti + " "+(Convert.ToDouble((new Random()).Next(0, 20)) / 100));
+            Rmulti += Convert.ToDouble((new Random()).Next(0,21))/100;
+            System.Diagnostics.Debug.WriteLine("rando - " + Rmulti + " "+(Convert.ToDouble((new Random()).Next(0, 21)) / 100));
             return Rmulti;
         }
     }

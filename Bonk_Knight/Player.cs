@@ -122,7 +122,7 @@ namespace Bonk_Knight
             double enemyDiff = MainClass.GameMap.GameSectionMap[MainClass.GameMap.CurrentSection].EnemyDifficulty;
 
 
-            this.Money += Convert.ToInt32((new Random()).Next(0, 10) * enemyDiff);
+            this.Money += Convert.ToInt32((new Random()).Next(1, 11) * enemyDiff);
         }
     }
     public class Item

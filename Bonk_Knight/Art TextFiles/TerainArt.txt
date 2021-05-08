@@ -7,6 +7,7 @@ rando:
 Screen - 9/10x30, moving screen - 6x30
 
 Home > Mountains > Caves > Forest >  Villages > Castle
+Mountain,Cave,Forest,Village,Kingdom,ThroneRoom
 Home:
 
 mini stuff to do

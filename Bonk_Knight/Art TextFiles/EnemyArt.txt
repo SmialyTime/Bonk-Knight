@@ -1,6 +1,11 @@
 Weird Chars (extended ascii):
 ´ ░▒▓█ ▌▌▀▄	·•·│─—¡σ ═ ¯ ,
 
+Names:
+slime,crab,bat,croc,
+WoodCutter,Tiller,Pitchfork
+Knight,Archer,King
+
 rando:
 ︵ ₀₀ ₁₁ ₂ ₃ ₄ ₅ ₆ ₇ ₈ ₉  ₓ∗
 ︵                            ffffffffffsf₀₀
@@ -14,12 +19,23 @@ best King:
 ╕╬╒ 
 /|\ 
 / \ 
+
+Archer:
+
+ /|   /|
+<-┼< <┼-<   /| o    ,┐ o
+ \|   \|    \|/|\   <┼/|\
+			  / \   `┘/ \
+Kight:
+ [╦]
+ /|\
+ / \
 concepts/copied
  (\_/)            o¯¯o                   o-._.-o
 (='.'=)           ɔ  |                     |m|  
 (")_(")           ````        __          (   ) 
                  o__     ;0.o.(__) 
- <--.            <__>    /  |  \   
+ <--.            <__>    /  |  \      ¶========>
  ___|            `  `
 '∞--/              
 
@@ -72,7 +88,7 @@ Mountains:
   `^´`^´
   
 Forest: 
-
+croc:
   __σσ--.__
   Vv,==,^^`
   
@@ -88,3 +104,7 @@ Villagers:
   / \  '/ \   / \  `/ \
 
 Castle:
+   _ 
+└┼┘O 
+ |/|\
+  / \

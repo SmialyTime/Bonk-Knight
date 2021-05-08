@@ -102,13 +102,13 @@ namespace Bonk_Knight
                 Globals.Terrain = this.GameSectionMap[this.CurrentSection].Type;
                 Render.ChangeScreen(0, 0, Art.Background($"{this.GameSectionMap[this.CurrentSection].SectionName}"));
 
-
                 //initalize the new enemies
                 for (int i = 0; i < this.GameSectionMap[this.CurrentSection].Enemies ; i++)
                 {
-                    //ADD enemies
                     Enemy NewEnemy = new Enemy(this.GameSectionMap[this.CurrentSection].Type, this.GameSectionMap[this.CurrentSection].EnemyDifficulty);
-                    NewEnemy.Position = 6 - CurrentEnemies.Count;
+                    //randomised enemy spawn if only 1
+                    if (this.GameSectionMap[this.CurrentSection].Enemies == 1) { NewEnemy.Position = 6 - (new Random()).Next(1,3); }
+                    else{NewEnemy.Position = 6 - this.CurrentEnemies.Count;}
                     this.CurrentEnemies.Add(NewEnemy);
                     //make it so they appear on screen
                     this.CurrentEnemies[i].RenderEntity();
@@ -118,7 +118,6 @@ namespace Bonk_Knight
                 MainClass.Player_1.Position = 1;
                 MainClass.Player_1.RenderEntity();
                 Render.RenderScreen("all");
-
             }
             else
             {
@@ -159,9 +158,17 @@ namespace Bonk_Knight
             Section home = new Section();
                 home.Enemies = 0;
                 home.EnemyDifficulty = 0;
-                home.Type = "home";
+                home.Type = "Home";
                 home.SectionName = "Home";
                 this.GameSectionMap.Add(home);
+            //Mountain,Cave,Forest,Village,Kingdom,ThroneRoom
+            List<String> typetst = new List<string>() { "Mountain", "Cave", "Forest", "Village", "Kingdom", "ThroneRoom" };
+            Section Tester = new Section();
+                Tester.Enemies = 1;
+                Tester.EnemyDifficulty = 1;
+                Tester.Type = typetst[(new Random()).Next(0,6)];
+                Tester.SectionName = "Test";
+                this.GameSectionMap.Add(Tester);
             //Mountains 
             for (var MountainRange = 0 ; MountainRange <= SectionPerStage; MountainRange++) {
                 Section Mount = new Section();
@@ -176,7 +183,7 @@ namespace Bonk_Knight
             //Cave
             for (var CaveVein = 0 ; CaveVein <= SectionPerStage; CaveVein++) {
                 Section Caven = new Section();
-                Caven.Enemies = (new Random()).Next(1,2);
+                Caven.Enemies = (new Random()).Next(1,3);
                 Caven.EnemyDifficulty = difficulty/2 + (CaveVein / 20);
                 Caven.Type = "Cave";
                 if (CaveVein == 0){Caven.SectionName = "CaveEntrance";}
@@ -187,7 +194,7 @@ namespace Bonk_Knight
             //Forest
             for (var ForestPart = 0 ; ForestPart <= SectionPerStage; ForestPart++) {
                 Section Forst = new Section();
-                Forst.Enemies = (new Random()).Next(1,2);
+                Forst.Enemies = (new Random()).Next(1,3);
                 Forst.EnemyDifficulty = difficulty/2 + (ForestPart / 20);
                 Forst.Type = "Forest";
                 if (ForestPart == 0){Forst.SectionName = "ForestEntrance"; }
@@ -198,7 +205,7 @@ namespace Bonk_Knight
             //Village
             for (var VillageNum = 0 ; VillageNum <= SectionPerStage; VillageNum++) {
                 Section Vill = new Section();
-                Vill.Enemies = (new Random()).Next(1,2);
+                Vill.Enemies = (new Random()).Next(1,3);
                 Vill.EnemyDifficulty = difficulty/2 + (VillageNum / 20);
                 Vill.Type = "Village";
                 if (VillageNum == 0){Vill.SectionName = "VillageEntrance"; }
@@ -209,7 +216,7 @@ namespace Bonk_Knight
             //Kingdom/Castle
             for (var CastleNum = 0 ; CastleNum <= SectionPerStage; CastleNum++) {
                 Section Castle = new Section();
-                Castle.Enemies = (new Random()).Next(1,2);
+                Castle.Enemies = (new Random()).Next(1,3);
                 Castle.EnemyDifficulty = difficulty/2 + (CastleNum / 10);
                 Castle.Type = "Kingdom";
                 if (CastleNum == 0){Castle.SectionName = "KingdomEntrance"; }
@@ -226,6 +233,5 @@ namespace Bonk_Knight
             this.GameSectionMap.Add(ThroneRoom);
 
         }
-        
     }
 }

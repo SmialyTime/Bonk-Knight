@@ -383,7 +383,7 @@ namespace Bonk_Knight
                                 @"▀`/|\ %" +
                                 @"  / \`%" ;
                     break;
-                case "FarmerP":
+                case "Pitchfork":
                     EnemyBack = @"   _ %" +
                                 @"└┼┘O %" +
                                 @" |/|\%" +
@@ -395,28 +395,40 @@ namespace Bonk_Knight
                                 @" |/|\%" +
                                 @"  / \%" ;
                     break;
-                case "FarmerH":
+                case "Tiller":
                     EnemyBack = @" _ _ %" +
                                 @"´|´O`%" +
                                 @" |/|\%" +
                                 @"  / \%" ;
                     break;
-                case "Croc":
+                case "croc":
                     EnemyBack = @" __σσ--.__%" +
                                 @" Vv,==,^^`%" ;
                     break;
-                case "Slime":
+                case "slime":
                     EnemyBack = @" ,--. %" +
                                 @"(o▫o▫)%" ;
                     break;
-                case "Crab":
+                case "crab":
                     EnemyBack = @"().--.()%" +
                                 @" `^´`^´ %" ;
                     break;
-                case "Bat":
+                case "bat":
                     EnemyBack = @"   ,_,   %" +
                                 @" /¯)∞(¯\ %" +
                                 @"/.-\_/-.\%" ;
+                    break;
+                case "Knight":
+                    EnemyBack = @" |~%" +
+                                @"╕╬╒%" +
+                                @"/|\%" +
+                                @"/▫\%";
+                    break;
+                case "Archer":
+                    EnemyBack = @"     %" +
+                                @",┐ o %" +
+                                @"<┼/|\%" +
+                                @"`┘/ \%";
                     break;
                 case "King":
                     EnemyBack = @" |~%" +
@@ -633,7 +645,7 @@ namespace Bonk_Knight
         {                                                               
             List<String> backAni = new List<String>() { };              
             switch (AniName)                                            
-            {                                                           
+            {                      
                 case "LiftHammer":                                      
                     backAni = new List<String>(){                       
                               // 1                                      
@@ -729,10 +741,11 @@ namespace Bonk_Knight
                 Animations to add
 
                 case "WalkRightHammerUp":
-                    break
+                    break;
                 case "WalkLeftHammerUp":
-                    break
-                
+                    break;
+                case "TakeHammerOut":
+                    break;
                 */
                 default://tester
                     backAni = new List<String>(){ 

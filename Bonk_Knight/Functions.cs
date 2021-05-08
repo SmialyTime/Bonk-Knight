@@ -46,6 +46,18 @@ namespace Bonk_Knight
         {
             Console.SetCursorPosition(0, 13);
         }
+
+        public static int LastRand = 1;
+        public static int RandomRandUntilNewRand(int start, int end)
+        {
+            var rond = new Random();
+            var Rnd = rond.Next(start, end + 1);
+            while (Rnd == LastRand && start != end + 1 && start != end) {
+                Rnd = rond.Next(start, end + 1);
+            }
+            LastRand = Rnd;
+            return Rnd;
+        }
         public static void MakeErrorMessage(String message)
         {
             //catches bugs
