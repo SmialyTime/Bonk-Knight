@@ -383,6 +383,13 @@ namespace Bonk_Knight
                                 @"▀`/|\ %" +
                                 @"  / \`%" ;
                     break;
+                case "PlayerHammerUp":
+                case "PlayerMovingHammerUp":
+                    EnemyBack = @"   █┬█%" +
+                                @" (τ)| %" +
+                                @"  |”' %" +
+                                @" / \  %" ;
+                    break;
                 case "Pitchfork":
                     EnemyBack = @"   _ %" +
                                 @"└┼┘O %" +
@@ -450,6 +457,7 @@ namespace Bonk_Knight
                                 @"/▫\%";
                     break;
                 default:
+                    Functions.MakeErrorMessage($"name of Enemy unidentified - {Type}");
                     EnemyBack = @"1234567890%" +
                                 @"2234567890%" +
                                 @"3234567890%" +
@@ -809,7 +817,7 @@ namespace Bonk_Knight
                               @"      .::%" +
                               @"  (τ)  ▄▄%" +
                               @"   |=•──┤%" +
-                              @"   |>    %",
+                              @"   |>  ▀▀%",
                               //18
                               @"         %" +
                               @"         %" +
@@ -886,7 +894,8 @@ namespace Bonk_Knight
                 case "TakeHammerOut":
                     break;
                 */
-                default://tester
+                default://tester\
+                    Functions.MakeErrorMessage($"name of animation unidentified - {AniName}");
                     backAni = new List<String>(){ 
                               // 1
                               @"       %" +

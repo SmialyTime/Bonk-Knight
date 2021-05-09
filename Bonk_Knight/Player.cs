@@ -14,7 +14,6 @@ namespace Bonk_Knight
         public String UserName { get; set; }
         //The inventory will contain the Item Name so you can ref it and amount of that item
         public Dictionary<String, int> Inventory { get; set; }
-        private bool HammerUp { get; set; }
         public Player(String UN)
         {
             Map.EnemyDied.EnemyDied += DefeatedEnemy;
@@ -22,7 +21,7 @@ namespace Bonk_Knight
             this.UserName = UN;
             this.Money = 0;
             this.Inventory = new Dictionary<String, int>() { };
-            this.HammerUp = false;
+            this.AtkCharged = false;
         }
         public void MoveR()
         {
@@ -42,7 +41,7 @@ namespace Bonk_Knight
                 }
                 if (!EnemyInfront)
                 {
-                    if (this.HammerUp == false)
+                    if (this.AtkCharged == false)
                     {
                         Animate.ControlableEntityAni(this.Position,this.Position + 1, Animations.PlayerAni("WalkRight"),80);
                     }
@@ -66,7 +65,7 @@ namespace Bonk_Knight
             if (this.Position > 1)
             {
                 //don't need to check if enemy behind
-                if (this.HammerUp == false) {
+                if (this.AtkCharged == false) {
                     //as animation has position of square it goes to
                     Animate.ControlableEntityAni(this.Position - 1, this.Position - 1, Animations.PlayerAni("WalkLeft"), 80);
                 }
@@ -86,16 +85,16 @@ namespace Bonk_Knight
         {
             this.Moving = false;
             //note it is a charge attack
-            if (this.HammerUp == false)
+            if (this.AtkCharged == false)
             {
                 //lift hammer up
+                this.AtkCharged = true;
                 Animate.ControlableEntityAni(this.Position,this.Position, Animations.PlayerAni("LiftHammer"));
-                this.HammerUp = true;
             }
             else
             {
                 //swing hammer
-                this.HammerUp = false;
+                this.AtkCharged = false;
                 Animate.ControlableEntityAni(this.Position,this.Position, Animations.PlayerAni("Bonk"),80);
 
                 //as can't change list while in foreach loop create new list

@@ -28,6 +28,8 @@ namespace Bonk_Knight
         public bool Dodging { get; set; }
         //decides what animation plays - Fight vs move mode
         public bool Moving { get; set; }
+        //charged attacks
+        public bool AtkCharged { get; set; }
 
         public Entity()
         {
@@ -55,14 +57,14 @@ namespace Bonk_Knight
                 //LOG the dodge
                 System.Diagnostics.Debug.WriteLine($"{this.Name} Dodged");
                 //loads the enemy again
-                Animate.ControlableEntityAni(this.Position, this.Position, Animations.PlayerAni(this.Name));
+                Animate.ControlableEntityAni(this.Position, this.Position, new List<string>() { Art.Enemy(this.Name) });
                 this.Dodging = false;
                 dmgMultiplier *= 0;
             }
             else
             {
                 //IMPROVE ADD FIX make a take damage flash? function
-                Animate.ControlableEntityAni(this.Position, this.Position, Animations.PlayerAni(this.Name));
+                Animate.ControlableEntityAni(this.Position, this.Position, new List<string>() { Art.Enemy(this.Name) });
                 dmgMultiplier *= 1;
             }
             this.Health -= Convert.ToInt32(this.BaseDamage*dmgMultiplier);
@@ -71,20 +73,13 @@ namespace Bonk_Knight
         }
         public void RenderEntity(int PlusPos = 0)
         {
+            var StanceName = this.Name;
             //make it 1 down?
             if (this.Name == "Player") {
-                if (Moving == false) {
-                    Animate.ControlableEntityPlace(this.Position + PlusPos, Art.Enemy(this.Name));
-                }
-                else
-                {
-                    Animate.ControlableEntityPlace(this.Position + PlusPos, Art.Enemy(this.Name + "Moving"));
-                }
+                if (Moving == true) {StanceName += "Moving";}
+                if (this.AtkCharged == true) {StanceName += "HammerUp";}
             }
-            else
-            {
-                Animate.ControlableEntityPlace(this.Position + PlusPos, Art.Enemy(this.Name));
-            }
+            Animate.ControlableEntityPlace(this.Position + PlusPos, Art.Enemy(StanceName));
         }
         public void CheckLiving()
         {

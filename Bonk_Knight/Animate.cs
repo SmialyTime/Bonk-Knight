@@ -68,9 +68,9 @@ namespace Bonk_Knight
                         //System.Diagnostics.Debug.WriteLine($"Completed Frame {Frame}");
                         Thread.Sleep(speed);
                     }
-                    EndAni();
                     ResetArea(Position, ActualEndPos, RowInitial, ColumnInitial, RowFinal, ColumnFinal);
                     RenderScreen($"{RowInitial},{ColumnInitial},{RowFinal},{ColumnFinal}");
+                    EndAni();
                 }
                 else
                 {
@@ -151,18 +151,19 @@ namespace Bonk_Knight
             for (var Ri = RI; Ri <= RF; Ri++)
             {
                 //                              *2???
-                Gap += new String('&',(CF - CI)+1) + '%';
+                Gap += new String(' ',(CF - CI)+1) + '%';
             }
             //fills it in
             var RwoCord = Convert.ToInt32(Globals.GroundInGameY - Gap.Count(f => f == '%'));
             var ClmCord = Convert.ToInt32((positon - 1) * 5);
-            ChangeScreen(RwoCord, ClmCord, Gap);
+            Render.ChangeScreen(RwoCord, ClmCord, Gap);
 
 
+            if (Globals.AnimationRunning == true) { Globals.AnimationRunning = false; }
             //use positon to rerender the thing back to original state
             if (MainClass.Player_1.Position == positon)
             {
-                //MainClass.Player_1.RenderEntity(actualendpos - positon);
+                MainClass.Player_1.RenderEntity(actualendpos - positon);
             }
             //FIX IMPROVE solves case of walking backwards only works for 1 backwards from orig
             else if (MainClass.Player_1.Position == positon + 1)
