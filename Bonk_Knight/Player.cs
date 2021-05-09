@@ -22,6 +22,14 @@ namespace Bonk_Knight
             this.Money = 0;
             this.Inventory = new Dictionary<String, int>() { };
             this.AtkCharged = false;
+            this.Moving = true;
+            this.BaseDamage = 1000;
+            this.Strength = 1;
+            this.Defence = 1;
+            this.Range = 1;
+            this.CritChance = 0.2;
+            this.Health = 100;
+            this.MaxHealth = this.Health;
         }
         public void MoveR()
         {

@@ -12,6 +12,7 @@ namespace Bonk_Knight
         public String Name { get; set; }
         //the total health you have before the entity dies  (h=0)
         public int Health { get; set; }
+        public int MaxHealth { get; set; }
         //the amount the attack at least does
         public double BaseDamage { get; set; }
         //the amount the attack is multiplied by (extra dmg)
@@ -36,6 +37,7 @@ namespace Bonk_Knight
             this.Strength = 1;
             this.Name = "Blank";
             this.Health = 100;
+            this.MaxHealth = this.Health;
             this.Defence = 1;
             this.CritChance = 0.1;
             this.Range = 1;
@@ -68,7 +70,7 @@ namespace Bonk_Knight
                 dmgMultiplier *= 1;
             }
             this.Health -= Convert.ToInt32(this.BaseDamage*dmgMultiplier);
-            System.Diagnostics.Debug.WriteLine($"Enemy {this.Name} took {this.BaseDamage * dmgMultiplier} and now is at {this.Health}/100");
+            System.Diagnostics.Debug.WriteLine($"Enemy {this.Name} took {this.BaseDamage * dmgMultiplier} and now is at {this.Health}/{this.MaxHealth}");
             CheckLiving();
         }
         public void RenderEntity(int PlusPos = 0)

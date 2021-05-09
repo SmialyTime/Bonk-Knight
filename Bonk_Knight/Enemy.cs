@@ -83,6 +83,7 @@ namespace Bonk_Knight
             this.Range = 1;
             this.CritChance = 0.1;
             this.Health = 40;
+            this.MaxHealth = this.Health;
             switch (this.Name) 
             {
                 /*sets special stats for special enemies
@@ -147,6 +148,7 @@ namespace Bonk_Knight
             }
             this.Strength = this.Strength*DifficultyLevel;
             this.Defence = this.Strength*DifficultyLevel;
+            this.MaxHealth = this.Health;
 
             this.RenderEntity();
         }
