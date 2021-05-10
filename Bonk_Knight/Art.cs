@@ -36,8 +36,8 @@ namespace Bonk_Knight
                            @" ╟Onnn77nnn╢ │       │      │ %" +
                            @"▒░▒░▒░▒░▒░▒░▒[¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯]%";
                     break;
-                case "Mountain1":
-                case "M1":
+                case "Mountain":
+                case "M":
                     back = @"   /\    /\    .^.      /¯¯\_ %" +
                            @"  /^ \  /^ \  / ^^\    /  ^  \%" +
                            @" /    \/  ^ \/     \/\/       %" +

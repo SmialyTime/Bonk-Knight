@@ -169,11 +169,12 @@ namespace Bonk_Knight
         private void PlayerEventSystem_MadeCombatMove(object sender, string e)
         {
             //recives player input
+            CheckLiving();
             MakeMove();
         }
         public void MakeMove()
         {
-            //System.Diagnostics.Debug.WriteLine($"E1 - {this.PlanedMove}");
+            System.Diagnostics.Debug.WriteLine($"        {this.Name} - {this.PlanedMove}");
             //remember player moves then enemy
             //ADD animations
             switch (this.PlanedMove.ToLower())
@@ -304,7 +305,6 @@ namespace Bonk_Knight
             //testing dodging and attacking
             //if (RandomRandUntilNewRand(0, 10) == 0) { this.PlanedMove = "Attack"; }
             //else { this.PlanedMove = "dodge"; }
-            this.PlanedMove = "Attack";
 
         }
 
