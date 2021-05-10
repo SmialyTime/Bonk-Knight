@@ -1,0 +1,22 @@
+Animals: slime-weak, crab-standard, bat-def, croc-hard,
+People:  WoodCutter-atk, Tiller-standard, Pitchfork-atk,
+Guards:  Knight-def, Archer-range, King -special stats CHANGE IMPROVE ADD new special class?
+standards:
+    Strength = 1
+    Defence = 1
+    Range = 1
+    Crit Chance = 0.1
+    Base Damage = 20
+    Health = 40
+	
+For attacks:
+basic enemies
+	slime,crab,croc,Tiller
+defensive enemies
+	bat,Knight
+agressive enemies
+	WoodCutter,Pitchfork
+ranged enemies
+	Archer
+special
+    king

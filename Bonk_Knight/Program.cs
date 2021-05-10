@@ -3,6 +3,7 @@ using System.Text;
 using System.Drawing;
 using System.Collections.Generic;
 using System.Threading;
+using System.Runtime.InteropServices;
 
 namespace Bonk_Knight
 {
@@ -30,21 +31,22 @@ namespace Bonk_Knight
         //public static KeyHandler Keys = new KeyHandler();
         public static PlayerHandler PlayerEventSystem = new PlayerHandler();
         public static Map GameMap = new Map("Medium");
+        public static ChangeConsoleSize MaxSize = new ChangeConsoleSize();
         public static Player Player_1 {get;set;}
         public static void Main(string[] args)
         {
-            Console.SetWindowSize(32,15);
             InitializeComponents();
-            Render.CursorBellowScreen();
 
+
+            //add in intro page
+
+            Render.CursorBellowScreen();
             var userName = "Bonk Knight";
             Player_1 = new Player(userName);
             //CHANGE load first screen
             Player_1.Position = 4;
             GameMap.LoadCurrentScreen();
             Player_1.RenderEntity();
-
-
             Globals.GameGoing = true;
             char Continue = keyInput();
             while (Globals.GameGoing == true)
@@ -53,20 +55,21 @@ namespace Bonk_Knight
                 switch (Continue)
                 {
                     case 'a':
-                        //left
+                    //left  
                         Player_1.MoveL();
+                        break;
+                    case 'y':
+                        //obstain  
+                        PlayerEventSystem.MadeMove("left");
                         break;
                     case 'd':
                         //right
                         Player_1.MoveR();
                         break;
-                    case 'j':
-                        //prev screen
-                        GameMap.PrevScreen();
-                        break;
-                    case 'l':
-                        //next screen
-                        GameMap.NextScreen();
+                    case 'w':
+                    case 's':
+                    //dodge  
+                        Player_1.Dodge();
                         break;
                     case 'm':
                         //displays Map Screen
@@ -153,9 +156,50 @@ namespace Bonk_Knight
             //runs all events named clickEvent
             Deaded?.Invoke(this, myCustomArgs);
         }
+        
+        public event EventHandler<String> MadeCombatMove;
+        //public event EventHandler<String> Moved;
+        public void MadeMove(String Move)
+        {
+            //runs all events that happen when the player moves
+            switch (Move.ToLower()) 
+            {
+                case "left":
+                case "right":
+                case "attack":
+                case "dodge":
+                    //handles when combat is happening and the moves make a difference
+                    MadeCombatMove?.Invoke(this, Move);
+                    break;
+                default:
+                    System.Diagnostics.Debug.WriteLine(Move);
+                    //handles normal moves 
+                    //Moved?.Invoke(this, Move);
+                    break;
+            }
+        }
+        
     }
     public class PlayerStats
     {
         public int Score { get; set; }
+    }
+    public class ChangeConsoleSize
+    {
+            [DllImport("kernel32.dll", ExactSpelling = true)]
+            private static extern IntPtr GetConsoleWindow();
+            private static IntPtr ThisConsole = GetConsoleWindow();
+            [DllImport("user32.dll", CharSet = CharSet.Auto, SetLastError = true)]
+            private static extern bool ShowWindow(IntPtr hWnd, int nCmdShow);
+            private const int HIDE = 0;
+            private const int MAXIMIZE = 3;
+            private const int MINIMIZE = 6;
+            private const int RESTORE = 9;
+            public ChangeConsoleSize()
+            {
+                Console.SetWindowSize(Console.LargestWindowWidth, Console.LargestWindowHeight);
+                ShowWindow(ThisConsole, MAXIMIZE);
+                Console.ReadLine();
+            }
     }
 }

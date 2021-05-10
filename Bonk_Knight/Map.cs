@@ -77,6 +77,7 @@ namespace Bonk_Knight
                 //LOG
                 System.Diagnostics.Debug.WriteLine($"{Cull.Name} was defeated");
                 this.CurrentEnemies.Remove(Cull);
+                this.GameSectionMap[this.CurrentSection].Enemies--;
             }
         }
         public static void LoadMapWindow()
@@ -170,6 +171,15 @@ namespace Bonk_Knight
                 home.Type = "Home";
                 home.SectionName = "Home";
                 this.GameSectionMap.Add(home);
+            //only 1 mountain
+            Section Mount = new Section();
+            Mount.Enemies = 1;
+            Mount.EnemyDifficulty = difficulty / 2;
+            Mount.Type = "Mountain";
+            Mount.SectionName = "Mountain";
+            this.GameSectionMap.Add(Mount);
+
+            //older code
             //Mountain,Cave,Forest,Village,Kingdom,ThroneRoom
             //List<String> typetst = new List<string>() { "Mountain", "Cave", "Forest", "Village", "Kingdom", "ThroneRoom" };
             //Section Tester = new Section();
@@ -179,16 +189,16 @@ namespace Bonk_Knight
             //Tester.SectionName = "Test";
             //this.GameSectionMap.Add(Tester);
             //Mountains 
-            for (var MountainRange = 0 ; MountainRange <= SectionPerStage; MountainRange++) {
-                Section Mount = new Section();
-                Mount.Enemies = (new Random()).Next(1,1);
-                Mount.EnemyDifficulty = difficulty/2 + (MountainRange / 20);
-                Mount.Type = "Mountain";
-                if (MountainRange == 0){Mount.SectionName = "MountainEntrance";}
-                else if (MountainRange == SectionPerStage){Mount.SectionName = "MountainExit";}
-                else{Mount.SectionName = "Mountain" + MountainRange;}
-                this.GameSectionMap.Add(Mount);
-            }
+            //or (var MountainRange = 0 ; MountainRange <= SectionPerStage; MountainRange++) {
+            //   Section Mount = new Section();
+            //   Mount.Enemies = (new Random()).Next(1,1);
+            //   Mount.EnemyDifficulty = difficulty/2 + (MountainRange / 20);
+            //   Mount.Type = "Mountain";
+            //   if (MountainRange == 0){Mount.SectionName = "MountainEntrance";}
+            //   else if (MountainRange == SectionPerStage){Mount.SectionName = "MountainExit";}
+            //   else{Mount.SectionName = "Mountain" + MountainRange;}
+            //   this.GameSectionMap.Add(Mount);
+            //
             //Cave
             for (var CaveVein = 0 ; CaveVein <= SectionPerStage; CaveVein++) {
                 Section Caven = new Section();

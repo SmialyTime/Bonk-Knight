@@ -33,6 +33,7 @@ namespace Bonk_Knight
         }
         public void MoveR()
         {
+            MainClass.PlayerEventSystem.MadeMove("right");
             this.Moving = true;
             //checks if at edge of screen
             if (this.Position < 6)
@@ -68,6 +69,7 @@ namespace Bonk_Knight
         }
         public void MoveL()
         {
+            MainClass.PlayerEventSystem.MadeMove("left");
             this.Moving = true;
             //checks if at edge of screen
             if (this.Position > 1)
@@ -91,6 +93,7 @@ namespace Bonk_Knight
         }
         public void Attack()
         {
+            MainClass.PlayerEventSystem.MadeMove("attack");
             this.Moving = false;
             //note it is a charge attack
             if (this.AtkCharged == false)
@@ -115,10 +118,23 @@ namespace Bonk_Knight
                 {
                     if (this.Position == EnemyToAttack.Position - 1)
                     {
-                        EnemyToAttack.TakeDamage(this.Strength, "Heavy");
+                        if (EnemyToAttack.PlanedMove == "dodge")
+                        {
+                            EnemyToAttack.MakeMove();
+                            EnemyToAttack.TakeDamage(this.Strength, this.BaseDamage);
+                        }
+                        else
+                        {
+                            EnemyToAttack.TakeDamage(this.Strength, this.BaseDamage);
+                        }
                     }
                 }
             }
+            this.Moving = true;
+        }
+        public void Dodge()
+        {
+            MainClass.PlayerEventSystem.MadeMove("dodge");
         }
         private void DefeatedEnemy(object sender, string e)
         {

@@ -31,10 +31,13 @@ namespace Bonk_Knight
         public bool Moving { get; set; }
         //charged attacks
         public bool AtkCharged { get; set; }
+        //makes the player/enemy do nothing
+        public bool debuff { get; set; }
 
         public Entity()
         {
             this.Strength = 1;
+            this.debuff = false;
             this.Name = "Blank";
             this.Health = 100;
             this.MaxHealth = this.Health;
@@ -44,8 +47,16 @@ namespace Bonk_Knight
             this.Position = 1;
             //CHANGE
             this.BaseDamage = 100;
+            MainClass.PlayerEventSystem.MadeCombatMove += PlayerEventSystem_MadeCombatMove;
         }
-        public void TakeDamage(double AtkStrength, String atkType)
+
+        private void PlayerEventSystem_MadeCombatMove(object sender, string e)
+        {
+            //reset dogeing
+            this.Dodging = false;
+        }
+
+        public void TakeDamage(double AtkStrength, double AtkDmg)
         {
             //ADD differnt attack types - heavy,normal,projectile
             //IMPROVE
@@ -69,8 +80,8 @@ namespace Bonk_Knight
                 Animate.ControlableEntityAni(this.Position, this.Position, new List<string>() { Art.Enemy(this.Name) });
                 dmgMultiplier *= 1;
             }
-            this.Health -= Convert.ToInt32(this.BaseDamage*dmgMultiplier);
-            System.Diagnostics.Debug.WriteLine($"Enemy {this.Name} took {this.BaseDamage * dmgMultiplier} and now is at {this.Health}/{this.MaxHealth}");
+            this.Health -= Convert.ToInt32(AtkDmg * dmgMultiplier);
+            System.Diagnostics.Debug.WriteLine($"Enemy {this.Name} took {AtkDmg * dmgMultiplier} and now is at {this.Health}/{this.MaxHealth}");
             CheckLiving();
         }
         public void RenderEntity(int PlusPos = 0)

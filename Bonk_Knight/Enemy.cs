@@ -8,8 +8,14 @@ namespace Bonk_Knight
 {
     public partial class Enemy : Entity
     {
+
+        public String PlanedMove { get; set; }
         public Enemy(int otherEns,String Biome, double DifficultyLevel)
         {
+            //recives the player events
+            MainClass.PlayerEventSystem.MadeCombatMove += PlayerEventSystem_MadeCombatMove;
+
+            this.PlanedMove = "debuff";
             this.Name = "null";
             //Mountain,Cave,Forest,Village,Kingdom,ThroneRoom
             Random rand = new Random();
@@ -149,13 +155,158 @@ namespace Bonk_Knight
             this.Strength = this.Strength*DifficultyLevel;
             this.Defence = this.Strength*DifficultyLevel;
             this.MaxHealth = this.Health;
+            this.AtkCharged = false;
 
             this.RenderEntity();
         }
+        //set the type of enemy
+        public static List<String> standard = new List<string>() { "slime", "crab", "croc", "tiller" };
+        public static List<String> defensive = new List<string>() { "bat", "knight"};
+        public static List<String> agressive = new List<string>() { "woodCutter", "pitchfork" };
+        public static List<String> ranged = new List<string>() { "archer" };
+        public static List<String> special = new List<string>() { "king" };
 
+        private void PlayerEventSystem_MadeCombatMove(object sender, string e)
+        {
+            //recives player input
+            MakeMove();
+        }
         public void MakeMove()
         {
-            //if
+            //System.Diagnostics.Debug.WriteLine($"E1 - {this.PlanedMove}");
+            //remember player moves then enemy
+            //ADD animations
+            switch (this.PlanedMove.ToLower())
+            {
+                case "dodge":
+                    this.Dodging = true;
+                    break;
+                case "debuff":
+                    //do nothing
+                    break;
+                case "move":
+                    //this.Position -= 1; not working
+                    Animate.ControlableEntityPlace(this.Position,Art.Enemy("blank"));
+                    if (MainClass.Player_1.Position != this.Position - 1)
+                    {
+                        this.Position-=1;
+                    }
+                    else
+                    {
+                        System.Diagnostics.Debug.WriteLine("Can't move there player is there");
+                    }
+                    this.RenderEntity();
+                    break;
+                case "increasedefence":
+                    this.Defence += 0.1;
+                    break;
+                case "increaseattack":
+                    this.Strength += 0.1;
+                    break;
+                case "chargeattack":
+                    this.AtkCharged = true;
+                    break;
+                case "attack":
+                    if (MainClass.Player_1.Position >= this.Position - this.Range)
+                    {
+                        MainClass.Player_1.TakeDamage(this.Strength,this.BaseDamage);
+                    }
+                    this.AtkCharged = false;
+                    break;
+                default:
+                    MakeErrorMessage($"unregistered move {this.PlanedMove}");
+                    break;
+            }
+            
+            //plans the next move
+            PlanMove();
         }
+        public void PlanMove()
+        {
+            //checks if enemy is debuffed (can't move)
+            if (this.debuff == true)
+            {
+                this.PlanedMove = "debuff";
+            }
+            else
+            {
+                //checks if player in range otherwise moves forward
+                if (MainClass.Player_1.Position < this.Position - this.Range)
+                {
+                    this.PlanedMove = "move";
+                }
+                else
+                {
+                    //checks if attack needs to be charged
+                    if (/*NOT*/!(this.AtkCharged == true || (agressive.Contains(this.Name))))
+                    {
+                        if (ranged.Contains(this.Name))
+                        {
+                            //ranged enemies take longer to "aim" attacks
+                            this.PlanedMove = "chargeAttack";
+                            this.debuff = true;
+                        }
+                        else
+                        {
+                            this.PlanedMove = "chargeAttack";
+                        }
+                    }
+                    else
+                    {
+                        //attacks dodges or does a special move
+                        switch (this.Name.ToLower())
+                        {
+                            //basic enemies
+                            case "crab":
+                            case "slime":
+                            case "croc":
+                            case "tiller":
+                                //80% Attack + 15% dodge + 5% debuff
+                                if (RandomRandUntilNewRand(0, 10) <= 8) { this.PlanedMove = "Attack"; }
+                                else if (RandomRandUntilNewRand(0, 10) <= 7) { this.PlanedMove = "dodge"; }
+                                else { this.PlanedMove = "debuff"; }
+
+                                break;
+                            //defensive enemies
+                            case "bat":
+                            case "knight":
+                                //60% Attack + 40% increaseDefence 
+                                if (RandomRandUntilNewRand(0, 10) <= 6) { this.PlanedMove = "Attack"; }
+                                else { this.PlanedMove = "increaseDefence"; }
+                                
+                                break;
+                            //agressive enemies (no charge but debuff after)
+                            case "pitchfork":
+                            case "woodcutter":
+                                //60% Attack + 40% increaseAttack
+                                if (RandomRandUntilNewRand(0, 10) <= 6) 
+                                {
+                                    this.PlanedMove = "Attack";
+                                    this.debuff = true;
+                                }
+                                else { this.PlanedMove = "increaseAttack"; }
+                                break;
+                            //ranged enemies (high charge) 80% attack 20% dodge/debuf
+                            case "archer":
+                                if (RandomRandUntilNewRand(0, 10) <= 8) { this.PlanedMove = "Attack"; }
+                                else { this.PlanedMove = "dodge"; }
+                                break;
+                            //special enemies 90% attack 10% dodge
+                            case "king":
+                                if (RandomRandUntilNewRand(0, 10) <= 9) { this.PlanedMove = "Attack"; }
+                                else { this.PlanedMove = "dodge"; }
+                                break;
+                        }
+                    }
+                }
+            }
+
+            //testing dodging and attacking
+            //if (RandomRandUntilNewRand(0, 10) == 0) { this.PlanedMove = "Attack"; }
+            //else { this.PlanedMove = "dodge"; }
+            this.PlanedMove = "Attack";
+
+        }
+
     }
 }

@@ -44,7 +44,16 @@ namespace Bonk_Knight
                             for (int ROW = Bounderies[0]; ROW <= Bounderies[2]; ROW++)
                             {
                                 //setColor(Globals.Screen[ROW, CLM]);-----------------------------------------------------------
-                                Console.Write(Globals.Screen[ROW, CLM]); //-1 because 0 indexed
+                                if (Globals.Screen[ROW, CLM] == '◇')
+                                {
+                                    setColor(Globals.CurrentBackground[ROW, CLM]);
+                                    Console.Write(Globals.CurrentBackground[ROW, CLM]); //-1 because 0 indexed
+                                    Console.ForegroundColor = ConsoleColor.White;
+                                }
+                                else
+                                {
+                                    Console.Write(Globals.Screen[ROW, CLM]); //-1 because 0 indexed
+                                }
                                 Console.SetCursorPosition(Console.CursorLeft-1, Console.CursorTop + 1);
                             }
                             Console.SetCursorPosition(Console.CursorLeft + 1, Bounderies[0] + Globals.Sy);
@@ -72,7 +81,16 @@ namespace Bonk_Knight
                     {
                         setColor(Globals.Screen[rw, cl]);
                         //to ref the screen multi-array use Screen[row][columb] in double nested for loops
-                        Console.Write(Globals.Screen[rw, cl]);
+                        if (Globals.Screen[rw, cl] == '◇')
+                        {
+                            setColor(Globals.CurrentBackground[rw, cl]);
+                            Console.Write(Globals.CurrentBackground[rw, cl]); //-1 because 0 indexed
+                            Console.ForegroundColor = ConsoleColor.White;
+                        }
+                        else
+                        {
+                            Console.Write(Globals.Screen[rw, cl]);
+                        }
                     }
                     Console.SetCursorPosition(Globals.Sx, Console.CursorTop + 1);
                 }
@@ -142,7 +160,7 @@ namespace Bonk_Knight
                             else
                             {
                                 //current map char behind
-                                Globals.Screen[rw, cl] = Globals.CurrentBackground[rw, cl];
+                                Globals.Screen[rw, cl] = '◇';
                             }
                         }
                     }
@@ -410,6 +428,19 @@ namespace Bonk_Knight
                         }
                         break;
                     case "Village":
+                        switch (inChar)
+                        {
+                            case '▒':
+                            case '▓':
+                            case '░':
+                                forgColor = Functions.GC('z');
+                                break;
+                            case 'σ':
+                                forgColor = Functions.GC('r');
+                                break;
+                        }
+                        break;
+                    case "Mountain":
                         switch (inChar)
                         {
                             case '▒':
