@@ -76,6 +76,7 @@ namespace Bonk_Knight
             {
                 //LOG
                 System.Diagnostics.Debug.WriteLine($"{Cull.Name} was defeated");
+                Cull.dead();
                 this.CurrentEnemies.Remove(Cull);
                 this.GameSectionMap[this.CurrentSection].Enemies--;
             }

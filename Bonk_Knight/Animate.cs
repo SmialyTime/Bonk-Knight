@@ -91,7 +91,7 @@ namespace Bonk_Knight
             //meant for player and enemy
             if (Globals.AnimationRunning == false) {
                 if (!(Position > 6 || Position < 1)) {
-                    //Globals.AnimationRunning = true;
+                    Globals.AnimationRunning = true;
 
                     //note the animtaion starts from the ground
                     //all animations are within square

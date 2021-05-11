@@ -166,15 +166,29 @@ namespace Bonk_Knight
         public static List<String> ranged = new List<string>() { "archer" };
         public static List<String> special = new List<string>() { "king" };
 
+        public void dead()
+        {
+            if (this.living == false)
+            {
+                MainClass.PlayerEventSystem.MadeCombatMove -= PlayerEventSystem_MadeCombatMove;
+            }
+        }
         private void PlayerEventSystem_MadeCombatMove(object sender, string e)
         {
             //recives player input
             CheckLiving();
-            MakeMove();
+            if (this.living == false)
+            {
+                dead();
+            }
+            else
+            {
+                MakeMove();
+
+            }
         }
         public void MakeMove()
         {
-            System.Diagnostics.Debug.WriteLine($"        {this.Name} - {this.PlanedMove}");
             //remember player moves then enemy
             //ADD animations
             switch (this.PlanedMove.ToLower())
@@ -301,6 +315,8 @@ namespace Bonk_Knight
                     }
                 }
             }
+
+            System.Diagnostics.Debug.WriteLine($"            {this.Name} Plan  - {this.PlanedMove}");
 
             //testing dodging and attacking
             //if (RandomRandUntilNewRand(0, 10) == 0) { this.PlanedMove = "Attack"; }

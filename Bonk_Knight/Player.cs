@@ -33,7 +33,6 @@ namespace Bonk_Knight
         }
         public void MoveR()
         {
-            MainClass.PlayerEventSystem.MadeMove("right");
             this.Moving = true;
             //checks if at edge of screen
             if (this.Position < 6)
@@ -66,10 +65,10 @@ namespace Bonk_Knight
                 //loads the next screen if conditions met - enemies = 0, is at edge of screen, not at end of game
                 MainClass.GameMap.NextScreen();
             }
+            MainClass.PlayerEventSystem.MadeMove("right");
         }
         public void MoveL()
         {
-            MainClass.PlayerEventSystem.MadeMove("left");
             this.Moving = true;
             //checks if at edge of screen
             if (this.Position > 1)
@@ -90,10 +89,10 @@ namespace Bonk_Knight
                 //loads the prev screen if conditions met - enemies = 0, is at edge of screen, not at start of game
                 MainClass.GameMap.PrevScreen();
             }
+            MainClass.PlayerEventSystem.MadeMove("left");
         }
         public void Attack()
         {
-            MainClass.PlayerEventSystem.MadeMove("attack");
             this.Moving = false;
             //note it is a charge attack
             if (this.AtkCharged == false)
@@ -131,9 +130,11 @@ namespace Bonk_Knight
                 }
             }
             this.Moving = true;
+            MainClass.PlayerEventSystem.MadeMove("attack");
         }
         public void Dodge()
         {
+            //add in code here 
             MainClass.PlayerEventSystem.MadeMove("dodge");
         }
         private void DefeatedEnemy(object sender, string e)

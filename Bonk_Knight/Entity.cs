@@ -33,10 +33,13 @@ namespace Bonk_Knight
         public bool AtkCharged { get; set; }
         //makes the player/enemy do nothing
         public bool debuff { get; set; }
+        //living
+        public bool living { get; set; }
 
         public Entity()
         {
             this.Strength = 1;
+            this.living = true;
             this.debuff = false;
             this.Name = "Blank";
             this.Health = 100;
@@ -98,10 +101,12 @@ namespace Bonk_Knight
         {
             if (this.Health <=0)
             {
+                this.living = false;
                 //EVENT dead 
                 //will remove the enemy if dead
                 if (this.Name != "Player") {
                     Map.EnemyDied.Enemyded(this.Name);
+                    MainClass.PlayerEventSystem.MadeCombatMove -= PlayerEventSystem_MadeCombatMove;
                 }
                 else
                 {
