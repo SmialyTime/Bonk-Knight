@@ -165,6 +165,10 @@ namespace Bonk_Knight
         public static List<String> agressive = new List<string>() { "woodCutter", "pitchfork" };
         public static List<String> ranged = new List<string>() { "archer" };
         public static List<String> special = new List<string>() { "king" };
+        public int OneLineAboveEnemy { get;set; }
+        public int enemyWidth { get;set; }
+        public int CentredAboveEnemy { get;set; }
+        public String PlanedMoveChar = "??";
 
         public void dead()
         {
@@ -189,6 +193,10 @@ namespace Bonk_Knight
         }
         public void MakeMove()
         {
+            //clears Planned move
+
+            Console.SetCursorPosition(this.CentredAboveEnemy, this.OneLineAboveEnemy);
+            Console.WriteLine($"{new String(' ',this.PlanedMoveChar.Length)}");
             //remember player moves then enemy
             //ADD animations
             switch (this.PlanedMove.ToLower())
@@ -321,6 +329,47 @@ namespace Bonk_Knight
                     }
                 }
             }
+            String EnemyArtLook = Art.Enemy(this.Name);
+            //Animate.ControlableEntityPlace(this.Position,);
+            this.OneLineAboveEnemy = Globals.GroundInGameY - EnemyArtLook.Count(f => f == '%');
+            this.enemyWidth = (EnemyArtLook.Length - EnemyArtLook.Count(f => f == '%')) / EnemyArtLook.Count(f => f == '%');
+            this.CentredAboveEnemy = ((this.Position - 1) * 5) + (this.enemyWidth / 2);
+            Console.SetCursorPosition(this.CentredAboveEnemy,this.OneLineAboveEnemy);
+            switch (this.PlanedMove.ToLower())
+            {
+                case "dodge":
+                    Console.ForegroundColor = ConsoleColor.Green;
+                    PlanedMoveChar = "*";
+                    break;
+                case "move":
+                    Console.ForegroundColor = ConsoleColor.DarkBlue;
+                    PlanedMoveChar = "←";
+                    break;
+                case "increasedefence":
+                    Console.ForegroundColor = ConsoleColor.DarkGreen;
+                    PlanedMoveChar = "↑*";
+                    break;
+                case "increaseattack":
+                    Console.ForegroundColor = ConsoleColor.DarkRed;
+                    PlanedMoveChar = "↑*";
+                    break;
+                case "chargeattack":
+                    Console.ForegroundColor = ConsoleColor.Yellow;
+                    PlanedMoveChar = "ϟ";
+                    break;
+                case "attack":
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    PlanedMoveChar = "*";
+                    break;
+                default:
+                    //debuff
+                    Console.ForegroundColor = ConsoleColor.DarkGray;
+                    PlanedMoveChar = "??";
+                    break;
+            }
+            Console.WriteLine($"{this.PlanedMoveChar}");
+            Console.ForegroundColor = ConsoleColor.White;
+
             //LOG ?
             System.Diagnostics.Debug.WriteLine($"            {this.Name} Plan  - {this.PlanedMove}");
 

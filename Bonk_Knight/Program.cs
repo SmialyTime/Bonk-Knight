@@ -40,7 +40,6 @@ namespace Bonk_Knight
         public static Player Player_1 {get;set;}
         public static void Main(string[] args)
         {
-            Console.WriteLine("Press any key to Start");
             InitializeComponents();
 
             GameOptions();
