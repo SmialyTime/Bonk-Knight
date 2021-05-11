@@ -75,9 +75,9 @@ namespace Bonk_Knight
             {
                 //renders whole screen
                 Console.SetCursorPosition(Globals.Sx, Globals.Sy);
-                for (int rw = 0; rw < 9; rw++)
+                for (int rw = 0; rw < Globals.GSH; rw++)
                 {
-                    for (int cl = 0; cl < 30; cl++)
+                    for (int cl = 0; cl < Globals.GSW; cl++)
                     {
                         setColor(Globals.Screen[rw, cl]);
                         //to ref the screen multi-array use Screen[row][columb] in double nested for loops
@@ -102,9 +102,9 @@ namespace Bonk_Knight
         {
             //renders whole screen
             Console.SetCursorPosition(Globals.Sx, Globals.Sy);
-            for (int rw = 0; rw < 9; rw++)
+            for (int rw = 0; rw < Globals.GSH; rw++)
             {
-                for (int cl = 0; cl < 30; cl++)
+                for (int cl = 0; cl < Globals.GSW; cl++)
                 {
                     setColor(ScreenToTender[rw, cl]);
                     //to ref the screen multi-array use Screen[row][columb] in double nested for loops
@@ -131,7 +131,7 @@ namespace Bonk_Knight
                 }
                 else
                 {
-                    if (rw >= 9 || cl >= 30)
+                    if (rw >= Globals.GSH || cl >= Globals.GSW)
                     {
                         //only works for whole screen rendering
                         junk += ToAdd[elm];
@@ -186,7 +186,7 @@ namespace Bonk_Knight
                 }
                 else
                 {
-                    if (rw >= 9 || cl >= 30)
+                    if (rw >= Globals.GSH || cl >= Globals.GSW)
                     {
                         //only works for whole screen rendering
                         junk += MapToSwitchTo[elm];
@@ -230,35 +230,35 @@ namespace Bonk_Knight
             switch (inChar)
             {
                 case '*':
-                    forgColor = Functions.GC('?');
+                    forgColor = Functions.GC("?");
                     break;
                 case 'τ':
-                    forgColor = Functions.GC('c');
+                    forgColor = Functions.GC("c");
                     break;
                 case 'c':
-                    forgColor = Functions.GC('y');
+                    forgColor = Functions.GC("y");
                     break;
                 case '~':
                 case '╬':
-                    forgColor = Functions.GC('m');
+                    forgColor = Functions.GC("m");
                     break;
                 case '⌡':
                 case '⌠':
                 case '║':
                 case '╦':
-                    forgColor = Functions.GC('B');
+                    forgColor = Functions.GC("B");
                     break;
                 case '╢':
                 case '╖':
                 case '╓':
                 case '╟':
-                    forgColor = Functions.GC('b');
+                    forgColor = Functions.GC("b");
                     break;
                 case '╘':
                 case 'δ':
                 case 'Φ':
                 case '╛':
-                    forgColor = Functions.GC('M');
+                    forgColor = Functions.GC("M");
                     break;
                 case '(':
                 case ')':
@@ -266,7 +266,7 @@ namespace Bonk_Knight
                 case '#':
                 case '″':
                 case '‴':
-                    forgColor = Functions.GC('g');
+                    forgColor = Functions.GC("g");
                     break;
                 case '‘':
                 case '’':
@@ -275,10 +275,10 @@ namespace Bonk_Knight
                 case '“':
                 case '”':
                 case '„':
-                    forgColor = Functions.GC('E');
+                    forgColor = Functions.GC("E");
                     break;
                 default:
-                    forgColor = Functions.GC('w');
+                    forgColor = Functions.GC("w");
                     break;
             }
 
@@ -291,23 +291,23 @@ namespace Bonk_Knight
                         switch (inChar)
                         {
                             case '░':
-                                forgColor = Functions.GC('C');
+                                forgColor = Functions.GC("C");
                                 break;
                             //case 'o':
-                                //forgColor = Functions.GC('m');
+                                //forgColor = Functions.GC("m');
                                 //break;
                             case '▒':
-                                forgColor = Functions.GC('c');
+                                forgColor = Functions.GC("c");
                                 break;
                             case '#':
-                                forgColor = Functions.GC('b');
+                                forgColor = Functions.GC("b");
                                 break;
                             case 'σ':
-                                forgColor = Functions.GC('r');
+                                forgColor = Functions.GC("r");
                                 break;
                             case '·':
                             case 'O':
-                                forgColor = Functions.GC('y');
+                                forgColor = Functions.GC("y");
                                 break;
                             case 'U':
                             case '╢':
@@ -315,12 +315,12 @@ namespace Bonk_Knight
                             case '│':
                             case '-':
                             case '_':
-                                forgColor = Functions.GC('z');
+                                forgColor = Functions.GC("z");
                                 break;
                             case ']':
                             case '[':
                             case 'n':
-                                forgColor = Functions.GC('g');
+                                forgColor = Functions.GC("g");
                                 break;
                         }
                         break;
@@ -328,27 +328,27 @@ namespace Bonk_Knight
                         switch (inChar)
                         {
                             case '│':
-                                forgColor = Functions.GC('m');
+                                forgColor = Functions.GC("m");
                                 break;
                             case 'o':
-                                forgColor = Functions.GC('c');
+                                forgColor = Functions.GC("c");
                                 break;
                             case '#':
-                                forgColor = Functions.GC('b');
+                                forgColor = Functions.GC("b");
                                 break;
                             case 'n':
                             case 'σ':
-                                forgColor = Functions.GC('r');
+                                forgColor = Functions.GC("r");
                                 break;
                             case '·':
                             case '_':
-                                forgColor = Functions.GC('y');
+                                forgColor = Functions.GC("y");
                                 break;
                             case '.':
                             case '´':
                             case '`':
                             case '¯':
-                                forgColor = Functions.GC('g');
+                                forgColor = Functions.GC("g");
                                 break;
                         }
                         break;
@@ -360,20 +360,20 @@ namespace Bonk_Knight
                             case '╖':
                             case '╓':
                             case '╟':
-                                forgColor = Functions.GC('B');
+                                forgColor = Functions.GC("B");
                                 break;
                             case '┐':
                             case '│':
                             case '┤':
                             case '├':
                             case '┌':
-                                forgColor = Functions.GC('b');
+                                forgColor = Functions.GC("b");
                                 break;
                             case '‛':
                             case '“':
                             case '”':
                             case '„':
-                                forgColor = Functions.GC('E');
+                                forgColor = Functions.GC("E");
                                 break;
                             case '(':
                             case ')':
@@ -394,13 +394,13 @@ namespace Bonk_Knight
                             case '-':
                             case '¯':
                             case '_':
-                                forgColor = Functions.GC('g');
+                                forgColor = Functions.GC("g");
                                 break;
                             case '‴':
-                                forgColor = Functions.GC('M');
+                                forgColor = Functions.GC("M");
                                 break;
                             case '″':
-                                forgColor = Functions.GC('C');
+                                forgColor = Functions.GC("C");
                                 break;
                         }
                         break;
@@ -408,11 +408,11 @@ namespace Bonk_Knight
                         switch (inChar)
                         {
                             case '|':
-                                forgColor = Functions.GC('y');
+                                forgColor = Functions.GC("y");
                                 break;
                             case '\\':
                             case '/':
-                                forgColor = Functions.GC('E');
+                                forgColor = Functions.GC("E");
                                 break;
                             case '`':
                             case '´':
@@ -420,10 +420,10 @@ namespace Bonk_Knight
                             case '#':
                             case '(':
                             case ')':
-                                forgColor = Functions.GC('e');
+                                forgColor = Functions.GC("e");
                                 break;
                             case 'σ':
-                                forgColor = Functions.GC('z');
+                                forgColor = Functions.GC("z");
                                 break;
                         }
                         break;
@@ -433,10 +433,10 @@ namespace Bonk_Knight
                             case '▒':
                             case '▓':
                             case '░':
-                                forgColor = Functions.GC('z');
+                                forgColor = Functions.GC("z");
                                 break;
                             case 'σ':
-                                forgColor = Functions.GC('r');
+                                forgColor = Functions.GC("r");
                                 break;
                         }
                         break;
@@ -446,10 +446,10 @@ namespace Bonk_Knight
                             case '▒':
                             case '▓':
                             case '░':
-                                forgColor = Functions.GC('z');
+                                forgColor = Functions.GC("z");
                                 break;
                             case 'σ':
-                                forgColor = Functions.GC('r');
+                                forgColor = Functions.GC("r");
                                 break;
                         }
                         break;

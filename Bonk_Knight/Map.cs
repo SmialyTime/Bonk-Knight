@@ -41,21 +41,16 @@ namespace Bonk_Knight
 
         public Map(String Difficulty)
         {
-            //add to event stuff  if 'm' => LoadMapWindow()
-
             var dif = 2;// 1  = easy , 2 = medium, 3 = hard
-            //easy:   enemies x0.5 as Strong, normaly x1   enemies, 3 Stages per Section,x0.5 total gold to collect
-            //medium: enemies x1.0 as Strong, normaly x1-2 enemies, 5 Stages per Section,x1.0 total gold to collect
-            //hard:   enemies x1.5 as Strong, normaly x2-3 enemies, ?? Stages per Section,x1.5 total gold to collect
             switch (Difficulty)
             {
-                case "Easy":
+                case "easy":
                     dif = 1;
                     break;
-                case "Medium":
+                case "medium":
                     dif = 2;
                     break;
-                case "Hard":
+                case "hard":
                     dif = 3;
                     break;
             }

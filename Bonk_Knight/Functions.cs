@@ -46,6 +46,31 @@ namespace Bonk_Knight
         {
             Console.SetCursorPosition(0, 13);
         }
+        public static void CursourLogLineClear()
+        {
+            Console.SetCursorPosition(Globals.Sx, 11);
+            Console.Write(new String(' ',28));
+            Console.SetCursorPosition(Globals.Sx, 11);
+        }
+        public static void CursourLogLineWrite(String ToWriteIn)
+        {
+            CursourLogLineClear();
+            if (ToWriteIn.Length <= 28) {
+                Console.Write(ToWriteIn);
+            }
+            else
+            {
+                MakeErrorMessage($"{ToWriteIn} too long for Log area");
+            }
+        }
+        public static void CentedTextSubText(String MainText, String Subtext = "", int LeftABit = 0)
+        {
+            Console.SetCursorPosition(Globals.Sx + Globals.GSW/2 - LeftABit, Console.CursorTop);
+            Console.Write(MainText);
+            Console.ForegroundColor = ConsoleColor.Gray;
+            Console.Write(" " + Subtext);
+            Console.ForegroundColor = ConsoleColor.White;
+        }
 
         public static int LastRand = 1;
         public static int RandomRandUntilNewRand(int start, int end)
@@ -65,53 +90,78 @@ namespace Bonk_Knight
             Console.WriteLine(message);
             System.Diagnostics.Debug.WriteLine(message);
         }
-        public static ConsoleColor GC(char color)
+        public static ConsoleColor GC(string color)
         {
             String colour = "";
             //get color
             switch (color)
             {
-                case 'b':
+                case "b":
+                case "blue":
                     colour = "Blue";
                     break;
-                case 'B':
+                case "B":
+                case "DarkBlue":
+                case "darkblue":
                     colour = "DarkBlue";
                     break;
-                case 'C':
+                case "C":
+                case "DarkCyan":
+                case "darkcyan":
                     colour = "DarkCyan";
                     break;
-                case 'c':
+                case "c":
+                case "Cyan":
+                case "cyan":
                     colour = "Cyan";
                     break;
-                case 'y':
+                case "y":
+                case "Yellow":
+                case "yellow":
                     colour = "Yellow";
                     break;
-                case 'M':
+                case "M":
+                case "DarkMagenta":
+                case "darkmagenta":
                     colour = "DarkMagenta";
                     break;
-                case 'm':
+                case "m":
+                case "Magenta":
+                case "magenta":
                     colour = "Magenta";
                     break;
-                case 'r':
-                    colour = "DarkRed";
+                case "r":
+                case "Red":
+                case "red":
+                    colour = "Red";
                     break;
-                case 'g':
+                case "g":
+                case "DarkGray":
+                case "darkgray":
                     colour = "DarkGray";
                     break;
-                case 'z':
+                case "z":
+                case "DarkYellow":
+                case "darkyellow":
                     colour = "DarkYellow";
                     break;
-                case 'x':
+                case "x":
+                case "DarkRed":
+                case "darkred":
                     colour = "DarkRed";
                     break;
-                case 'e':
+                case "e":
+                case "Green":
+                case "green":
                     colour = "Green";
                     break;
-                case 'E':
+                case "E":
+                case "DarkGreen":
+                case "darkgreen":
                     colour = "DarkGreen";
                     break;
-                case '?':
-                    List<char> allCol = new List<char> { 'b', 'r', 'g', 'e', 'd', 'w','z','x','y','E','m','M','B' };
+                case "?":
+                    List<String> allCol = new List<String> { "b", "r", "g", "e", "d", "w","z","x","y","E","m","M","B" };
                     return GC(allCol[(new Random()).Next(allCol.Count)]);
                 default:
                     colour = "White";

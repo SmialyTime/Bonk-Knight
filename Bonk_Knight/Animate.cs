@@ -37,8 +37,9 @@ namespace Bonk_Knight
                     }
                     //IDK why probs 0 index
                     ColumnFinal--;
-                    if (ColumnFinal >= 30){
-                        ColumnFinal = 29;
+                    if (ColumnFinal >= Globals.GSW)
+                    {
+                        ColumnFinal = Globals.GSW - 1 ;
                     }
                     System.Diagnostics.Debug.WriteLine($"{RowInitial},{ColumnInitial},{RowFinal},{ColumnFinal}");
 
@@ -111,7 +112,7 @@ namespace Bonk_Knight
                     ColumnFinal = Math.Max(ColumnFinal, ColumnInitial+((EntityStationary.Length - EntityStationary.Count(f => f == '%')) / EntityStationary.Count(f => f == '%')));
                     //IDK why probs 0 index
                     ColumnFinal--;
-                    if (ColumnFinal >= 30){ColumnFinal = 29;}
+                    if (ColumnFinal >= Globals.GSW) {ColumnFinal = Globals.GSW - 1; }
 
                     //set up the Location of the Animation to change the screen list
                     List<int> ThingCoords = new List<int>() { };
