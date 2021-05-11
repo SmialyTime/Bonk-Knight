@@ -214,10 +214,8 @@ namespace Bonk_Knight
                     {
                         this.Position-=1;
                     }
-                    else
-                    {
-                        System.Diagnostics.Debug.WriteLine("Can't move there player or enemy is there");
-                    }
+                    //UNCOMMENT
+                    else { System.Diagnostics.Debug.WriteLine("Can't move there player or enemy is there");}
                     this.RenderEntity();
                     break;
                 case "increasedefence":
@@ -323,7 +321,7 @@ namespace Bonk_Knight
                     }
                 }
             }
-
+            //LOG ?
             System.Diagnostics.Debug.WriteLine($"            {this.Name} Plan  - {this.PlanedMove}");
 
             //testing dodging and attacking

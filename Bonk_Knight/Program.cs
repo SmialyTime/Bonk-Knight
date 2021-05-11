@@ -217,11 +217,11 @@ namespace Bonk_Knight
                         Functions.ClearKeyIntputs();
                         return ltr;
                     }
-                    else { System.Diagnostics.Debug.WriteLine($"Enter+stuff"); Functions.ClearKeyIntputs(); return '回';/*place holder for enter*/}
+                    else { /*System.Diagnostics.Debug.WriteLine($"Enter+stuff");*/ Functions.ClearKeyIntputs(); return '回';/*place holder for enter*/}
                 }
                 else { Functions.ClearKeyIntputs(); return '㊀'; }
             }
-            else { /*Doesn't run*/  Functions.ClearKeyIntputs(); System.Diagnostics.Debug.WriteLine($"Animation running"); return '㊅'; }
+            else { /*Doesn't run  System.Diagnostics.Debug.WriteLine($"Animation running");*/  Functions.ClearKeyIntputs(); return '㊅'; }
         }
     }
     public class PlayerHandler
@@ -250,8 +250,10 @@ namespace Bonk_Knight
                     //handles when combat is happening and the moves make a difference
                     MadeCombatMove?.Invoke(this, Move);
                     break;
+
+                //maybe make things for other moves
                 default:
-                    System.Diagnostics.Debug.WriteLine(Move);
+                    //System.Diagnostics.Debug.WriteLine(Move);
                     //handles normal moves 
                     //Moved?.Invoke(this, Move);
                     break;

@@ -44,6 +44,7 @@ namespace Bonk_Knight
                     if (ens.Position == this.Position + 1)
                     {
                         EnemyInfront = true;
+                        //LOG?
                         System.Diagnostics.Debug.WriteLine("EnemyInfront");
                     }
                 }

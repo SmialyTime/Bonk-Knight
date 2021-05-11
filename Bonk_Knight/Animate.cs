@@ -42,7 +42,7 @@ namespace Bonk_Knight
                     {
                         ColumnFinal = Globals.GSW - 1 ;
                     }
-                    System.Diagnostics.Debug.WriteLine($"{RowInitial},{ColumnInitial},{RowFinal},{ColumnFinal}");
+                    //System.Diagnostics.Debug.WriteLine($"{RowInitial},{ColumnInitial},{RowFinal},{ColumnFinal}");
 
                     //set up the Location of the Animation to change the screen list
                     List<List<int>> Location = new List<List<int>>() { };

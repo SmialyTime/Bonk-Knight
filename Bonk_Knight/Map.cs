@@ -130,7 +130,7 @@ namespace Bonk_Knight
             }
             else
             {
-                //game ended??
+                //LOG can't exit ENDING 
                 System.Diagnostics.Debug.WriteLine($"at end {CurrentSection < this.GameSectionMap.Count - 1}|| player positon not at enterance {MainClass.Player_1.Position == 6 }|| enemies remaining {this.CurrentEnemies.Count}");
             }
         }
@@ -154,7 +154,7 @@ namespace Bonk_Knight
             }
             else
             {
-                //game ended??
+                //LOG?
                 System.Diagnostics.Debug.WriteLine($"@Beginning {this.CurrentSection} {this.CurrentSection > 0 }|| @enterance? {MainClass.Player_1.Position == 1 } {MainClass.Player_1.Position}|| enemies {this.CurrentEnemies.Count} {this.CurrentEnemies.Count == 0}");
             }
         }

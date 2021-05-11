@@ -58,7 +58,6 @@ namespace Bonk_Knight
             //reset dogeing
             this.Dodging = false;
         }
-
         public void TakeDamage(double AtkStrength, double AtkDmg)
         {
             //ADD differnt attack types - heavy,normal,projectile
@@ -84,6 +83,7 @@ namespace Bonk_Knight
                 dmgMultiplier *= 1;
             }
             this.Health -= Convert.ToInt32(AtkDmg * dmgMultiplier);
+            //LOG
             System.Diagnostics.Debug.WriteLine($"Enemy {this.Name} took {AtkDmg * dmgMultiplier} and now is at {this.Health}/{this.MaxHealth}");
             CheckLiving();
         }
@@ -118,6 +118,7 @@ namespace Bonk_Knight
         {
             if ((new Random()).NextDouble() <= this.CritChance)
             {
+                //LOG
                 System.Diagnostics.Debug.WriteLine("CRIT");
                 return true;
             }
@@ -131,7 +132,7 @@ namespace Bonk_Knight
             double Rmulti = 1;
             //gives a multiplier of 1-1.2
             Rmulti += Convert.ToDouble((new Random()).Next(0,21))/100;
-            System.Diagnostics.Debug.WriteLine("rando - " + Rmulti + " "+(Convert.ToDouble((new Random()).Next(0, 21)) / 100));
+            //System.Diagnostics.Debug.WriteLine("rando - " + Rmulti + " "+(Convert.ToDouble((new Random()).Next(0, 21)) / 100));
             return Rmulti;
         }
     }
