@@ -45,12 +45,15 @@ namespace Bonk_Knight
             switch (Difficulty)
             {
                 case "easy":
+                case "1":
                     dif = 1;
                     break;
                 case "medium":
+                case "2":
                     dif = 2;
                     break;
                 case "hard":
+                case "3":
                     dif = 3;
                     break;
             }

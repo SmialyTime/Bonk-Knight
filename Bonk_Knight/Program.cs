@@ -110,46 +110,78 @@ namespace Bonk_Knight
         {
             Functions.GC("White");
             //input game preferences
-            Functions.CursourLogLineWrite("Username: ");
+            Functions.CursourLogLineWrite("name: ");
             var Username = Console.ReadLine();
             //10 because too long would mess up the display of things
-            while (Username.Length > 10)
+            while (Username == null || Username == "" || Username?.Length > 10)
             {
-                Functions.CursourLogLineWrite("Username (max of 10): ");
+                Functions.CursourLogLineWrite("(10 max): ");
                 Username = Console.ReadLine();
                 //ADD cencorship?
             }
+            Render.RenderScreen("all");
             Player_1 = new Player(Username);
 
             //writes out info
             Functions.resetCursor();
-            Console.Write("Enter the difficulty you want:");
+            Console.Write("Difficulty: ");
             Console.SetCursorPosition(Console.CursorLeft, Console.CursorTop + 1);
-            Functions.CentedTextSubText("> easy  ", " Weaker Enemies , Less gold required", 10);
+            Functions.CentedTextSubText("1 easy  ", " Weak Enemies-More gold", ConsoleColor.DarkGreen);
             Console.SetCursorPosition(Console.CursorLeft, Console.CursorTop + 1);
-            Functions.CentedTextSubText("> medium", " Normal Enemies , Norm gold required", 10);
+            Functions.CentedTextSubText("2 medium", " ", ConsoleColor.DarkCyan);
             Console.SetCursorPosition(Console.CursorLeft, Console.CursorTop + 1);
-            Functions.CentedTextSubText("> hard  ", " Harder Enemies , More gold required", 10);
+            Functions.CentedTextSubText("3 hard  ", " Hard Enemies-Less gold", ConsoleColor.Red);
 
-            //easy:   
-            //medium: enemies x1.0 as Strong,x1.0 total gold to collect
-            //hard:   enemies x1.5 as Strong,x1.5 total gold to collect
-            //does checks for the input
-            Functions.CursourLogLineWrite("Enter Difficulty: ");
+            Functions.CursourLogLineWrite("Difficulty: ");
             Globals.GameDifficulty = Console.ReadLine().ToLower();
-            while (/*not*/!(Globals.GameDifficulty == "easy" || Globals.GameDifficulty == "medium" || Globals.GameDifficulty == "hard"))
+            //does checks for the input
+            while (/*not*/!(Globals.GameDifficulty == "1" || Globals.GameDifficulty == "2" || Globals.GameDifficulty == "3" || Globals.GameDifficulty == "easy" || Globals.GameDifficulty == "medium" || Globals.GameDifficulty == "hard"))
             {
-                Functions.CursourLogLineWrite("Enter valid Difficulty: ");
+                Functions.CursourLogLineWrite("valid Diff: ");
                 Globals.GameDifficulty = Console.ReadLine().ToLower();
                 //LOG enter valid difficulty
             }
             GameMap = new Map(Globals.GameDifficulty);
+            Render.RenderScreen("all");
 
-            var GameSpeed = "Normal".ToLower();
-            while (/*not*/!(GameSpeed == "slow" || GameSpeed == "normal" || GameSpeed == "fast"))
+            Functions.resetCursor();
+            Console.Write("Animation Speeds: ");
+            Console.SetCursorPosition(Console.CursorLeft, Console.CursorTop + 1);
+            Functions.CentedTextSubText("1 slow  ", "half speed", ConsoleColor.DarkCyan);
+            Console.SetCursorPosition(Console.CursorLeft, Console.CursorTop + 1);
+            Functions.CentedTextSubText("2 normal", "x1 speed (recomended)");
+            Console.SetCursorPosition(Console.CursorLeft, Console.CursorTop + 1);
+            Functions.CentedTextSubText("3 fast  ", "x2 speed", ConsoleColor.DarkYellow);
+            Console.SetCursorPosition(Console.CursorLeft, Console.CursorTop + 1);
+            Functions.CentedTextSubText("4 ZOOM  ", "ZOOOOOOOOOOOOOOOOOOOOOOOOOOM", ConsoleColor.Red);
+            Functions.CursourLogLineWrite("Speed: ");
+            var GameSpeed = Console.ReadLine().ToLower();
+            while (/*not*/!(GameSpeed == "1" || GameSpeed == "2" || GameSpeed == "3"|| GameSpeed == "4"
+                  ||GameSpeed == "slow" || GameSpeed == "normal" || GameSpeed == "fast"|| GameSpeed == "zoom"))
             {
-                //LOG enter valid difficulty
+                Functions.CursourLogLineWrite("A Speed: ");
+                GameSpeed = Console.ReadLine().ToLower();
             }
+            switch (GameSpeed)
+            {
+                case "slow":
+                case "1":
+                    Globals.GameSpeed = 1;
+                    break;
+                case "normal":
+                case "2":
+                    Globals.GameSpeed = 0.5;
+                    break;
+                case "fast":
+                case "3":
+                    Globals.GameSpeed = 0.05;
+                    break;
+                case "zoom":
+                case "4":
+                    Globals.GameSpeed = 0.001;
+                    break;
+            }
+            Render.RenderScreen("all");
         }
         public static void InitializeComponents()
         {

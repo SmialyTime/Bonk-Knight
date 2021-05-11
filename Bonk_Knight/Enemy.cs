@@ -202,13 +202,21 @@ namespace Bonk_Knight
                 case "move":
                     //this.Position -= 1; not working
                     Animate.ControlableEntityPlace(this.Position,Art.Enemy("blank"));
-                    if (MainClass.Player_1.Position != this.Position - 1)
+                    bool spaceInfrontAvalible = true;
+                    foreach (Enemy spaceInfrontAvalibleToCheck in MainClass.GameMap.CurrentEnemies)
+                    {
+                        if (spaceInfrontAvalibleToCheck.Position == this.Position - 1)
+                        {
+                            spaceInfrontAvalible = false;
+                        }
+                    }
+                    if (MainClass.Player_1.Position != this.Position - 1 && spaceInfrontAvalible)
                     {
                         this.Position-=1;
                     }
                     else
                     {
-                        System.Diagnostics.Debug.WriteLine("Can't move there player is there");
+                        System.Diagnostics.Debug.WriteLine("Can't move there player or enemy is there");
                     }
                     this.RenderEntity();
                     break;

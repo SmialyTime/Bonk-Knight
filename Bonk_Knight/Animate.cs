@@ -8,8 +8,9 @@ namespace Bonk_Knight
 {
     public class Animate : Render
     {
-        public static void ControlableEntityAni(int Position, int ActualEndPos ,List<String> Animation, int speed = 240)
+        public static void ControlableEntityAni(int Position, int ActualEndPos ,List<String> Animation, int speed = 120)//240?
         {
+            speed = Convert.ToInt32(speed * Globals.GameSpeed);
             //FIX CHANGE
             //meant for player and enemy
             if (Globals.AnimationRunning == false) {

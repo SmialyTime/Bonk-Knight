@@ -63,12 +63,29 @@ namespace Bonk_Knight
                 MakeErrorMessage($"{ToWriteIn} too long for Log area");
             }
         }
-        public static void CentedTextSubText(String MainText, String Subtext = "", int LeftABit = 0)
+        public static void CentedTextSubText(String MainText, String Subtext = "",ConsoleColor HighlightColor = ConsoleColor.White)
         {
-            Console.SetCursorPosition(Globals.Sx + Globals.GSW/2 - LeftABit, Console.CursorTop);
-            Console.Write(MainText);
-            Console.ForegroundColor = ConsoleColor.Gray;
-            Console.Write(" " + Subtext);
+            if (Subtext.Length <= 28)
+            {
+                Console.ForegroundColor = HighlightColor;
+                //centers text            Screen left + half width of screen - half text
+                Console.SetCursorPosition((Globals.Sx + (Globals.GSW - 2) / 2 - Convert.ToInt32(MainText.Length/2)), Console.CursorTop);
+                Console.Write(MainText);
+            }
+            else
+            {
+                MakeErrorMessage($"{MainText} too long for Screen area");
+            }
+            if (Subtext.Length <= 28)
+            {
+                Console.ForegroundColor = ConsoleColor.DarkGray;
+                Console.SetCursorPosition(Globals.Sx + (Globals.GSW - 2) / 2 - Convert.ToInt32(Subtext.Length / 2), Console.CursorTop + 1);
+                Console.Write(Subtext);
+            }
+            else
+            {
+                MakeErrorMessage($"{Subtext} too long for Screen area");
+            }
             Console.ForegroundColor = ConsoleColor.White;
         }
 
