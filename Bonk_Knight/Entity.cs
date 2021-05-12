@@ -71,14 +71,14 @@ namespace Bonk_Knight
                 //LOG the dodge
                 System.Diagnostics.Debug.WriteLine($"{this.Name} Dodged");
                 //loads the enemy again
-                Animate.ControlableEntityAni(this.Position, this.Position, new List<string>() { Art.Enemy(this.Name) });
+                //Animate.ControlableEntityAni(this.Position, this.Position, new List<string>() { Art.Enemy(this.Name) });
                 this.Dodging = false;
                 dmgMultiplier = 0;
             }
             else
             {
                 //IMPROVE ADD FIX make a take damage flash? function
-                Animate.ControlableEntityAni(this.Position, this.Position, new List<string>() { Art.Enemy(this.Name) });
+                //Animate.ControlableEntityAni(this.Position, this.Position, new List<string>() { Art.Enemy(this.Name) });
                 dmgMultiplier *= 1;
             }
             this.Health -= Convert.ToInt32(AtkDmg * dmgMultiplier);

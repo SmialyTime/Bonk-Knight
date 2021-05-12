@@ -66,6 +66,8 @@ namespace Bonk_Knight
         }
         private void PlayerEventSystem_Deaded(object sender, PlayerStats e)
         {
+            this.GameSectionMap[this.CurrentSection].Enemies = 0;
+            this.CurrentEnemies = new List<Enemy>() { };
             //resets to previous area and re-adds in the enemies
             var SectionToRespawnAt = 0;
             while(this.GameSectionMap[this.CurrentSection].Type != this.GameSectionMap[SectionToRespawnAt].Type)
@@ -79,12 +81,25 @@ namespace Bonk_Knight
                 {
                     this.GameSectionMap[i].Enemies = (new Random()).Next(1, 3);
                 }
+                if (this.GameSectionMap[i].Type == "ThroneRoom")
+                {
+                    //only 1 king
+                    this.GameSectionMap[i].Enemies = 1;
+                }
             }
-
-            if (SectionToRespawnAt != 0) 
+            //loads new screen
+            if (this.GameSectionMap[SectionToRespawnAt].Type != "ThroneRoom" && this.GameSectionMap[SectionToRespawnAt].Type != "Home")
             {
                 this.CurrentSection = SectionToRespawnAt - 1;
                 MainClass.Player_1.Position = 6;
+                LoadCurrentScreen();
+                NextScreen();
+            }
+            else if (this.GameSectionMap[SectionToRespawnAt].Type == "ThroneRoom")
+            {
+                this.CurrentSection = SectionToRespawnAt - 2;
+                MainClass.Player_1.Position = 6;
+                LoadCurrentScreen();
                 NextScreen();
             }
             else
@@ -122,7 +137,6 @@ namespace Bonk_Knight
             Globals.Terrain = this.GameSectionMap[this.CurrentSection].Type;
             Render.ChangeScreen(0, 0, Art.Background($"{this.GameSectionMap[this.CurrentSection].SectionName}"));
             Render.RenderScreen("all");
-
         }
         public void NextScreen()
         {
@@ -166,6 +180,7 @@ namespace Bonk_Knight
                 //LOG can't exit ENDING 
                 System.Diagnostics.Debug.WriteLine($"at end {CurrentSection < this.GameSectionMap.Count - 1}|| player positon not at enterance {MainClass.Player_1.Position == 6 }|| enemies remaining {this.CurrentEnemies.Count}");
             }
+
         }
         public void PrevScreen()
         {

@@ -63,6 +63,12 @@ namespace Bonk_Knight
                     //left  
                         Player_1.MoveL();
                         break;
+                    case 'k':
+                        //left  
+                        Console.SetCursorPosition(Globals.Ox, Globals.Oy);
+                        Console.ForegroundColor = ConsoleColor.White;
+                        Console.Write($"┌───");
+                        break;
                     case 'y':
                         //obstain  
                         PlayerEventSystem.MadeMove("left");
@@ -115,10 +121,12 @@ namespace Bonk_Knight
             //10 because too long would mess up the display of things
             while (Username == null || Username == "" || Username?.Length > 10)
             {
+                Functions.CursourLogLineClear(Username);
                 Functions.CursourLogLineWrite("(10 max): ");
                 Username = Console.ReadLine();
                 //ADD cencorship?
             }
+            Functions.CursourLogLineClear(Username);
             Render.RenderScreen("all");
             Player_1 = new Player(Username);
 
@@ -137,10 +145,12 @@ namespace Bonk_Knight
             //does checks for the input
             while (/*not*/!(Globals.GameDifficulty == "1" || Globals.GameDifficulty == "2" || Globals.GameDifficulty == "3" || Globals.GameDifficulty == "easy" || Globals.GameDifficulty == "medium" || Globals.GameDifficulty == "hard"))
             {
+                Functions.CursourLogLineClear(Globals.GameDifficulty);
                 Functions.CursourLogLineWrite("valid Diff: ");
                 Globals.GameDifficulty = Console.ReadLine().ToLower();
                 //LOG enter valid difficulty
             }
+            Functions.CursourLogLineClear(Globals.GameDifficulty);
             GameMap = new Map(Globals.GameDifficulty);
             Render.RenderScreen("all");
 
@@ -157,11 +167,13 @@ namespace Bonk_Knight
             Functions.CursourLogLineWrite("Speed: ");
             var GameSpeed = Console.ReadLine().ToLower();
             while (/*not*/!(GameSpeed == "1" || GameSpeed == "2" || GameSpeed == "3"|| GameSpeed == "4"
-                  ||GameSpeed == "slow" || GameSpeed == "normal" || GameSpeed == "fast"|| GameSpeed == "zoom"))
+                  ||GameSpeed == "slow" || GameSpeed == "normal" || GameSpeed == "fast"|| GameSpeed == "zoom"|| GameSpeed == "zoooooooooooooooooooooooooom"))
             {
+                Functions.CursourLogLineClear(GameSpeed);
                 Functions.CursourLogLineWrite("A Speed: ");
                 GameSpeed = Console.ReadLine().ToLower();
             }
+            Functions.CursourLogLineClear(GameSpeed);
             switch (GameSpeed)
             {
                 case "slow":
@@ -178,9 +190,11 @@ namespace Bonk_Knight
                     break;
                 case "zoom":
                 case "4":
+                case "zoooooooooooooooooooooooooom":
                     Globals.GameSpeed = 0.001;
                     break;
             }
+            Render.RenderOutline(Globals.GSW, Globals.GSH);
             Render.RenderScreen("all");
         }
         public static void InitializeComponents()

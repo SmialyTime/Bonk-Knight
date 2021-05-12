@@ -24,15 +24,20 @@ namespace Bonk_Knight
             this.Inventory = new Dictionary<String, int>() { };
             this.AtkCharged = false;
             this.Moving = true;
-            this.BaseDamage = 1000;
             this.Strength = 1;
             this.Defence = 1;
             this.Range = 1;
             this.CritChance = 0.2;
             this.Health = 100;
+            this.BaseDamage = 40;
+            //game dev hack
+            if (this.UserName == "b")
+            {
+                this.BaseDamage = 1000;
+                this.Health = 500;
+            }
             this.MaxHealth = this.Health;
         }
-
         private void PlayerEventSystem_Deaded(object sender, PlayerStats e)
         {
             this.living = false;
@@ -40,7 +45,6 @@ namespace Bonk_Knight
         }
         public void MoveR()
         {
-            Map.EnemyDied.Enemyded("slime");
             this.Moving = true;
             //checks if at edge of screen
             if (this.Position < 6)
@@ -150,9 +154,17 @@ namespace Bonk_Knight
         }
         public void PlayerDied()
         {
-            this.Health = this.MaxHealth;
-            this.Money -= 10;
             //LOG player died and lost money
+            this.Health = this.MaxHealth;
+            if ((this.Money - 10)>0) 
+            {
+
+                this.Money -= 10;
+            }
+            else
+            {
+                this.Money = 0;
+            }
 
 
             //Code discontinued as player doesn't actualy die just respawns
@@ -221,13 +233,15 @@ namespace Bonk_Knight
             case "King":
                 break;
             }
-            if (this.Inventory.ContainsKey(ItemToAdd) && ItemToAdd != "none")
-            {
-                this.Inventory[ItemToAdd] += (new Random()).Next(1,3);
-            }
-            else
-            {
-                this.Inventory.Add(ItemToAdd, 1);
+            if (ItemToAdd != "none") {
+                if (this.Inventory.ContainsKey(ItemToAdd))
+                {
+                    this.Inventory[ItemToAdd] += (new Random()).Next(1, 3);
+                }
+                else
+                {
+                    this.Inventory.Add(ItemToAdd, 1);
+                }
             }
 
             //money

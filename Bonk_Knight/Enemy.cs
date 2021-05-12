@@ -34,6 +34,7 @@ namespace Bonk_Knight
             MainClass.PlayerEventSystem.Deaded += PlayerEventSystem_Deaded;
 
             this.PlanedMove = "debuff";
+            this.PlanedMoveChar = "??";
             this.Name = "null";
             //Mountain,Cave,Forest,Village,Kingdom,ThroneRoom
             Random rand = new Random();
@@ -164,9 +165,9 @@ namespace Bonk_Knight
                     this.Health = 100;
                     break;
                 case "King"://King -special
-                    this.Strength = 2;
-                    this.Range = 2;
-                    this.Defence = 2;
+                    this.Strength = 3;
+                    this.Range = 1;
+                    this.Defence = 3;
                     this.Health = 200;
                     break;
             }
@@ -174,6 +175,7 @@ namespace Bonk_Knight
             this.Defence = this.Strength*DifficultyLevel;
             this.MaxHealth = this.Health;
             this.AtkCharged = false;
+
 
             this.RenderEntity();
         }
@@ -207,9 +209,14 @@ namespace Bonk_Knight
         public void MakeMove()
         {
             //clears Planned move
-
-            Console.SetCursorPosition(this.CentredAboveEnemy, this.OneLineAboveEnemy);
-            Console.WriteLine($"{new String(' ',this.PlanedMoveChar.Length)}");
+            if (this.CentredAboveEnemy != 0 && this.OneLineAboveEnemy != 0) {
+                Console.SetCursorPosition(this.CentredAboveEnemy, this.OneLineAboveEnemy);
+                Console.WriteLine($"{new String(' ', this.PlanedMoveChar.Length)}");
+            }
+            else
+            {
+                //MakeErrorMessage("Enemy indicatior not right");
+            }
             //remember player moves then enemy
             //ADD animations
             switch (this.PlanedMove.ToLower())
@@ -342,11 +349,12 @@ namespace Bonk_Knight
                     }
                 }
             }
+            //Improve as may be inefficent to redeclare
             String EnemyArtLook = Art.Enemy(this.Name);
-            //Animate.ControlableEntityPlace(this.Position,);
             this.OneLineAboveEnemy = Globals.GroundInGameY - EnemyArtLook.Count(f => f == '%');
             this.enemyWidth = (EnemyArtLook.Length - EnemyArtLook.Count(f => f == '%')) / EnemyArtLook.Count(f => f == '%');
             this.CentredAboveEnemy = ((this.Position - 1) * 5) + (this.enemyWidth / 2);
+
             Console.SetCursorPosition(this.CentredAboveEnemy,this.OneLineAboveEnemy);
             switch (this.PlanedMove.ToLower())
             {
@@ -380,13 +388,13 @@ namespace Bonk_Knight
                     PlanedMoveChar = "??";
                     break;
             }
+
+            
             Console.WriteLine($"{this.PlanedMoveChar}");
             Console.ForegroundColor = ConsoleColor.White;
 
-            //LOG ?
-            System.Diagnostics.Debug.WriteLine($"            {this.Name} Plan  - {this.PlanedMove}");
-
             //testing dodging and attacking
+            //System.Diagnostics.Debug.WriteLine($"            {this.Name} Plan  - {this.PlanedMove}");
             //if (RandomRandUntilNewRand(0, 10) == 0) { this.PlanedMove = "Attack"; }
             //else { this.PlanedMove = "dodge"; }
 

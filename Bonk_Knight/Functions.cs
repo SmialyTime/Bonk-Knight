@@ -46,10 +46,18 @@ namespace Bonk_Knight
         {
             Console.SetCursorPosition(0, 13);
         }
-        public static void CursourLogLineClear()
+        public static void CursourLogLineClear(String MessageToClear = null)
         {
+            // if the input message is longer then 28 it will ruin screen so stop that
+            
+            if (MessageToClear != null) 
+            {
+                Console.SetCursorPosition(Globals.Sx, 11);
+                // +28 to take into acount for the info asking in the screen
+                Console.Write(new String(' ', MessageToClear.Length + 28));
+            }
             Console.SetCursorPosition(Globals.Sx, 11);
-            Console.Write(new String(' ',28));
+            Console.Write(new String(' ', 30) + "│");
             Console.SetCursorPosition(Globals.Sx, 11);
         }
         public static void CursourLogLineWrite(String ToWriteIn)

@@ -1,0 +1,29 @@
+
+            CRAB Plan  - chargeAttack
+4,10,7,16
+            CRAB Plan  - dodge
+            CRAB Plan  - Attack
+4,10,7,15
+Enemy Player took 20.2 and now is at 80/100
+            CRAB Plan  - chargeAttack
+2,10,7,18
+rando - 1.02 0.02
+6,15,7,22
+Enemy CRAB took 1020 and now is at -980/40
+CRAB was defeated
+Player earned 6 current purse 6
+
+
+
+Player earned 10 current purse 441
+            bat Plan  - increaseDefence
+4,20,7,28
+Exception thrown: 'System.IO.IOException' in mscorlib.dll
+An unhandled exception of type 'System.IO.IOException' occurred in mscorlib.dll
+The parameter is incorrect.
+
+
+
+            Console.SetCursorPosition(Globals.Ox, Globals.Oy);
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.Write($"┌");
