@@ -47,14 +47,17 @@ namespace Bonk_Knight
                 case "easy":
                 case "1":
                     dif = 1;
+                    Globals.MoneyMultiplier = 2;
                     break;
                 case "medium":
                 case "2":
                     dif = 2;
+                    Globals.MoneyMultiplier = 1;
                     break;
                 case "hard":
                 case "3":
                     dif = 3;
+                    Globals.MoneyMultiplier = 0.5;
                     break;
             }
             CreateGameMap(dif, 4);

@@ -52,7 +52,6 @@ namespace Bonk_Knight
             this.BaseDamage = 100;
             MainClass.PlayerEventSystem.MadeCombatMove += PlayerEventSystem_MadeCombatMove;
         }
-
         private void PlayerEventSystem_MadeCombatMove(object sender, string e)
         {
             //reset dogeing

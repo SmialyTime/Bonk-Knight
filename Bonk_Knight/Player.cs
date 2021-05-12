@@ -12,7 +12,7 @@ namespace Bonk_Knight
         public int Money { get; set; }
         //sets the name of this instant of the player
         public String UserName { get; set; }
-        //The inventory will contain the Item Name so you can ref it and amount of that item
+        //The inventory will contain the Item Name so you can ref it and amount of that item *unimplimented
         public Dictionary<String, int> Inventory { get; set; }
         public Player(String UN)
         {
@@ -163,40 +163,57 @@ namespace Bonk_Knight
                     extraMoney = 1000;
                     break;
             }
-
             //loot based on enemy
+            var ItemToAdd = "none";
             switch (e.ToLower())
             { 
             case "Pitchfork":
-                break;
+                    ItemToAdd = "wheat";
+                    break;
             case "WoodCutter":
-                break;
+                    ItemToAdd = "wood";
+                    break;
             case "Tiller":
-                break;
+                    ItemToAdd = "wheat";
+                    break;
             case "croc":
-                break;
+                    ItemToAdd = "scale";
+                    break;
             case "slime":
-                break;
+                    ItemToAdd = "slime";
+                    break;
             case "crab":
-                break;
+                    ItemToAdd = "scale";
+                    break;
             case "bat":
-                break;
+                    ItemToAdd = "fang";
+                    break;
             case "Knight":
-                break;
+                    ItemToAdd = "iron";
+                    break;
             case "Archer":
-                break;
+                    ItemToAdd = "arrow";
+                    break;
             case "King":
                 break;
+            }
+            if (this.Inventory.ContainsKey(ItemToAdd) && ItemToAdd != "none")
+            {
+                this.Inventory[ItemToAdd] += (new Random()).Next(1,3);
+            }
+            else
+            {
+                this.Inventory.Add(ItemToAdd, 1);
             }
 
             //money
 
             double enemyDiff = MainClass.GameMap.GameSectionMap[MainClass.GameMap.CurrentSection].EnemyDifficulty;
 
-            //LOG
-            int moneyLoot = extraMoney + Convert.ToInt32((new Random()).Next(1, 11) * enemyDiff);
+            int moneyLoot = Convert.ToInt32((extraMoney + (new Random()).Next(1, 31) * enemyDiff)*Globals.MoneyMultiplier);
             this.Money += moneyLoot;
 
+            //LOG
             System.Diagnostics.Debug.WriteLine($"Player earned {moneyLoot} current purse {this.Money}");
         }
     }

@@ -20,6 +20,7 @@ namespace Bonk_Knight
         public static bool AnimationRunning = false;
         public static double GameSpeed = 1;
         public static String GameDifficulty = "medium";
+        public static double MoneyMultiplier = 1;
         public static bool GameGoing = false;
         public static String Terrain = "Uknown";
         //to print to position x,y do Console.SetCursorPosition(x,y); <remember 0 indexed
@@ -104,7 +105,6 @@ namespace Bonk_Knight
             Console.WriteLine("press Enter button to continue");
             Console.ReadLine();
         }
-        
         public static void GameOptions()
         {
             Functions.GC("White");

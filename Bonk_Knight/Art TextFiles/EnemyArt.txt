@@ -6,6 +6,40 @@ slime,crab,bat,croc,
 WoodCutter,Tiller,Pitchfork
 Knight,Archer,King
 
+Enemy move set
+
+dodge
+ Green
+  d
+move
+ DarkBlue;
+  ←  
+increasedefence  
+ DarkGreen 
+  ↑*  
+  ↑D  
+increaseattack  
+ DarkRed 
+  ↑*  
+  ↑A  
+chargeattack  
+ Yellow 
+  ϟ  
+attack  
+ Red 
+  *  
+  A  
+debuff
+ DarkGray 
+  ??  
+dead
+ x-x
+ ox
+	
+
+
+
+
 rando:
 ︵ ₀₀ ₁₁ ₂ ₃ ₄ ₅ ₆ ₇ ₈ ₉  ₓ∗
 ︵                            ffffffffffsf₀₀
@@ -27,9 +61,9 @@ Archer:
  \|   \|    \|/|\   <┼/|\
 			  / \   `┘/ \
 Kight:
- [╦]
- /|\
- / \
+ |[╦]
+ +/|\    
+  / \   
 concepts/copied
  (\_/)            o¯¯o                   o-._.-o
 (='.'=)           ɔ  |                     |m|  

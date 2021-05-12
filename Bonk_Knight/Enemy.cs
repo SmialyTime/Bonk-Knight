@@ -8,8 +8,25 @@ namespace Bonk_Knight
 {
     public partial class Enemy : Entity
     {
-
+        //classes of enemies
+        public static List<String> standard = new List<string>() { "slime", "crab", "croc", "tiller" };
+        public static List<String> defensive = new List<string>() { "bat", "knight" };
+        public static List<String> agressive = new List<string>() { "woodCutter", "pitchfork" };
+        public static List<String> ranged = new List<string>() { "archer" };
+        public static List<String> special = new List<string>() { "king" };
+        //position one above enemy
+        public int OneLineAboveEnemy { get; set; }
+        //enemy Width
+        public int enemyWidth { get; set; }
+        //the centre of the top of the enemy
+        public int CentredAboveEnemy { get; set; }
+        //the text that displays what the enemy will do
+        public String PlanedMoveChar = "??";
+        //the enemies next move
         public String PlanedMove { get; set; }
+
+
+        //initalizes enemy
         public Enemy(int otherEns,String Biome, double DifficultyLevel)
         {
             //recives the player events
@@ -159,17 +176,6 @@ namespace Bonk_Knight
 
             this.RenderEntity();
         }
-        //set the type of enemy
-        public static List<String> standard = new List<string>() { "slime", "crab", "croc", "tiller" };
-        public static List<String> defensive = new List<string>() { "bat", "knight"};
-        public static List<String> agressive = new List<string>() { "woodCutter", "pitchfork" };
-        public static List<String> ranged = new List<string>() { "archer" };
-        public static List<String> special = new List<string>() { "king" };
-        public int OneLineAboveEnemy { get;set; }
-        public int enemyWidth { get;set; }
-        public int CentredAboveEnemy { get;set; }
-        public String PlanedMoveChar = "??";
-
         public void dead()
         {
             if (this.living == false)
@@ -339,7 +345,7 @@ namespace Bonk_Knight
             {
                 case "dodge":
                     Console.ForegroundColor = ConsoleColor.Green;
-                    PlanedMoveChar = "*";
+                    PlanedMoveChar = "d";
                     break;
                 case "move":
                     Console.ForegroundColor = ConsoleColor.DarkBlue;
@@ -347,11 +353,11 @@ namespace Bonk_Knight
                     break;
                 case "increasedefence":
                     Console.ForegroundColor = ConsoleColor.DarkGreen;
-                    PlanedMoveChar = "↑*";
+                    PlanedMoveChar = "↑D";
                     break;
                 case "increaseattack":
                     Console.ForegroundColor = ConsoleColor.DarkRed;
-                    PlanedMoveChar = "↑*";
+                    PlanedMoveChar = "↑A";
                     break;
                 case "chargeattack":
                     Console.ForegroundColor = ConsoleColor.Yellow;
@@ -359,7 +365,7 @@ namespace Bonk_Knight
                     break;
                 case "attack":
                     Console.ForegroundColor = ConsoleColor.Red;
-                    PlanedMoveChar = "*";
+                    PlanedMoveChar = "A";
                     break;
                 default:
                     //debuff
