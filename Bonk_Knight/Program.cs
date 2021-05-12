@@ -44,7 +44,10 @@ namespace Bonk_Knight
         {
             InitializeComponents();
 
-            GameOptions();
+            //GameOptions();
+            Player_1 = new Player("Bonk Knight");
+            GameMap = new Map("2");
+            Globals.GameSpeed = 0.005;
             //add in intro page
 
 
@@ -66,10 +69,6 @@ namespace Bonk_Knight
                             //left  
                             Player_1.MoveL();
                             break;
-                        case 'k':
-                            //left  
-                            GameWindow tseter = new GameWindow("Map");
-                            break;
                         case 'y':
                             //obstain  
                             PlayerEventSystem.MadeMove("left");
@@ -85,9 +84,26 @@ namespace Bonk_Knight
                             break;
                         case 'm':
                             //displays Map Screen
+                            GameWindow MapScn = new GameWindow("Map");
+                            //make it so any button after changes to the normal screen
+                            break;
+                        case 'l':
+                            //displays Map Screen
+                            GameWindow LogScn = new GameWindow("log");
+                            //make it so any button after changes to the normal screen
+                            break;
+                        case 'b':
+                            //displays Map Screen
+                            GameWindow ShopScn = new GameWindow("shop");
                             //make it so any button after changes to the normal screen
                             break;
                         case 'h':
+                            //displays Map Screen
+                            GameWindow HelpScn = new GameWindow("help");
+                            //make it so any button after changes to the normal screen
+                            break;
+                        /*spacebar*/
+                        case '▭':
                             //attack with player
                             Player_1.Attack();
                             break;
@@ -232,7 +248,7 @@ namespace Bonk_Knight
                 {
                     //Keys.KeyI();
                     var input = Console.ReadKey();
-                    if (input.Key != ConsoleKey.Enter && input.Key != ConsoleKey.Backspace)
+                    if (input.Key != ConsoleKey.Enter && input.Key != ConsoleKey.Backspace && input.Key != ConsoleKey.Spacebar)
                     {
                         char ltr = Convert.ToChar(input.KeyChar);
                         //2System.Diagnostics.Debug.WriteLine($"{ltr} pressed");
@@ -242,6 +258,7 @@ namespace Bonk_Knight
                         Functions.ClearKeyIntputs();
                         return ltr;
                     }
+                    else if (input.Key == ConsoleKey.Spacebar){Functions.ClearKeyIntputs(); return '▭'; }
                     else { /*System.Diagnostics.Debug.WriteLine($"Enter+stuff");*/ Functions.ClearKeyIntputs(); return '回';/*place holder for enter*/}
                 }
                 else { Functions.ClearKeyIntputs(); return '㊀'; }

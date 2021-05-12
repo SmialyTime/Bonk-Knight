@@ -22,7 +22,11 @@ namespace Bonk_Knight
                     MapWindow();
                     //has to custom render
                     break;
+                case "log":
+                case "shop":
+                case "help":
                 default:
+                    NormalWindow();
                     break;
             }
 
@@ -46,6 +50,32 @@ namespace Bonk_Knight
             }
             CloseScreen();
         }
+        public void NormalWindow()
+        {
+            Functions.ClearKeyIntputs();
+            //load custom map screen
+            Render.ChangeScreen(0, 0, Art.GameUI($"{this.WindowName}"));
+            Render.RenderScreen("all");
+
+            Functions.CursourLogLineWrite("Input Text: ");
+            var TextInputToScreen = Console.ReadLine().ToLower();
+            while (this.WindowOpen)
+            {
+                //check if player wants to exit screen
+                if (TextInputToScreen == "exit" || TextInputToScreen == "e" || TextInputToScreen == "'exit'" || TextInputToScreen == "esc" || TextInputToScreen == "stop" || TextInputToScreen == "leave" || TextInputToScreen == "end")
+                {
+                    this.WindowOpen = false;
+                }
+                else
+                {
+                    //get input
+                    Functions.CursourLogLineClear(TextInputToScreen);
+                    Functions.CursourLogLineWrite("Input Text: ");
+                    TextInputToScreen = Console.ReadLine().ToLower();
+                }
+            }
+            CloseScreen();
+        }
         public void CloseScreen()
         {
             Globals.ExtraScreenOpen = "Game";
@@ -56,6 +86,7 @@ namespace Bonk_Knight
                 ennmy.RenderEntity();
                 ennmy.LoadIndicator();
             }
+            Functions.ClearKeyIntputs();
         }
         public void LoadCurrentScreen()
         {

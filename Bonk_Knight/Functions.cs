@@ -57,6 +57,7 @@ namespace Bonk_Knight
                 Console.Write(new String(' ', MessageToClear.Length + 28));
             }
             Console.SetCursorPosition(Globals.Sx, 11);
+            Console.ForegroundColor = ConsoleColor.White;
             Console.Write(new String(' ', 30) + "│");
             Console.SetCursorPosition(Globals.Sx, 11);
         }
