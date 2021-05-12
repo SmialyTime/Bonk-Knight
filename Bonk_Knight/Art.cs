@@ -349,14 +349,12 @@ namespace Bonk_Knight
                                 @" / \  %" ;
                     break;
                 case "Pitchfork":
-                    EnemyBack = @"   _ %" +
-                                @"└┼┘O %" +
+                    EnemyBack = @"└┼┘O %" +
                                 @" |/|\%" +
                                 @"  / \%" ;
                     break;
                 case "WoodCutter":
-                    EnemyBack = @"   _ %" +
-                                @"<| O %" +
+                    EnemyBack = @"<| O %" +
                                 @" |/|\%" +
                                 @"  / \%" ;
                     break;
@@ -397,22 +395,20 @@ namespace Bonk_Knight
                                 @"/.-\_/-.\%" ;
                     break;
                 case "Knight":
-                    EnemyBack = @"    %" +
-                                @"|[╦]%" +
+                    EnemyBack = @"|[╦]%" +
                                 @"+/|\%" +
                                 @" / \%";
                     break;
                 case "Archer":
-                    EnemyBack = @"     %" +
-                                @",┐ o %" +
+                    EnemyBack = @",┐ o %" +
                                 @"<┼/|\%" +
                                 @"`┘/ \%";
                     break;
                 case "King":
-                    EnemyBack = @" |~%" +
-                                @"╕╬╒%" +
-                                @"/|\%" +
-                                @"/ \%";
+                    EnemyBack = @"| |~%" +
+                                @"$╕╬╒%" +
+                                @"┼/|\%" +
+                                @" / \%";
                     break;
                 default:
                     Functions.MakeErrorMessage($"name of Enemy unidentified - {Type}");
