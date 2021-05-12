@@ -18,6 +18,7 @@ namespace Bonk_Knight
 
         public static int GroundInGameY = 8;
         public static bool AnimationRunning = false;
+        public static String ExtraScreenOpen = "Game";
         public static double GameSpeed = 1;
         public static String GameDifficulty = "medium";
         public static double MoneyMultiplier = 1;
@@ -56,57 +57,63 @@ namespace Bonk_Knight
             char Continue = keyInput();
             while (Globals.GameGoing == true)
             {
-                //use key 
-                switch (Continue)
-                {
-                    case 'a':
-                    //left  
-                        Player_1.MoveL();
-                        break;
-                    case 'k':
-                        //left  
-                        Console.SetCursorPosition(Globals.Ox, Globals.Oy);
-                        Console.ForegroundColor = ConsoleColor.White;
-                        Console.Write($"┌───");
-                        break;
-                    case 'y':
-                        //obstain  
-                        PlayerEventSystem.MadeMove("left");
-                        break;
-                    case 'd':
-                        //right
-                        Player_1.MoveR();
-                        break;
-                    case 'w':
-                    case 's':
-                    //dodge  
-                        Player_1.Dodge();
-                        break;
-                    case 'm':
-                        //displays Map Screen
-                        //make it so any button after changes to the normal screen
-                        break;
-                    case 'h':
-                        //attack with player
-                        Player_1.Attack();
-                        break;
-                    case 't':
-                        //TESTAni.RunWalkCycle();
-                        break;
-                    case ''/*Esc*/:
-                        Globals.GameGoing = false;
-                        break;
-                }
-                Functions.CursorBellowScreen();
+                //checks if the user is in a seperate screen so game is stopped
+                if (Globals.ExtraScreenOpen == "Game") {
+                    //use key 
+                    switch (Continue)
+                    {
+                        case 'a':
+                            //left  
+                            Player_1.MoveL();
+                            break;
+                        case 'k':
+                            //left  
+                            GameWindow tseter = new GameWindow("Map");
+                            break;
+                        case 'y':
+                            //obstain  
+                            PlayerEventSystem.MadeMove("left");
+                            break;
+                        case 'd':
+                            //right
+                            Player_1.MoveR();
+                            break;
+                        case 'w':
+                        case 's':
+                            //dodge  
+                            Player_1.Dodge();
+                            break;
+                        case 'm':
+                            //displays Map Screen
+                            //make it so any button after changes to the normal screen
+                            break;
+                        case 'h':
+                            //attack with player
+                            Player_1.Attack();
+                            break;
+                        case 't':
+                            //TESTAni.RunWalkCycle();
+                            break;
+                        case ''/*Esc*/:
+                            Globals.GameGoing = false;
+                            break;
+                    }
+                    Functions.CursorBellowScreen();
 
-                //make better
-                Continue = ' ';
-                Continue = keyInput();
-                Functions.CursorBellowScreen();
+                    //make better
+                    Continue = ' ';
+                    Continue = keyInput();
+                }
+                else
+                {
+
+                    Continue = ' ';
+                }
             }
 
             GameMap.Completed();
             //CHANGE later
+            Functions.CursorBellowScreen();
             Console.ResetColor();
             Console.ForegroundColor = Functions.GC("w");
             Console.WriteLine("press Enter button to continue");

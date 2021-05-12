@@ -189,6 +189,7 @@ namespace Bonk_Knight
         {
             if (this.living == false)
             {
+                //deLoadIndicator();
                 MainClass.PlayerEventSystem.MadeCombatMove -= PlayerEventSystem_MadeCombatMove;
             }
         }
@@ -217,7 +218,7 @@ namespace Bonk_Knight
             {
                 //MakeErrorMessage("Enemy indicatior not right");
             }
-            //remember player moves then enemy
+               //remember player moves then enemy
             //ADD animations
             switch (this.PlanedMove.ToLower())
             {
@@ -270,9 +271,70 @@ namespace Bonk_Knight
             {
                 MainClass.Player_1.Dodging = false;
             }
-            
-            //plans the next move
-            PlanMove();
+
+            //plans the next move if player isn't dead
+            if (this.living == true)
+            {
+                PlanMove();
+            }
+        }
+        public void LoadIndicator() 
+        {
+            this.RenderEntity();
+            //update the position
+            String EnemyArtLook = Art.Enemy(this.Name);
+            this.OneLineAboveEnemy = Globals.GroundInGameY - EnemyArtLook.Count(f => f == '%');
+            this.enemyWidth = (EnemyArtLook.Length - EnemyArtLook.Count(f => f == '%')) / EnemyArtLook.Count(f => f == '%');
+            this.CentredAboveEnemy = ((this.Position - 1) * 5) + (this.enemyWidth / 2);
+
+            //write indicator
+            Console.SetCursorPosition(this.CentredAboveEnemy, this.OneLineAboveEnemy);
+            switch (this.PlanedMove.ToLower())
+            {
+                case "dodge":
+                    Console.ForegroundColor = ConsoleColor.Green;
+                    PlanedMoveChar = "d";
+                    break;
+                case "move":
+                    Console.ForegroundColor = ConsoleColor.DarkBlue;
+                    PlanedMoveChar = "←";
+                    break;
+                case "increasedefence":
+                    Console.ForegroundColor = ConsoleColor.DarkGreen;
+                    PlanedMoveChar = "↑D";
+                    break;
+                case "increaseattack":
+                    Console.ForegroundColor = ConsoleColor.DarkRed;
+                    PlanedMoveChar = "↑A";
+                    break;
+                case "chargeattack":
+                    Console.ForegroundColor = ConsoleColor.Yellow;
+                    PlanedMoveChar = "ϟ";
+                    break;
+                case "attack":
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    PlanedMoveChar = "A";
+                    break;
+                default:
+                    //debuff
+                    Console.ForegroundColor = ConsoleColor.DarkGray;
+                    PlanedMoveChar = "??";
+                    break;
+            }
+            Console.WriteLine($"{this.PlanedMoveChar}");
+            Console.ForegroundColor = ConsoleColor.White;
+        }
+        public void deLoadIndicator() 
+        {
+            //update the position
+            String EnemyArtLook = Art.Enemy(this.Name);
+            this.OneLineAboveEnemy = Globals.GroundInGameY - EnemyArtLook.Count(f => f == '%');
+            this.enemyWidth = (EnemyArtLook.Length - EnemyArtLook.Count(f => f == '%')) / EnemyArtLook.Count(f => f == '%');
+            this.CentredAboveEnemy = ((this.Position - 1) * 5) + (this.enemyWidth / 2);
+            //write indicator
+            Console.SetCursorPosition(this.CentredAboveEnemy, this.OneLineAboveEnemy);
+            Console.WriteLine($"  ");
+            Console.ForegroundColor = ConsoleColor.White;
         }
         public void PlanMove()
         {
@@ -354,54 +416,12 @@ namespace Bonk_Knight
                 }
             }
             //Improve as may be inefficent to redeclare
-            String EnemyArtLook = Art.Enemy(this.Name);
-            this.OneLineAboveEnemy = Globals.GroundInGameY - EnemyArtLook.Count(f => f == '%');
-            this.enemyWidth = (EnemyArtLook.Length - EnemyArtLook.Count(f => f == '%')) / EnemyArtLook.Count(f => f == '%');
-            this.CentredAboveEnemy = ((this.Position - 1) * 5) + (this.enemyWidth / 2);
-
-            Console.SetCursorPosition(this.CentredAboveEnemy,this.OneLineAboveEnemy);
-            switch (this.PlanedMove.ToLower())
-            {
-                case "dodge":
-                    Console.ForegroundColor = ConsoleColor.Green;
-                    PlanedMoveChar = "d";
-                    break;
-                case "move":
-                    Console.ForegroundColor = ConsoleColor.DarkBlue;
-                    PlanedMoveChar = "←";
-                    break;
-                case "increasedefence":
-                    Console.ForegroundColor = ConsoleColor.DarkGreen;
-                    PlanedMoveChar = "↑D";
-                    break;
-                case "increaseattack":
-                    Console.ForegroundColor = ConsoleColor.DarkRed;
-                    PlanedMoveChar = "↑A";
-                    break;
-                case "chargeattack":
-                    Console.ForegroundColor = ConsoleColor.Yellow;
-                    PlanedMoveChar = "ϟ";
-                    break;
-                case "attack":
-                    Console.ForegroundColor = ConsoleColor.Red;
-                    PlanedMoveChar = "A";
-                    break;
-                default:
-                    //debuff
-                    Console.ForegroundColor = ConsoleColor.DarkGray;
-                    PlanedMoveChar = "??";
-                    break;
-            }
-
-            
-            Console.WriteLine($"{this.PlanedMoveChar}");
-            Console.ForegroundColor = ConsoleColor.White;
+            LoadIndicator();
 
             //testing dodging and attacking
             //System.Diagnostics.Debug.WriteLine($"            {this.Name} Plan  - {this.PlanedMove}");
             //if (RandomRandUntilNewRand(0, 10) == 0) { this.PlanedMove = "Attack"; }
             //else { this.PlanedMove = "dodge"; }
-
         }
 
     }

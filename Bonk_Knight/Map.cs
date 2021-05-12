@@ -107,6 +107,7 @@ namespace Bonk_Knight
                 Functions.CursorBellowScreen();
                 Console.WriteLine("How did you die with no Enemies");
             }
+            MainClass.Player_1.living = true;
         }
         private void RemoveDeadEnemies(object sender, string e)
         {
@@ -126,10 +127,6 @@ namespace Bonk_Knight
                 this.CurrentEnemies.Remove(Cull);
                 this.GameSectionMap[this.CurrentSection].Enemies--;
             }
-        }
-        public static void LoadMapWindow()
-        {
-            Art.MapUI("Home",1);
         }
         public void LoadCurrentScreen()
         {

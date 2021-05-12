@@ -34,6 +34,7 @@
     <Content Include="RefCode\basic game.txt" />
     <Compile Include="Enemy.cs" />
     <Compile Include="Entity.cs" />
+    <Compile Include="GameWindow.cs" />
     <Compile Include="RefCode\GameRunning.cs" />
     <Compile Include="Player.cs" />
     <Compile Include="RefCode\button.cs" />
