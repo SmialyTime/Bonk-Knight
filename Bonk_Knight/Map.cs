@@ -41,6 +41,7 @@ namespace Bonk_Knight
 
         public Map(String Difficulty)
         {
+            MainClass.PlayerEventSystem.Deaded += PlayerEventSystem_Deaded;
             var dif = 2;// 1  = easy , 2 = medium, 3 = hard
             switch (Difficulty)
             {
@@ -62,6 +63,35 @@ namespace Bonk_Knight
             }
             CreateGameMap(dif, 4);
             Map.EnemyDied.EnemyDied += RemoveDeadEnemies;
+        }
+        private void PlayerEventSystem_Deaded(object sender, PlayerStats e)
+        {
+            //resets to previous area and re-adds in the enemies
+            var SectionToRespawnAt = 0;
+            while(this.GameSectionMap[this.CurrentSection].Type != this.GameSectionMap[SectionToRespawnAt].Type)
+            {
+                SectionToRespawnAt++;
+            }
+            //re-adds in enemies defeated
+            for (var i = SectionToRespawnAt; i <= this.CurrentSection; i++)
+            {
+                if (this.GameSectionMap[i].Enemies == 0)
+                {
+                    this.GameSectionMap[i].Enemies = (new Random()).Next(1, 3);
+                }
+            }
+
+            if (SectionToRespawnAt != 0) 
+            {
+                this.CurrentSection = SectionToRespawnAt - 1;
+                MainClass.Player_1.Position = 6;
+                NextScreen();
+            }
+            else
+            {
+                Functions.CursorBellowScreen();
+                Console.WriteLine("How did you die with no Enemies");
+            }
         }
         private void RemoveDeadEnemies(object sender, string e)
         {
@@ -160,6 +190,10 @@ namespace Bonk_Knight
                 //LOG?
                 System.Diagnostics.Debug.WriteLine($"@Beginning {this.CurrentSection} {this.CurrentSection > 0 }|| @enterance? {MainClass.Player_1.Position == 1 } {MainClass.Player_1.Position}|| enemies {this.CurrentEnemies.Count} {this.CurrentEnemies.Count == 0}");
             }
+        }
+        public void Completed()
+        {
+
         }
         public void CreateGameMap(int difficulty, int SectionPerStage)
         {

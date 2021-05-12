@@ -31,6 +31,7 @@ namespace Bonk_Knight
         {
             //recives the player events
             MainClass.PlayerEventSystem.MadeCombatMove += PlayerEventSystem_MadeCombatMove;
+            MainClass.PlayerEventSystem.Deaded += PlayerEventSystem_Deaded;
 
             this.PlanedMove = "debuff";
             this.Name = "null";
@@ -175,6 +176,12 @@ namespace Bonk_Knight
             this.AtkCharged = false;
 
             this.RenderEntity();
+        }
+        private void PlayerEventSystem_Deaded(object sender, PlayerStats e)
+        {
+            //removes instance of Enemy
+            this.living = false;
+            dead();
         }
         public void dead()
         {

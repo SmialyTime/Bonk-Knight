@@ -17,6 +17,7 @@ namespace Bonk_Knight
         public Player(String UN)
         {
             Map.EnemyDied.EnemyDied += DefeatedEnemy;
+            MainClass.PlayerEventSystem.Deaded += PlayerEventSystem_Deaded;
             this.Name = "Player";
             this.UserName = UN;
             this.Money = 0;
@@ -31,8 +32,15 @@ namespace Bonk_Knight
             this.Health = 100;
             this.MaxHealth = this.Health;
         }
+
+        private void PlayerEventSystem_Deaded(object sender, PlayerStats e)
+        {
+            this.living = false;
+            PlayerDied();
+        }
         public void MoveR()
         {
+            Map.EnemyDied.Enemyded("slime");
             this.Moving = true;
             //checks if at edge of screen
             if (this.Position < 6)
@@ -136,7 +144,23 @@ namespace Bonk_Knight
         public void Dodge()
         {
             //add in code here 
+            this.Dodging = true;
             MainClass.PlayerEventSystem.MadeMove("dodge");
+            this.Dodging = false;
+        }
+        public void PlayerDied()
+        {
+            this.Health = this.MaxHealth;
+            this.Money -= 10;
+            //LOG player died and lost money
+
+
+            //Code discontinued as player doesn't actualy die just respawns
+            //if (this.living == false) 
+            //{
+            //    Map.EnemyDied.EnemyDied -= DefeatedEnemy;
+            //    MainClass.PlayerEventSystem.Deaded -= PlayerEventSystem_Deaded;
+            //}
         }
         private void DefeatedEnemy(object sender, string e)
         {

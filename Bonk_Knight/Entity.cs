@@ -73,7 +73,7 @@ namespace Bonk_Knight
                 //loads the enemy again
                 Animate.ControlableEntityAni(this.Position, this.Position, new List<string>() { Art.Enemy(this.Name) });
                 this.Dodging = false;
-                dmgMultiplier *= 0;
+                dmgMultiplier = 0;
             }
             else
             {

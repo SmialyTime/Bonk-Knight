@@ -35,9 +35,9 @@ namespace Bonk_Knight
     {
         //makes an eventHandler to be called and referenced for the event of Key input
         //public static KeyHandler Keys = new KeyHandler();
+        public static ChangeConsoleSize MaxSize = new ChangeConsoleSize();
         public static PlayerHandler PlayerEventSystem = new PlayerHandler();
         public static Map GameMap { get; set; }
-        public static ChangeConsoleSize MaxSize = new ChangeConsoleSize();
         public static Player Player_1 {get;set;}
         public static void Main(string[] args)
         {
@@ -99,6 +99,7 @@ namespace Bonk_Knight
                 Functions.CursorBellowScreen();
             }
 
+            GameMap.Completed();
             //CHANGE later
             Console.ResetColor();
             Console.ForegroundColor = Functions.GC("w");
