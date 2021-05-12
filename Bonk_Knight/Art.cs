@@ -421,6 +421,37 @@ namespace Bonk_Knight
             }
             return EnemyBack;
         }                      
+        public static String GameUI(String Type)
+        {
+            var GameScreenBack = "";
+            switch (Type)
+            {
+                case "FillerTEST":
+                    GameScreenBack = @"123456789012345678901234567890%" +
+                                     @"123456789012345678901234567890%" +
+                                     @"123456789012345678901234567890%" +
+                                     @"123456789012345678901234567890%" +
+                                     @"123456789012345678901234567890%" +
+                                     @"123456789012345678901234567890%" +
+                                     @"123456789012345678901234567890%" +
+                                     @"123456789012345678901234567890%" +
+                                     @"123456789012345678901234567890%";
+                    break;
+                default:
+                    GameScreenBack = @"                              %" +
+                                     @"                              %" +
+                                     @"                              %" +
+                                     @"                              %" +
+                                     @"              ?               %" +
+                                     @"                              %" +
+                                     @"                              %" +
+                                     @"                              %" +
+                                     @"(¯¯¯)(¯¯¯)(¯¯¯)(¯¯¯)(¯¯¯)(¯¯¯)%";
+                    break;
+            }
+            return GameScreenBack;
+        }
+        
         public static String MapUI(String Type, int ScreenNum)
         {
             List<string> Mount = new List<string>() {

@@ -103,6 +103,10 @@ namespace Bonk_Knight
                     //make better
                     Continue = ' ';
                     Continue = keyInput();
+                    if (Continue != '㊀' && Continue != '㊅' && Continue != '回')
+                    {
+                        System.Diagnostics.Debug.Write(Continue);
+                    }
                 }
                 else
                 {

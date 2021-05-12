@@ -243,8 +243,7 @@ namespace Bonk_Knight
                     {
                         this.Position-=1;
                     }
-                    //UNCOMMENT
-                    else { System.Diagnostics.Debug.WriteLine("Can't move there player or enemy is there");}
+                    else { /*System.Diagnostics.Debug.WriteLine("Can't move there player or enemy is there");*/}
                     this.RenderEntity();
                     break;
                 case "increasedefence":
@@ -322,18 +321,6 @@ namespace Bonk_Knight
                     break;
             }
             Console.WriteLine($"{this.PlanedMoveChar}");
-            Console.ForegroundColor = ConsoleColor.White;
-        }
-        public void deLoadIndicator() 
-        {
-            //update the position
-            String EnemyArtLook = Art.Enemy(this.Name);
-            this.OneLineAboveEnemy = Globals.GroundInGameY - EnemyArtLook.Count(f => f == '%');
-            this.enemyWidth = (EnemyArtLook.Length - EnemyArtLook.Count(f => f == '%')) / EnemyArtLook.Count(f => f == '%');
-            this.CentredAboveEnemy = ((this.Position - 1) * 5) + (this.enemyWidth / 2);
-            //write indicator
-            Console.SetCursorPosition(this.CentredAboveEnemy, this.OneLineAboveEnemy);
-            Console.WriteLine($"  ");
             Console.ForegroundColor = ConsoleColor.White;
         }
         public void PlanMove()
