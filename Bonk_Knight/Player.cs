@@ -38,6 +38,8 @@ namespace Bonk_Knight
             }
             this.MaxHealth = this.Health;
         }
+
+
         private void PlayerEventSystem_Deaded(object sender, PlayerStats e)
         {
             this.living = false;
@@ -150,7 +152,6 @@ namespace Bonk_Knight
             //add in code here 
             this.Dodging = true;
             MainClass.PlayerEventSystem.MadeMove("dodge");
-            this.Dodging = false;
         }
         public void PlayerDied()
         {

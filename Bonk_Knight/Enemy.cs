@@ -266,6 +266,10 @@ namespace Bonk_Knight
                     MakeErrorMessage($"unregistered move {this.PlanedMove}");
                     break;
             }
+            if (MainClass.Player_1.Dodging == true)
+            {
+                MainClass.Player_1.Dodging = false;
+            }
             
             //plans the next move
             PlanMove();

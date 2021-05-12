@@ -55,7 +55,9 @@ namespace Bonk_Knight
         private void PlayerEventSystem_MadeCombatMove(object sender, string e)
         {
             //reset dogeing
-            this.Dodging = false;
+            if (this.Name.ToLower() != "player") {
+                this.Dodging = false;
+            }
         }
         public void TakeDamage(double AtkStrength, double AtkDmg)
         {
