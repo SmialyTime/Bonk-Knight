@@ -671,7 +671,7 @@ namespace Bonk_Knight
             return Menu;
         }                       
     }                                                                   
-    public class Animations                                             
+    public class Animations
     {                                                                   
         public static List<String> PlayerAni(String AniName)
         {                                                               

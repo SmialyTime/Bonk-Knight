@@ -139,6 +139,46 @@ namespace Bonk_Knight
             Console.WriteLine(message);
             System.Diagnostics.Debug.WriteLine(message);
         }
+        public static void ColourPalet(String ColorPalet, String letter = "")
+        {
+            ConsoleColor Col = ConsoleColor.White;
+            switch (ColorPalet.ToLower()) 
+            {
+                case "logline":
+                case "log":
+                    switch (letter)
+                    {
+                        case "C":
+                        case "R":
+                        case "I":
+                        case "T":
+                            Col = GC("red");
+                            break;
+                        case "₿":
+                            Col = GC("green");
+                            break;
+                        case "1":
+                        case "2":
+                        case "3":
+                        case "4":
+                        case "5":
+                        case "6":
+                        case "7":
+                        case "8":
+                        case "9":
+                        case "0":
+                            Col = GC("y");
+                            break;
+                        default:
+                            Col = GC("w");
+                            break;
+                    }
+                    break;
+                default:
+                    break;
+            }
+            Console.ForegroundColor = Col;
+        }
         public static ConsoleColor GC(string color)
         {
             String colour = "";
@@ -190,6 +230,7 @@ namespace Bonk_Knight
                     colour = "DarkGray";
                     break;
                 case "z":
+                case "Y":
                 case "DarkYellow":
                 case "darkyellow":
                     colour = "DarkYellow";

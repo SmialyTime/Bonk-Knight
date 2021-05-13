@@ -27,6 +27,8 @@ namespace Bonk_Knight
         //to print to position x,y do Console.SetCursorPosition(x,y); <remember 0 indexed
         //Globals.Screen[rw,cl]
         public static String LastEvent = "";
+        public static List<String> Logs { get; set; }
+        public static String LastLog { get; set; }
         public static char[,] Screen = new char[9, GSW];
         public static char[,] CurrentBackground = new char[9, GSW];
         public static List<String> canBeBigEnemies = new List<String>() {"crab","bat","croc"};
@@ -39,6 +41,7 @@ namespace Bonk_Knight
         public static ChangeConsoleSize MaxSize = new ChangeConsoleSize();
         public static PlayerHandler PlayerEventSystem = new PlayerHandler();
         public static Map GameMap { get; set; }
+        public static Log GameLog { get; set; }
         public static Player Player_1 {get;set;}
         public static void Main(string[] args)
         {
@@ -227,6 +230,8 @@ namespace Bonk_Knight
         {
             //changes it so more characters can be used
             Console.OutputEncoding = Encoding.UTF8;
+            //initializes log
+            GameLog = new Log();
             //Initialise Screen arrays
             for (int dic = 0; dic < Globals.GSH; dic++)
             {
@@ -276,7 +281,6 @@ namespace Bonk_Knight
             //runs all events named clickEvent
             Deaded?.Invoke(this, myCustomArgs);
         }
-        
         public event EventHandler<String> MadeCombatMove;
         //public event EventHandler<String> Moved;
         public void MadeMove(String Move)
@@ -300,7 +304,6 @@ namespace Bonk_Knight
                     break;
             }
         }
-        
     }
     public class PlayerStats
     {

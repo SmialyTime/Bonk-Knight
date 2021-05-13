@@ -24,6 +24,7 @@ namespace Bonk_Knight
                     //has to custom render
                     break;
                 case "log":
+                    LogWindow();
                     break;
                 case "shop":
                     break;
@@ -32,6 +33,7 @@ namespace Bonk_Knight
                     break;
                 default:
                     //window template
+                    System.Diagnostics.Debug.WriteLine($"{this.WindowName} - is unrecognised as a window");
                     NormalWindow();
                     break;
             }
@@ -71,11 +73,58 @@ namespace Bonk_Knight
             LineWithSubText(" /?? ","charge/debuff", ConsoleColor.White);
             LineWithSubText("ϟ", "", ConsoleColor.Yellow);
 
-            //run input things
+            //check for key inputs to return to main
             while (this.WindowOpen)
             {
                 this.KeyBack = MainClass.keyInput();
-                if (this.KeyBack != '㊀' && this.KeyBack != '㊅' && this.KeyBack != '回')
+                if (this.KeyBack != '㊀')
+                {
+                    this.WindowOpen = false;
+                }
+            }
+            CloseScreen();
+        }
+        public void LogWindow()
+        {
+            //renders log messages
+            Render.RenderBlankOutline(Globals.GSW, Globals.GSH);
+            Console.SetCursorPosition(Globals.Sx,Globals.Sy);
+            var Counter = 0;
+            foreach (String log in Globals.Logs)
+            {
+                if (log != Globals.LastLog)
+                {
+                    Console.Write($"L{Counter}- ");
+                    foreach (char ltr in log)
+                    {
+                        Functions.ColourPalet("logline", Convert.ToString(ltr));
+                        Console.Write(ltr);
+                        Console.ForegroundColor = ConsoleColor.White;
+                    }
+                    Console.SetCursorPosition(Globals.Sx, Console.CursorTop + 1);
+                }
+                else
+                {
+                    Console.Write("C - ");
+                    foreach (char ltr in log)
+                    {
+                        Functions.ColourPalet("logline", Convert.ToString(ltr));
+                        Console.Write(ltr);
+                        Console.ForegroundColor = ConsoleColor.White;
+                    }
+                    Console.SetCursorPosition(Globals.Sx, Console.CursorTop + 1);
+
+                }
+                Counter++;
+            }
+            Functions.CursourLogLineWrite("press any key to return");
+            Console.ForegroundColor = ConsoleColor.White;
+
+            //wait till input to return to main
+            while (this.WindowOpen)
+            {
+                this.KeyBack = MainClass.keyInput();
+                if (this.KeyBack != '㊀' && this.KeyBack != '㊅')
                 {
                     this.WindowOpen = false;
                 }
@@ -256,7 +305,7 @@ namespace Bonk_Knight
             while (this.WindowOpen)
             {
                 this.KeyBack = MainClass.keyInput();
-                if (this.KeyBack != '㊀' && this.KeyBack != '㊅' && this.KeyBack != '回')
+                if (this.KeyBack != '㊀' && this.KeyBack != '㊅')
                 {
                     this.WindowOpen = false;
                 }

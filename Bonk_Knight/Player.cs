@@ -251,7 +251,7 @@ namespace Bonk_Knight
             this.Money += moneyLoot;
 
             //LOG
-            System.Diagnostics.Debug.WriteLine($"Player earned {moneyLoot} current purse {this.Money}");
+            Log.UpdateLog($"Looted ₿{moneyLoot} Purse ₿{this.Money}");
         }
     }
     public class Item

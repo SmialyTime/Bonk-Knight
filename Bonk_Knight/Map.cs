@@ -302,4 +302,39 @@ namespace Bonk_Knight
 
         }
     }
+
+    public class Log
+    {
+        public Log()
+        {
+            var StartMsg = "Game Started";
+            Globals.Logs = new List<string>() { StartMsg };
+            Globals.LastLog = StartMsg;
+        }
+        public static void UpdateLog(String logMessage)
+        {
+            if (logMessage.Length <= 28 - 3)
+            {
+                if (Globals.Logs.Count == 10)
+                {
+                    //need to remove log
+                    Globals.Logs.RemoveAt(Globals.Logs.Count - 1);
+                }
+
+                Globals.Logs.Insert(0, logMessage);
+                Globals.LastLog = logMessage;
+                Functions.CursourLogLineClear();
+                foreach (char ltr in logMessage) 
+                {
+                    Functions.ColourPalet("logline",Convert.ToString(ltr));
+                    Console.Write(ltr);
+                }
+                Console.ForegroundColor = ConsoleColor.White;
+            }
+            else
+            {
+                System.Diagnostics.Debug.WriteLine($"{logMessage} - too long for log area");
+            }
+        }
+    }
 }
