@@ -180,7 +180,12 @@ namespace Bonk_Knight
             }
             else
             {
-               // System.Diagnostics.Debug.WriteLine($"at end {CurrentSection < this.GameSectionMap.Count - 1}|| player positon not at enterance {MainClass.Player_1.Position == 6 }|| enemies remaining {this.CurrentEnemies.Count}");
+                // System.Diagnostics.Debug.WriteLine($"at end {CurrentSection < this.GameSectionMap.Count - 1}|| player positon not at enterance {MainClass.Player_1.Position == 6 }|| enemies remaining {this.CurrentEnemies.Count}");
+                if (CurrentSection == this.GameSectionMap.Count - 1 && this.CurrentEnemies.Count == 0)
+                {
+                    Globals.GameGoing = false;
+                    Globals.KingDefeated = true;
+                }
             }
 
         }
@@ -206,10 +211,6 @@ namespace Bonk_Knight
             {
                 //System.Diagnostics.Debug.WriteLine($"@Beginning {this.CurrentSection} {this.CurrentSection > 0 }|| @enterance? {MainClass.Player_1.Position == 1 } {MainClass.Player_1.Position}|| enemies {this.CurrentEnemies.Count} {this.CurrentEnemies.Count == 0}");
             }
-        }
-        public void Completed()
-        {
-
         }
         public void CreateGameMap(int difficulty, int SectionPerStage)
         {

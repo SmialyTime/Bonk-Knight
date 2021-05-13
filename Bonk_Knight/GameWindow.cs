@@ -16,7 +16,7 @@ namespace Bonk_Knight
             this.WindowName = windowNm;
             this.WindowOpen = true;
             Globals.ExtraScreenOpen = this.WindowName;
-            switch (this.WindowName) 
+             switch (this.WindowName) 
             {
                 //could seperate into different classes later
                 case "Map":
@@ -31,6 +31,12 @@ namespace Bonk_Knight
                     break;
                 case "help":
                     HelpWindow();
+                    break;
+                case "endwin":
+                    EndWinWindow();
+                    break;
+                case "endstory":
+                    EndStoryWindow();
                     break;
                 default:
                     //window template
@@ -76,6 +82,73 @@ namespace Bonk_Knight
             LineWithSubText("ϟ", "", ConsoleColor.Yellow);
 
             //check for key inputs to return to main
+            while (this.WindowOpen)
+            {
+                this.KeyBack = MainClass.keyInput();
+                if (this.KeyBack != '㊀')
+                {
+                    this.WindowOpen = false;
+                }
+            }
+            CloseScreen();
+        }
+        public void EndWinWindow(){
+            Functions.ClearKeyIntputs();
+            //load custom map screen
+            Render.RenderBlankOutline(Globals.GSW, Globals.GSH);
+            Render.RenderMapOutline(Art.GameUI("end"));
+            Console.SetCursorPosition(Globals.Sx, Globals.Sy);
+            Functions.SlowScrollText($@"With the king defeated%"+            
+                                     $@"{MainClass.Player_1.UserName} stated his %"+
+                                     $@"long journey home past%"+
+                                     $@" all the fallen foe   %",4);
+            //check for key inputs to return to main
+            while (this.WindowOpen)
+            {
+                this.KeyBack = MainClass.keyInput();
+                if (this.KeyBack != '㊀')
+                {
+                    this.WindowOpen = false;
+                }
+            }
+            CloseScreen();
+        }
+        public void EndStoryWindow(){
+            Functions.ClearKeyIntputs();
+            //load custom map screen
+            Render.RenderBlankOutline(Globals.GSW, Globals.GSH);
+            if (MainClass.Player_1.Money >= 500)
+            {
+                Render.RenderMapOutline(Art.GameUI("EndStory"));
+                Console.SetCursorPosition(Globals.Sx + 12, Globals.Sy + 6);
+                Functions.SlowScrollText($@"{MainClass.Player_1.UserName} arrived%" +
+                                         $@"home with ₿{MainClass.Player_1.Money},%" +
+                                         $@"his wife could now%" +
+                                         $@"be cured. the name%" +
+                                         $@"Bonk king lives on",12,20,ConsoleColor.DarkGray);
+            }
+            else
+            {
+                Render.RenderMapOutline(Art.GameUI("EndStoryBad"));
+                Console.SetCursorPosition(Globals.Sx + 12, Globals.Sy + 6);
+                int rando = (new Random()).Next(0, 11);
+                if (rando > 5 && MainClass.Player_1.Money >=10) {
+                    Functions.SlowScrollText($@"{MainClass.Player_1.UserName} arrived%" +
+                                             $@"home with ₿{MainClass.Player_1.Money},%" +
+                                             $@"his wife could now%" +
+                                             $@"be cured. the name%" +
+                                             $@"Bonk king lives on", 12, 20, ConsoleColor.DarkGray);
+                }
+                else
+                {
+                    Functions.SlowScrollText($@"{MainClass.Player_1.UserName} arrived%" +
+                                             $@"home with ₿{MainClass.Player_1.Money},%" +
+                                             $@"his wife DIED 1day%" +
+                                             $@" after due to the %" +
+                                             $@"sickness (unlucky)", 12, 20, ConsoleColor.DarkGray);
+                }
+            }
+            //check for key inputs to reBonk king lives on%turn to main
             while (this.WindowOpen)
             {
                 this.KeyBack = MainClass.keyInput();

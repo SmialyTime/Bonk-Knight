@@ -32,6 +32,7 @@ namespace Bonk_Knight
         public static char[,] Screen = new char[9, GSW];
         public static char[,] CurrentBackground = new char[9, GSW];
         public static List<String> canBeBigEnemies = new List<String>() {"crab","bat","croc"};
+        public static bool KingDefeated = false;
         //CHANGE make a dictionary with all items and one for gear
     }
     class MainClass
@@ -46,12 +47,12 @@ namespace Bonk_Knight
         public static void Main(string[] args)
         {
             InitializeComponents();
-            LoadCover();
+            //LoadCover();
             //GameOptions();
-            Player_1 = new Player("Bonk Knight");
             GameMap = new Map("2");
             Globals.GameSpeed = 0.005;
-            //add in intro page
+            Player_1 = new Player("Bonk Knight");
+            //add in tutorial page
 
 
             Render.CursorBellowScreen();
@@ -61,6 +62,7 @@ namespace Bonk_Knight
             Player_1.RenderEntity();
             Globals.GameGoing = true;
             char Continue = keyInput();
+
             while (Globals.GameGoing == true)
             {
                 //checks if the user is in a seperate screen so game is stopped
@@ -129,8 +131,10 @@ namespace Bonk_Knight
                     Continue = ' ';
                 }
             }
-
-            GameMap.Completed();
+            if (Globals.KingDefeated == true) {
+                GameWindow FinalScreen = new GameWindow("endwin");
+            }
+            GameWindow EndScreen = new GameWindow("endstory");
             //CHANGE later
             Functions.CursorBellowScreen();
             Console.ResetColor();

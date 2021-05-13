@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Threading;
 
 namespace Bonk_Knight
 {
@@ -120,7 +121,23 @@ namespace Bonk_Knight
             }
             Console.ForegroundColor = ConsoleColor.White;
         }
-
+        public static void SlowScrollText(String textToScroll, int LeftAlign = Globals.Sx, int speed = 10, ConsoleColor textClr = ConsoleColor.White)
+        {
+            Console.SetCursorPosition(LeftAlign, Console.CursorTop);
+            Console.ForegroundColor = textClr;
+            foreach (char ScrollText in textToScroll)
+            {
+                if (ScrollText == '%')
+                {
+                    Console.SetCursorPosition(LeftAlign,Console.CursorTop + 1);
+                }
+                else 
+                {
+                    Console.Write(ScrollText);
+                    Thread.Sleep(Convert.ToInt32(speed * Globals.GameSpeed));
+                }
+            }
+        }
         public static int LastRand = 1;
         public static int RandomRandUntilNewRand(int start, int end)
         {
