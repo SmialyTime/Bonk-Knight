@@ -31,15 +31,13 @@ namespace Bonk_Knight
             this.Health = 100;
             this.BaseDamage = 40;
             //game dev hack
-            if (this.UserName == "b")
+            if (this.UserName == "Bonk Knight")
             {
                 this.BaseDamage = 1000;
                 this.Health = 500;
             }
             this.MaxHealth = this.Health;
         }
-
-
         private void PlayerEventSystem_Deaded(object sender, PlayerStats e)
         {
             this.living = false;

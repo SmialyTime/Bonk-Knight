@@ -212,7 +212,8 @@ namespace Bonk_Knight
             {
                 Console.SetCursorPosition(OrigX, Console.CursorTop + 1);
                 Console.Write(side);
-                mc(w, 0);
+                Console.Write($"{new String(' ', w)}");
+                mc(0, 0);
                 Console.Write(side);
             }
             //clean up the console at the end
@@ -223,6 +224,46 @@ namespace Bonk_Knight
             Console.SetCursorPosition(OrigX, Console.CursorTop + 1);
             Console.Write($"└{new String(topB, w)}┘");
             //set the cursour back to the original position??
+        }
+        public static void RenderBlankOutline(int w, int h)
+        {
+            int OrigX = Globals.Sx - 1;
+            int OrigY = Globals.Sy - 1;
+            char side = '│';
+            char topB = '─';
+            Console.SetCursorPosition(OrigX, OrigY);
+            Console.Write($"┌{new String(topB, w)}┐");
+            for (int hig = 0; hig < h; hig++)
+            {
+                Console.SetCursorPosition(OrigX, Console.CursorTop + 1);
+                Console.Write(side);
+                Console.Write($"{new String(' ', w)}");
+                mc(0, 0);
+                Console.Write(side);
+            }
+            //clean up the console at the end
+            Console.SetCursorPosition(OrigX, Console.CursorTop + 1);
+            Console.Write($"│{new String(' ', w)}│");
+            Console.SetCursorPosition(OrigX, Console.CursorTop + 1);
+            Console.Write($"│{new String(' ', w)}│");
+            Console.SetCursorPosition(OrigX, Console.CursorTop + 1);
+            Console.Write($"└{new String(topB, w)}┘");
+            //set the cursour back to the original position??
+        }
+        public static void RenderMapOutline(String OutlineIn)
+        {
+            Console.SetCursorPosition(Globals.Ox, Globals.Oy);
+            for (int i = 0; i < OutlineIn.Length; i++)
+            {
+                if (OutlineIn[i] == '%')
+                {
+                    Console.SetCursorPosition(Globals.Ox, Console.CursorTop + 1);
+                }
+                else
+                {
+                    Console.Write(OutlineIn[i]);
+                }
+            }
         }
         public static void setColor(char inChar)
         {

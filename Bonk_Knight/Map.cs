@@ -130,6 +130,7 @@ namespace Bonk_Knight
         }
         public void LoadCurrentScreen()
         {
+            Render.RenderOutline(Globals.GSW,Globals.GSH);
             Render.ChangeBackground(this);
             Globals.Terrain = this.GameSectionMap[this.CurrentSection].Type;
             Render.ChangeScreen(0, 0, Art.Background($"{this.GameSectionMap[this.CurrentSection].SectionName}"));

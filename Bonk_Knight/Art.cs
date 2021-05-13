@@ -535,32 +535,58 @@ namespace Bonk_Knight
                                                      @"│*⌠╬⌡│%" +   
                                                      @"└────┘%"};
             String MapBack = "";
-            switch (Type)
+            switch (Type.ToLower())
             {
-                case "HomeIcon":
-                    MapBack = @"/¯/\ │%" +
-                              @"|'||*│%" +
-                              @"─────┘%" ;
+                case "unknown":
+                case "Unknown":
+                case "u":
+                    MapBack = @"┌────┐" +
+                              @"│ ?  │" +
+                              @"└────┘";
                     break;
-                case "ThroneIcon":
-                    MapBack = @"┌─────%" +
-                              @"│|  |~%" +
-                              @"│+ ╕╬╒%";
-                    break;
-                case "Mountain":
+                case "mountain":
+                case "0":
                     MapBack = Mount[ScreenNum];
                     break;  
-                case "Cave":
+                case "cave":
+                case "1":
                     MapBack = Cavy[ScreenNum];
                     break;
-                case "Forest":
+                case "forest":
+                case "2":
                     MapBack = Fst[ScreenNum];
                     break;
-                case "Village":
+                case "3":
+                case "village":
                     MapBack = Villg[ScreenNum];
                     break;
-                case "Kingdom":
+                case "kingdom":
                     MapBack = KingD[ScreenNum];
+                    break;
+                case "home":
+                    MapBack = @"/¯/\ │                        %" +
+                              @"|'||*│                        %" +
+                              @"─────┘                        %" +
+                              @"                              %" +
+                              @"                              %" +
+                              @"                              %" +
+                              @"┌────┐┌────┐┌────┐┌────┐┌─────%" +
+                              @"│ /^\││ ?  ││ ?  ││ ?  ││|  |~%" +
+                              @"└────┘└────┘└────┘└────┘│+ ╕╬╒%";
+                    break;
+                case "mapscreen":
+                case "MapScreen":
+                    MapBack = @"┌─────┬────────────────────────┐%" +
+                              @"│/¯/\ │                        │%" +
+                              @"│|'||*│                        │%" +
+                              @"├─────┘                        │%" +
+                              @"│                              │%" +
+                              @"│                              │%" +
+                              @"│                              │%" +
+                              @"│                        ┌─────┤%" +
+                              @"│                        │$  |~│%" +
+                              @"│                        │+ ╕╬╒│%" +
+                              @"├────────────────────────┴─────┤ %";
                     break;
                 default:
                     MapBack = @"      %" +

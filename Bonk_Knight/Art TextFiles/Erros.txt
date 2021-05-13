@@ -12,6 +12,7 @@ rando - 1.02 0.02
 Enemy CRAB took 1020 and now is at -980/40
 CRAB was defeated
 Player earned 6 current purse 6
+Mountain,Cave,Forest,Village,Kingdom,ThroneRoom
 
 
 

@@ -43,7 +43,6 @@ namespace Bonk_Knight
         public static void Main(string[] args)
         {
             InitializeComponents();
-
             //GameOptions();
             Player_1 = new Player("Bonk Knight");
             GameMap = new Map("2");

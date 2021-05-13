@@ -61,6 +61,23 @@ namespace Bonk_Knight
             Console.Write(new String(' ', 30) + "│");
             Console.SetCursorPosition(Globals.Sx, 11);
         }
+        public static void LineWithSubText(String MainText, String Subtext = "", ConsoleColor HighlightColor = ConsoleColor.White)
+        {
+            if (Subtext.Length + MainText.Length <= 28)
+            {
+                Console.ForegroundColor = HighlightColor;
+                //centers text            Screen left + half width of screen - half text
+                Console.SetCursorPosition(Globals.Sx , Console.CursorTop);
+                Console.Write(MainText);
+                Console.ForegroundColor = ConsoleColor.DarkGray;
+                Console.Write(Subtext);
+            }
+            else
+            {
+                MakeErrorMessage($"{Subtext} too long for Screen area");
+            }
+            Console.ForegroundColor = ConsoleColor.White;
+        }
         public static void CursourLogLineWrite(String ToWriteIn)
         {
             CursourLogLineClear();
