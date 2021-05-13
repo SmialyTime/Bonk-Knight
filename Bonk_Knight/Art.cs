@@ -426,6 +426,32 @@ namespace Bonk_Knight
             var GameScreenBack = "";
             switch (Type)
             {
+                case "Cover":
+                    GameScreenBack = @"┌──────────────────────────────┐%" +
+                                     @"│  | |               | |       │%" +
+                                     @"│  | |__   ___  _ __ | | __    │%" +
+                                     @"│  | '_ \ / _ \| '_ \| |/ /    │%" +
+                                     @"│  | |_) | (_) | | | |   <     │%" +
+                                     @"│  |_.__/ \___/|_| |_|_|\_\    │%" +
+                                     @"│ _          _       _     _   │%" +
+                                     @"│| |        (_)     | |   | |  │%" +
+                                     @"│| | ___ __  _  __ _| |__ | |_ │%" +
+                                     @"│| |/ / '_ \| |/ _` | '_ \| __|│%" +
+                                     @"│|   <| | | | | (_| | | | | |_ │%" +
+                                     @"│|_|\_\_| |_|_|\__, |_| |_|\__|│%" +
+                                     @"└──────────────────────────────┘%";
+                    break;
+                case "shop":
+                    GameScreenBack = @"            SHOP              %" +
+                                     @"123456789012345678901234567890%" +
+                                     @"123456789012345678901234567890%" +
+                                     @"123456789012345678901234567890%" +
+                                     @"123456789012345678901234567890%" +
+                                     @"123456789012345678901234567890%" +
+                                     @"123456789012345678901234567890%" +
+                                     @"123456789012345678901234567890%" +
+                                     @"123456789012345678901234567890%";
+                    break;
                 case "FillerTEST":
                     GameScreenBack = @"123456789012345678901234567890%" +
                                      @"123456789012345678901234567890%" +
@@ -451,7 +477,6 @@ namespace Bonk_Knight
             }
             return GameScreenBack;
         }
-        
         public static String MapUI(String Type, int ScreenNum)
         {
             List<string> Mount = new List<string>() {
@@ -837,7 +862,8 @@ namespace Bonk_Knight
                               @"   |=•──┤%" +
                               @"  / \  ▀▀%" };
                     break;
-                case "WalkRight"://make him be holding his hammer
+                case "WalkRight":
+                case "WalkRightHammerUp"://make him be holding his hammer
                     backAni = new List<String>(){ 
                               // 1
                               @"         %" +
@@ -869,12 +895,14 @@ namespace Bonk_Knight
                               @"    ▀`/|\%" +
                               @"      / \%" };
                     break;
-                case "WalkLeft"://make him be holding his hammer
+                case "WalkLeft":
+                case "WalkLeftHammerUp"://make him be holding his hammer
                     backAni = new List<String>(){ 
                               // 6
-                              @"     (J)▄ %" +
-                              @"     /|\´▀%" +
-                              @"    ´/ \  %",
+                              @"           %" +
+                              @"     (J)▄  %" +
+                              @"     /|\´▀ %" +
+                              @"    ´/ \   %",
                               // 5       
                               @"     (J)▄ %" +
                               @"     /|\´▀%" +
@@ -896,16 +924,6 @@ namespace Bonk_Knight
                               @" /|\´▀   %" +
                               @"´/ \     %", };
                     break;
-                /*
-                Animations to add
-
-                case "WalkRightHammerUp":
-                    break;
-                case "WalkLeftHammerUp":
-                    break;
-                case "TakeHammerOut":
-                    break;
-                */
                 default://tester\
                     Functions.MakeErrorMessage($"name of animation unidentified - {AniName}");
                     backAni = new List<String>(){ 

@@ -46,6 +46,7 @@ namespace Bonk_Knight
         public static void Main(string[] args)
         {
             InitializeComponents();
+            LoadCover();
             //GameOptions();
             Player_1 = new Player("Bonk Knight");
             GameMap = new Map("2");
@@ -70,10 +71,6 @@ namespace Bonk_Knight
                         case 'a':
                             //left  
                             Player_1.MoveL();
-                            break;
-                        case 'y':
-                            //obstain  
-                            PlayerEventSystem.MadeMove("left");
                             break;
                         case 'd':
                             //right
@@ -267,6 +264,25 @@ namespace Bonk_Knight
                 else { Functions.ClearKeyIntputs(); return '㊀'; }
             }
             else { /*Doesn't run  System.Diagnostics.Debug.WriteLine($"Animation running");*/  Functions.ClearKeyIntputs(); return '㊅'; }
+        }
+        public static void LoadCover()
+        {
+            Render.RenderBlankOutline(Globals.GSW, Globals.GSH);
+            Render.RenderMapOutline(Art.GameUI("Cover"));
+
+            //check for key inputs to return to main
+            var CoverOpen = true;
+            var KeyBack = '㊀';
+            while (CoverOpen)
+            {
+                KeyBack = keyInput();
+                if (KeyBack != '㊀')
+                {
+                    CoverOpen = false;
+                }
+            }
+
+            GameWindow HelpScn = new GameWindow("help");
         }
     }
     public class PlayerHandler

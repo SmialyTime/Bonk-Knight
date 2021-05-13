@@ -27,6 +27,7 @@ namespace Bonk_Knight
                     LogWindow();
                     break;
                 case "shop":
+                    shopWindow();
                     break;
                 case "help":
                     HelpWindow();
@@ -65,6 +66,7 @@ namespace Bonk_Knight
             LineWithSubText("                 b", "-shop");
             LineWithSubText(" A  ", "attack", ConsoleColor.Red);
             Console.SetCursorPosition(Globals.Sx, Console.CursorTop + 1);
+            LineWithSubText("                 h-help","", ConsoleColor.Red);
             LineWithSubText("↑A  ","buff attack", ConsoleColor.DarkRed);
             Console.SetCursorPosition(Globals.Sx, Console.CursorTop + 1);
             LineWithSubText("↑D  ","buff defence", ConsoleColor.DarkGreen); 
@@ -127,6 +129,32 @@ namespace Bonk_Knight
                 if (this.KeyBack != '㊀' && this.KeyBack != '㊅')
                 {
                     this.WindowOpen = false;
+                }
+            }
+            CloseScreen();
+        }
+        public void shopWindow()
+        {
+            Functions.ClearKeyIntputs();
+            //load custom map screen
+            Render.ChangeScreen(0, 0, Art.GameUI($"{this.WindowName}"));
+            Render.RenderScreen("all");
+
+            Functions.CursourLogLineWrite("Input Text: ");
+            var TextInputToScreen = Console.ReadLine().ToLower();
+            while (this.WindowOpen)
+            {
+                //check if player wants to exit screen
+                if (TextInputToScreen == "exit" || TextInputToScreen == "e" || TextInputToScreen == "'exit'" || TextInputToScreen == "esc" || TextInputToScreen == "stop" || TextInputToScreen == "leave" || TextInputToScreen == "end")
+                {
+                    this.WindowOpen = false;
+                }
+                else
+                {
+                    //get input
+                    Functions.CursourLogLineClear(TextInputToScreen);
+                    Functions.CursourLogLineWrite("Input Text: ");
+                    TextInputToScreen = Console.ReadLine().ToLower();
                 }
             }
             CloseScreen();
@@ -342,12 +370,14 @@ namespace Bonk_Knight
         {
             Globals.ExtraScreenOpen = "Game";
             Render.RenderOutline(Globals.GSW, Globals.GSH);
-            MainClass.GameMap.LoadCurrentScreen();
-            MainClass.Player_1.RenderEntity();
-            foreach (Enemy ennmy in MainClass.GameMap.CurrentEnemies)
-            {
-                ennmy.RenderEntity();
-                ennmy.LoadIndicator();
+            MainClass.GameMap?.LoadCurrentScreen();
+            MainClass.Player_1?.RenderEntity();
+            if (MainClass.GameMap != null) {
+                foreach (Enemy ennmy in MainClass.GameMap.CurrentEnemies)
+                {
+                    ennmy.RenderEntity();
+                    ennmy.LoadIndicator();
+                }
             }
             Functions.ClearKeyIntputs();
             Log.LoadLast();
