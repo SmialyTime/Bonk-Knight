@@ -350,6 +350,7 @@ namespace Bonk_Knight
                 ennmy.LoadIndicator();
             }
             Functions.ClearKeyIntputs();
+            Log.LoadLast();
         }
         public void LoadCurrentScreen()
         {

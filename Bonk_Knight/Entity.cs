@@ -63,15 +63,13 @@ namespace Bonk_Knight
         {
             //ADD differnt attack types - heavy,normal,projectile
             //IMPROVE
-            //LOG crit hit
             double dmgMultiplier = AtkStrength / this.Defence;
             dmgMultiplier *= Crit()? 2 : 1;
             dmgMultiplier *= RandomMultiplier();
             //EVENT dodge or item activated??
             if (this.Dodging == true)
             {
-                //LOG the dodge
-                System.Diagnostics.Debug.WriteLine($"{this.Name} Dodged");
+                Log.UpdateLog($"{this.Name} Dodged");
                 //loads the enemy again
                 //Animate.ControlableEntityAni(this.Position, this.Position, new List<string>() { Art.Enemy(this.Name) });
                 this.Dodging = false;
@@ -85,7 +83,24 @@ namespace Bonk_Knight
             }
             this.Health -= Convert.ToInt32(AtkDmg * dmgMultiplier);
             //LOG
-            System.Diagnostics.Debug.WriteLine($"Enemy {this.Name} took {AtkDmg * dmgMultiplier} and now is at {this.Health}/{this.MaxHealth}");
+            if (this.Name != "Player" && this.Name != "player")
+            {
+                Log.UpdateLog($"{this.Name.ToLower()} {this.Health}/{this.MaxHealth}HP left");
+                Log.UpdateLog($"Enemy {this.Name.ToLower()} took {Convert.ToInt32(AtkDmg * dmgMultiplier)}");
+            }
+            else
+            {
+                if (MainClass.Player_1.UserName.Length >= 7) 
+                {
+                    //0123456789 lost 14 (100/100HP)
+                    Log.UpdateLog($"{MainClass.Player_1.UserName} -{Convert.ToInt32(AtkDmg * dmgMultiplier)}|{this.Health}/{this.MaxHealth}");
+                }
+                else
+                {
+                    //0123456789 lost 14 (100/100HP)
+                    Log.UpdateLog($"{MainClass.Player_1.UserName} took {Convert.ToInt32(AtkDmg * dmgMultiplier)}|{this.Health}/{this.MaxHealth}");
+                }
+            }
             CheckLiving();
         }
         public void RenderEntity(int PlusPos = 0)
@@ -119,8 +134,7 @@ namespace Bonk_Knight
         {
             if ((new Random()).NextDouble() <= this.CritChance)
             {
-                //LOG
-                System.Diagnostics.Debug.WriteLine("CRIT");
+                Log.UpdateLog($"CRIT!");
                 return true;
             }
             else

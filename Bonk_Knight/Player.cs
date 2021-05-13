@@ -56,8 +56,7 @@ namespace Bonk_Knight
                     if (ens.Position == this.Position + 1)
                     {
                         EnemyInfront = true;
-                        //LOG?
-                        System.Diagnostics.Debug.WriteLine("EnemyInfront");
+                        Log.UpdateLog("can't move into Enemy");
                     }
                 }
                 if (!EnemyInfront)
@@ -71,6 +70,7 @@ namespace Bonk_Knight
                         Animate.ControlableEntityAni(this.Position, this.Position + 1, Animations.PlayerAni("WalkRightHammerUp"),10);
                     }
                     this.Position++;
+                    MainClass.PlayerEventSystem.MadeMove("right");
                 }
             }
             else
@@ -78,7 +78,6 @@ namespace Bonk_Knight
                 //loads the next screen if conditions met - enemies = 0, is at edge of screen, not at end of game
                 MainClass.GameMap.NextScreen();
             }
-            MainClass.PlayerEventSystem.MadeMove("right");
         }
         public void MoveL()
         {
@@ -96,13 +95,13 @@ namespace Bonk_Knight
                     Animate.ControlableEntityAni(this.Position - 1, this.Position - 1, Animations.PlayerAni("WalkLeftHammerUp"), 10);
                 }
                 this.Position--;
+                MainClass.PlayerEventSystem.MadeMove("left");
             }
             else
             {
                 //loads the prev screen if conditions met - enemies = 0, is at edge of screen, not at start of game
                 MainClass.GameMap.PrevScreen();
             }
-            MainClass.PlayerEventSystem.MadeMove("left");
         }
         public void Attack()
         {
@@ -155,15 +154,18 @@ namespace Bonk_Knight
         {
             //LOG player died and lost money
             this.Health = this.MaxHealth;
-            if ((this.Money - 10)>0) 
+            var moneyDropped = (new Random()).Next(0,21);
+            if ((this.Money - moneyDropped) >0) 
             {
 
-                this.Money -= 10;
+                this.Money -= moneyDropped;
             }
             else
             {
                 this.Money = 0;
             }
+
+            Log.ClearLog($"Player respawned lost ₿{moneyDropped}");
 
 
             //Code discontinued as player doesn't actualy die just respawns
@@ -198,6 +200,7 @@ namespace Bonk_Knight
                     extraMoney = 1000;
                     break;
             }
+
             //loot based on enemy
             var ItemToAdd = "none";
             switch (e.ToLower())
@@ -239,18 +242,15 @@ namespace Bonk_Knight
                 }
                 else
                 {
+                    Log.UpdateLog($"{e} dropped {ItemToAdd}");
                     this.Inventory.Add(ItemToAdd, 1);
                 }
             }
 
             //money
-
             double enemyDiff = MainClass.GameMap.GameSectionMap[MainClass.GameMap.CurrentSection].EnemyDifficulty;
-
             int moneyLoot = Convert.ToInt32((extraMoney + (new Random()).Next(1, 31) * enemyDiff)*Globals.MoneyMultiplier);
             this.Money += moneyLoot;
-
-            //LOG
             Log.UpdateLog($"Looted ₿{moneyLoot} Purse ₿{this.Money}");
         }
     }

@@ -122,7 +122,7 @@ namespace Bonk_Knight
             foreach (Enemy Cull in ToRem)
             {
                 //LOG
-                System.Diagnostics.Debug.WriteLine($"{Cull.Name} was defeated");
+                Log.UpdateLog($"{Cull.Name} was defeated");
                 Cull.dead();
                 this.CurrentEnemies.Remove(Cull);
                 this.GameSectionMap[this.CurrentSection].Enemies--;
@@ -141,7 +141,12 @@ namespace Bonk_Knight
             //IMPROVE - null case?
             if (CurrentSection < this.GameSectionMap.Count - 1 && MainClass.Player_1.Position == 6 && this.CurrentEnemies.Count == 0)
             {
+                var oldBiome = this.GameSectionMap[CurrentSection].Type;
                 this.CurrentSection++;
+                if (this.GameSectionMap[CurrentSection].Type != oldBiome)
+                {
+                    Log.UpdateLog($"Entered {this.GameSectionMap[CurrentSection].Type}");
+                }
                 Render.ChangeBackground(this);
                 //System.Diagnostics.Debug.WriteLine($"{this.this.CurrentSection}: {this.GameSectionMap[this.this.CurrentSection].SectionName}");
                 Globals.Terrain = this.GameSectionMap[this.CurrentSection].Type;
@@ -175,8 +180,7 @@ namespace Bonk_Knight
             }
             else
             {
-                //LOG can't exit ENDING 
-                System.Diagnostics.Debug.WriteLine($"at end {CurrentSection < this.GameSectionMap.Count - 1}|| player positon not at enterance {MainClass.Player_1.Position == 6 }|| enemies remaining {this.CurrentEnemies.Count}");
+               // System.Diagnostics.Debug.WriteLine($"at end {CurrentSection < this.GameSectionMap.Count - 1}|| player positon not at enterance {MainClass.Player_1.Position == 6 }|| enemies remaining {this.CurrentEnemies.Count}");
             }
 
         }
@@ -200,8 +204,7 @@ namespace Bonk_Knight
             }
             else
             {
-                //LOG?
-                System.Diagnostics.Debug.WriteLine($"@Beginning {this.CurrentSection} {this.CurrentSection > 0 }|| @enterance? {MainClass.Player_1.Position == 1 } {MainClass.Player_1.Position}|| enemies {this.CurrentEnemies.Count} {this.CurrentEnemies.Count == 0}");
+                //System.Diagnostics.Debug.WriteLine($"@Beginning {this.CurrentSection} {this.CurrentSection > 0 }|| @enterance? {MainClass.Player_1.Position == 1 } {MainClass.Player_1.Position}|| enemies {this.CurrentEnemies.Count} {this.CurrentEnemies.Count == 0}");
             }
         }
         public void Completed()
@@ -311,9 +314,25 @@ namespace Bonk_Knight
             Globals.Logs = new List<string>() { StartMsg };
             Globals.LastLog = StartMsg;
         }
+        public static void ClearLog(String newMSG = " ")
+        {
+            Globals.Logs = new List<string>() { newMSG };
+            Globals.LastLog = newMSG;
+        }
+        public static void LoadLast()
+        {
+            Functions.CursourLogLineClear();
+            Console.Write("Log: ");
+            foreach (char ltr in Globals.LastLog)
+            {
+                Functions.ColourPalet("logline", Convert.ToString(ltr));
+                Console.Write(ltr);
+            }
+            Console.ForegroundColor = ConsoleColor.White;
+        }
         public static void UpdateLog(String logMessage)
         {
-            if (logMessage.Length <= 28 - 3)
+            if (logMessage.Length <= 26)
             {
                 if (Globals.Logs.Count == 10)
                 {
@@ -324,6 +343,7 @@ namespace Bonk_Knight
                 Globals.Logs.Insert(0, logMessage);
                 Globals.LastLog = logMessage;
                 Functions.CursourLogLineClear();
+                Console.Write("Log: ");
                 foreach (char ltr in logMessage) 
                 {
                     Functions.ColourPalet("logline",Convert.ToString(ltr));

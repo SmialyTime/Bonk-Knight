@@ -177,7 +177,6 @@ namespace Bonk_Knight
                 Functions.CursourLogLineClear(Globals.GameDifficulty);
                 Functions.CursourLogLineWrite("valid Diff: ");
                 Globals.GameDifficulty = Console.ReadLine().ToLower();
-                //LOG enter valid difficulty
             }
             Functions.CursourLogLineClear(Globals.GameDifficulty);
             GameMap = new Map(Globals.GameDifficulty);

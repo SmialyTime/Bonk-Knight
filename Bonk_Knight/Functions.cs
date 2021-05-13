@@ -148,10 +148,8 @@ namespace Bonk_Knight
                 case "log":
                     switch (letter)
                     {
-                        case "C":
-                        case "R":
-                        case "I":
-                        case "T":
+                        case "H":
+                        case "P":
                             Col = GC("red");
                             break;
                         case "₿":
