@@ -109,7 +109,6 @@ namespace Bonk_Knight
             int SecLen = 0;
             List<String> BottomRow = new List<string>() { };
             int BotHidden = 0;
-            Console.SetCursorPosition(Globals.Sx, Globals.Sy + 4);
             switch (Areas) 
             {
                 case "home":
@@ -175,21 +174,81 @@ namespace Bonk_Knight
 
             //Write actual screen
             Render.RenderMapOutline(Art.MapUI("MapScreen", 1));
-            //top row
-            Console.SetCursorPosition(Globals.Sx+6, Globals.Sy);
             
-            Console.ForegroundColor = ConsoleColor.DarkBlue;
+            //top row
+            if (TopRow.Count != 0) {
+                var TopRowCellWidth = ((TopRow[0].Length - TopRow[0].Count(f => f == '%')) / TopRow[0].Count(f => f == '%'));
+                var TopRowCellHeight = TopRow[0].Count(f => f == '%');
+                Console.SetCursorPosition(Globals.Sx + 6, Globals.Sy);
+                //for each row
+                Console.ForegroundColor = ConsoleColor.DarkGreen;
+                for (var i = 0; i < TopRowCellHeight; i++)
+                {
+                    //and each small screen
+                    for (var j = 0; j < TopRow.Count; j++)
+                    {
+                        //get the first section
+                        for (var k = 0; k < TopRowCellWidth; k++)
+                        {
+                            Console.Write(TopRow[j][k + (i *( TopRowCellWidth + 1))]);
+                        }
+                    }
+                    Console.SetCursorPosition(Globals.Sx + 6, Console.CursorTop + 1);
+                }
+            }
+            TopRow.Clear();
             //middle row
-            Console.SetCursorPosition(Globals.Sx, Globals.Sy + 3);
-            Console.Write("bob");
-            Console.ForegroundColor = ConsoleColor.Green;
-            Console.ForegroundColor = ConsoleColor.Yellow;
-            Console.ForegroundColor = ConsoleColor.DarkGray;
-            //bottom row
-            Console.SetCursorPosition(Globals.Sx, Globals.Sy + 6);
-            Console.Write("bab");
-            Console.ForegroundColor = ConsoleColor.DarkGray;
+            if (MiddleRow.Count != 0)
+            {
+                var MiddleRowCellWidth = ((MiddleRow[0].Length - MiddleRow[0].Count(f => f == '%')) / MiddleRow[0].Count(f => f == '%'));
+                var MiddleRowCellHeight = MiddleRow[0].Count(f => f == '%');
+                Console.SetCursorPosition(Globals.Sx, Globals.Sy + 3);
+                //for each row
+                for (var i = 0; i < MiddleRowCellHeight; i++)
+                {
+                    //and each small screen
+                    for (var j = 0; j < MiddleRow.Count; j++)
+                    {
+                        //sets progress colour
+                        if (j == Progress - 1) { Console.ForegroundColor = ConsoleColor.Yellow; }
+                        else if (j < Progress - 1) { Console.ForegroundColor = ConsoleColor.Green; }
+                        else { Console.ForegroundColor = ConsoleColor.DarkGray; }
 
+                        //get the first section
+                        for (var k = 0; k < MiddleRowCellWidth; k++)
+                        {
+                            Console.Write(MiddleRow[j][k + (i *( MiddleRowCellWidth + 1))]);
+                        }
+                    }
+                    Console.SetCursorPosition(Globals.Sx, Console.CursorTop + 1);
+                }
+            }
+            MiddleRow.Clear();
+
+            //bottom row
+            
+            if (BottomRow.Count != 0)
+            {
+                Console.ForegroundColor = ConsoleColor.DarkGray;
+                var BottomRowCellWidth = ((BottomRow[0].Length - BottomRow[0].Count(f => f == '%')) / BottomRow[0].Count(f => f == '%'));
+                var BottomRowCellHeight = BottomRow[0].Count(f => f == '%');
+                Console.SetCursorPosition(Globals.Sx, Globals.Sy + 6);
+                //for each row
+                for (var i = 0; i < BottomRowCellHeight; i++)
+                {
+                    //and each small screen
+                    for (var j = 0; j < BottomRow.Count; j++)
+                    {
+                        //get the first section
+                        for (var k = 0; k < BottomRowCellWidth; k++)
+                        {
+                            Console.Write(BottomRow[j][k + (i *( BottomRowCellWidth + 1))]);
+                        }
+                    }
+                    Console.SetCursorPosition(Globals.Sx, Console.CursorTop + 1);
+                }
+            }
+            BottomRow.Clear();
 
             Console.ForegroundColor = ConsoleColor.White;
 

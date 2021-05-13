@@ -38,6 +38,12 @@ namespace Bonk_Knight
         {
             Console.SetCursorPosition(Globals.Ox, Console.CursorTop + yPlus);
         }
+        //public static int GetRowNum(String TextToGetHeight)
+        //{
+        //    var RowNumbers = 0;
+        //    Tex
+        //    return RowNumbers;
+        //}
         public static void resetCursor()
         {
             Console.SetCursorPosition(Globals.Sx, Globals.Sy);

@@ -540,9 +540,9 @@ namespace Bonk_Knight
                 case "unknown":
                 case "Unknown":
                 case "u":
-                    MapBack = @"┌────┐" +
-                              @"│ ?  │" +
-                              @"└────┘";
+                    MapBack = @"┌────┐%" +
+                              @"│ ?  │%" +
+                              @"└────┘%";
                     break;
                 case "mountain":
                 case "0":
