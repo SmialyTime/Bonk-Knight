@@ -26,9 +26,9 @@ namespace Bonk_Knight
                     break;
                 case "Home":
                 case "h":
-                    back = @"Um yes The game story starts %" +
-                           @"                              %" +
-                           @"                              %" +
+                    back = @"You must travel east to earn  %" +
+                           @" money to pay for treatment   %" +
+                           @"(Bonk Enemies to get ₿ money) %" +
                            @"──────────────────────────────%" +
                            @"·                     ]┼]x] .-%" +
                            @"╨     o       #        | |  │ %" +

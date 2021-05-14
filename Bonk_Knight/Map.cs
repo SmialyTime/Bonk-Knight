@@ -311,7 +311,7 @@ namespace Bonk_Knight
     {
         public Log()
         {
-            var StartMsg = "Game Started";
+            var StartMsg = "'Darlig I'm sick' - wife";
             Globals.Logs = new List<string>() { StartMsg };
             Globals.LastLog = StartMsg;
         }

@@ -47,11 +47,12 @@ namespace Bonk_Knight
         public static void Main(string[] args)
         {
             InitializeComponents();
-            //LoadCover();
-            //GameOptions();
-            GameMap = new Map("2");
-            Globals.GameSpeed = 0.005;
-            Player_1 = new Player("Bonk Knight");
+            LoadCover();
+            GameOptions();
+            //for testing
+            //GameMap = new Map("2");
+            //Globals.GameSpeed = 0.005;
+            //Player_1 = new Player("Bonk Knight");
             //add in tutorial page
 
 
@@ -62,7 +63,11 @@ namespace Bonk_Knight
             Player_1.RenderEntity();
             Globals.GameGoing = true;
             char Continue = keyInput();
-
+            //Render.CursorBellowScreen();
+            //Console.ForegroundColor = ConsoleColor.DarkGray;
+            //Console.WriteLine("         h - help  ");
+            //Console.ForegroundColor = ConsoleColor.White;
+            Log.UpdateLog("'Darlig I'm sick' - wife");
             while (Globals.GameGoing == true)
             {
                 //checks if the user is in a seperate screen so game is stopped
