@@ -212,11 +212,66 @@ namespace Bonk_Knight
             //load custom map screen
             Render.ChangeScreen(0, 0, Art.GameUI($"{this.WindowName}"));
             Render.RenderScreen("all");
+            //actual shop screen
+            Functions.resetCursor();
+            Console.SetCursorPosition(Console.CursorLeft, Console.CursorTop + 1);
+            Functions.CentedTextSubText("Increase Attack", $"Cost ₿{Convert.ToInt32(MainClass.Player_1.Strength*10)} Type: 'buy Attack'", ConsoleColor.DarkRed);
+            Console.SetCursorPosition(Console.CursorLeft, Console.CursorTop + 1);
+            Functions.CentedTextSubText("Increase Defence", $"Cost ₿{Convert.ToInt32(MainClass.Player_1.Defence * 10)} Type:'buy Defence'", ConsoleColor.DarkGreen);
+            Console.SetCursorPosition(Console.CursorLeft, Console.CursorTop + 1);
+            Functions.CentedTextSubText("Increase Max Health", $"Cost ₿{Convert.ToInt32(MainClass.Player_1.MaxHealth/10)} Type:'buy Health'", ConsoleColor.Red);
+            Console.SetCursorPosition(Console.CursorLeft, Console.CursorTop + 1);
+            Functions.CentedTextSubText("Increase Crit Chance", $"Cost ₿{Convert.ToInt32(MainClass.Player_1.CritChance* 500)} Type:'buy Crit'", ConsoleColor.Yellow);
 
-            Functions.CursourLogLineWrite("Input Text: ");
+
+            var cost = Convert.ToInt32(MainClass.Player_1.Strength * 10);
+            Functions.CursourLogLineWrite("Type in to buy: ");
             var TextInputToScreen = Console.ReadLine().ToLower();
+            //IMPROVE load the new cost when bought
             while (this.WindowOpen)
             {
+                //check if buying
+                if (TextInputToScreen == "attack" ||TextInputToScreen == "increase attack" || TextInputToScreen == "buy attack" || TextInputToScreen == "'attack'" || TextInputToScreen == "'buy attack'")
+                {
+                    cost = Convert.ToInt32(MainClass.Player_1.Strength * 10);
+                    if (MainClass.Player_1.Money >= cost)
+                    {
+                        MainClass.Player_1.Money -= cost;
+                        MainClass.Player_1.Strength += 0.1;
+                        Log.UpdateLog("bougth +10 percent attack");
+                    }
+                }
+                else if (TextInputToScreen == "defence" || TextInputToScreen == "increase defence" || TextInputToScreen == "buy defence" || TextInputToScreen == "'defence'" || TextInputToScreen == "'buy defence'")
+                {
+                    cost = Convert.ToInt32(MainClass.Player_1.Defence * 10);
+                    if (MainClass.Player_1.Money >= cost)
+                    {
+                        MainClass.Player_1.Money -= cost;
+                        MainClass.Player_1.Defence += 0.1;
+                        Log.UpdateLog("bougth +10percent defence");
+                    }
+                }
+                else if (TextInputToScreen == "health" || TextInputToScreen == "buy health" || TextInputToScreen == "max health" || TextInputToScreen == "buy max health" || TextInputToScreen == "maxhealth" || TextInputToScreen == "buy maxhealth" || TextInputToScreen == "increase health" || TextInputToScreen == "'health'" || TextInputToScreen == "'buy health'")
+                {
+                    cost = Convert.ToInt32(MainClass.Player_1.MaxHealth / 10);
+                    if (MainClass.Player_1.Money >= cost)
+                    {
+                        MainClass.Player_1.Money -= cost;
+                        MainClass.Player_1.MaxHealth += 20;
+                        MainClass.Player_1.Health += 20;
+                        Log.UpdateLog("Bought 20 Health");
+                    }
+                }
+                else if (TextInputToScreen == "crit chance" || TextInputToScreen == "buy crit chance" || TextInputToScreen == "'crit chance'" || TextInputToScreen == "'buy crit chance'" ||TextInputToScreen == "critchance" || TextInputToScreen == "buy critchance" || TextInputToScreen == "'critchance'" || TextInputToScreen == "'buy critchance'" || TextInputToScreen == "crit" || TextInputToScreen == "buy crit" || TextInputToScreen == "'crit'" || TextInputToScreen == "'buy crit'")
+                {
+                    cost = Convert.ToInt32(MainClass.Player_1.CritChance * 500);
+                    if (MainClass.Player_1.Money >= cost)
+                    {
+                        MainClass.Player_1.Money -= cost;
+                        MainClass.Player_1.CritChance += 0.1;
+                        Log.UpdateLog("Bought +10 percent crit");
+                    }
+                }
                 //check if player wants to exit screen
                 if (TextInputToScreen == "exit" || TextInputToScreen == "e" || TextInputToScreen == "'exit'" || TextInputToScreen == "esc" || TextInputToScreen == "stop" || TextInputToScreen == "leave" || TextInputToScreen == "end")
                 {
@@ -226,7 +281,7 @@ namespace Bonk_Knight
                 {
                     //get input
                     Functions.CursourLogLineClear(TextInputToScreen);
-                    Functions.CursourLogLineWrite("Input Text: ");
+                    Functions.CursourLogLineWrite("Type to buy: ");
                     TextInputToScreen = Console.ReadLine().ToLower();
                 }
             }
