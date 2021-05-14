@@ -152,6 +152,11 @@ namespace Bonk_Knight
             //check for key inputs to reurn to main
             Functions.ClearKeyIntputs();
             Console.ReadKey();
+            Functions.CursorBellowScreen();
+            Console.ResetColor();
+            Console.ForegroundColor = Functions.GC("w");
+            Console.WriteLine("press enter to close game");
+            Console.ReadLine();
             CloseScreen();
         }
         public void LogWindow()
@@ -199,6 +204,7 @@ namespace Bonk_Knight
         }
         public void shopWindow()
         {
+            Console.CursorVisible = true;
             Functions.ClearKeyIntputs();
             //load custom map screen
             Render.ChangeScreen(0, 0, Art.GameUI($"{this.WindowName}"));
@@ -216,7 +222,7 @@ namespace Bonk_Knight
             Console.SetCursorPosition(Console.CursorLeft, Console.CursorTop + 1);
             Functions.CentedTextSubText("Increase Max Health", $"Cost ₿{Convert.ToInt32(MainClass.Player_1.MaxHealth/10)} Type:'buy Health'", ConsoleColor.Red);
             Console.SetCursorPosition(Console.CursorLeft, Console.CursorTop + 1);
-            Functions.CentedTextSubText("Increase Crit Chance", $"Cost ₿{Convert.ToInt32(MainClass.Player_1.CritChance* 500)} Type:'buy Crit'", ConsoleColor.Yellow);
+            Functions.CentedTextSubText("Increase Crit Chance", $"Cost ₿{Convert.ToInt32(MainClass.Player_1.CritChance* 200)} Type:'buy Crit'", ConsoleColor.Yellow);
 
 
             var cost = Convert.ToInt32(MainClass.Player_1.Strength * 10);
@@ -235,7 +241,11 @@ namespace Bonk_Knight
                         MainClass.Player_1.Strength += 0.1;
                         Log.UpdateLog("bougth +10 percent attack");
                         Console.SetCursorPosition(Globals.Sx + 4, Globals.Sy);
-                        Functions.CentedTextSubText($"    ₿{MainClass.Player_1.Money}", $"", ConsoleColor.Green);
+                        Console.ForegroundColor = ConsoleColor.Green;
+                        Console.Write($"    ");
+                        Console.SetCursorPosition(Globals.Sx + 4, Globals.Sy);
+                        Console.Write($"₿{MainClass.Player_1.Money}");
+                        Console.ForegroundColor = ConsoleColor.White;
                     }
                 }
                 else if (TextInputToScreen == "defence" || TextInputToScreen == "increase defence" || TextInputToScreen == "buy defence" || TextInputToScreen == "'defence'" || TextInputToScreen == "'buy defence'")
@@ -247,7 +257,11 @@ namespace Bonk_Knight
                         MainClass.Player_1.Defence += 0.1;
                         Log.UpdateLog("bougth +10percent defence");
                         Console.SetCursorPosition(Globals.Sx + 4, Globals.Sy);
-                        Functions.CentedTextSubText($"    ₿{MainClass.Player_1.Money}", $"", ConsoleColor.Green);
+                        Console.ForegroundColor = ConsoleColor.Green;
+                        Console.Write($"    ");
+                        Console.SetCursorPosition(Globals.Sx + 4, Globals.Sy);
+                        Console.Write($"₿{MainClass.Player_1.Money}");
+                        Console.ForegroundColor = ConsoleColor.White;
                     }
                 }
                 else if (TextInputToScreen == "health" || TextInputToScreen == "buy health" || TextInputToScreen == "max health" || TextInputToScreen == "buy max health" || TextInputToScreen == "maxhealth" || TextInputToScreen == "buy maxhealth" || TextInputToScreen == "increase health" || TextInputToScreen == "'health'" || TextInputToScreen == "'buy health'")
@@ -260,7 +274,11 @@ namespace Bonk_Knight
                         MainClass.Player_1.Health += 20;
                         Log.UpdateLog("Bought 20 Health");
                         Console.SetCursorPosition(Globals.Sx + 4, Globals.Sy);
-                        Functions.CentedTextSubText($"    ₿{MainClass.Player_1.Money}", $"", ConsoleColor.Green);
+                        Console.ForegroundColor = ConsoleColor.Green;
+                        Console.Write($"    ");
+                        Console.SetCursorPosition(Globals.Sx + 4, Globals.Sy);
+                        Console.Write($"₿{MainClass.Player_1.Money}");
+                        Console.ForegroundColor = ConsoleColor.White;
                     }
                 }
                 else if (TextInputToScreen == "crit chance" || TextInputToScreen == "buy crit chance" || TextInputToScreen == "'crit chance'" || TextInputToScreen == "'buy crit chance'" ||TextInputToScreen == "critchance" || TextInputToScreen == "buy critchance" || TextInputToScreen == "'critchance'" || TextInputToScreen == "'buy critchance'" || TextInputToScreen == "crit" || TextInputToScreen == "buy crit" || TextInputToScreen == "'crit'" || TextInputToScreen == "'buy crit'")
@@ -272,7 +290,11 @@ namespace Bonk_Knight
                         MainClass.Player_1.CritChance += 0.1;
                         Log.UpdateLog("Bought +10 percent crit");
                         Console.SetCursorPosition(Globals.Sx + 4, Globals.Sy);
-                        Functions.CentedTextSubText($"    ₿{MainClass.Player_1.Money}", $"", ConsoleColor.Green);
+                        Console.ForegroundColor = ConsoleColor.Green;
+                        Console.Write($"    ");
+                        Console.SetCursorPosition(Globals.Sx + 4, Globals.Sy);
+                        Console.Write($"₿{MainClass.Player_1.Money}");
+                        Console.ForegroundColor = ConsoleColor.White;
                     }
                 }
                 //check if player wants to exit screen
@@ -494,6 +516,7 @@ namespace Bonk_Knight
         }
         public void CloseScreen()
         {
+            Console.CursorVisible = false;
             Functions.CursorBellowScreen();
             Console.WriteLine("                        ");
             Globals.ExtraScreenOpen = "Game";

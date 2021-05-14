@@ -348,6 +348,7 @@ namespace Bonk_Knight
                         {
                             //ranged enemies take longer to "aim" attacks
                             this.PlanedMove = "chargeAttack";
+                            //IMPROVE / FIX
                             this.debuff = true;
                         }
                         else

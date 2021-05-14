@@ -49,30 +49,29 @@ namespace Bonk_Knight
             InitializeComponents();
             LoadCover();
             GameOptions();
+            Console.CursorVisible = false;
             //for testing
+
             //GameMap = new Map("2");
             //Globals.GameSpeed = 0.005;
             //Player_1 = new Player("Bonk Knight");
-            //add in tutorial page
 
-
+            //intialize more things
             Render.CursorBellowScreen();
-            //CHANGE load first screen
             Player_1.Position = 4;
             GameMap.LoadCurrentScreen();
             Player_1.RenderEntity();
             Globals.GameGoing = true;
-            char Continue = keyInput();
-            Console.SetCursorPosition(Globals.Ox + Globals.GSW + 2,Globals.Oy);
-            Console.ForegroundColor = ConsoleColor.DarkGray;
-            Console.WriteLine("h - help  ");
-            Console.ForegroundColor = ConsoleColor.White;
+            Functions.WriteHelp();
+
             Log.UpdateLog("'Darlig I'm sick' - wife");
+            //game started
+            char Continue = keyInput();
             while (Globals.GameGoing == true)
             {
                 //checks if the user is in a seperate screen so game is stopped
                 if (Globals.ExtraScreenOpen == "Game") {
-                    //use key 
+                    //use input key to decide action
                     switch (Continue)
                     {
                         case 'a':
@@ -116,15 +115,17 @@ namespace Bonk_Knight
                             Globals.GameGoing = false;
                             break;
                     }
+                    //reset important things
                     Functions.CursorBellowScreen();
-
-                    //make better
                     Continue = ' ';
                     Continue = keyInput();
+                    /*
+                    testing what key was input
                     if (Continue != '㊀' && Continue != '㊅' && Continue != '回')
                     {
                         System.Diagnostics.Debug.Write(Continue);
                     }
+                    */
                 }
                 else
                 {
@@ -136,18 +137,14 @@ namespace Bonk_Knight
                 GameWindow FinalScreen = new GameWindow("endwin");
             }
             GameWindow EndScreen = new GameWindow("endstory");
-            //CHANGE later
-            Functions.CursorBellowScreen();
-            Console.ResetColor();
-            Console.ForegroundColor = Functions.GC("w");
-            Console.WriteLine("press Enter button to continue");
-            Console.ReadLine();
         }
         public static void GameOptions()
         {
             Functions.GC("White");
+            Render.ChangeScreen(Globals.Sx,Globals.Sy,Art.Menu("Name"));
+            Render.RenderScreen("all");
             //input game preferences
-            Functions.CursourLogLineWrite("name: ");
+            Functions.CursourLogLineWrite("Username: ");
             var Username = Console.ReadLine();
             //10 because too long would mess up the display of things
             while (Username == null || Username == "" || Username?.Length > 10)
@@ -158,7 +155,8 @@ namespace Bonk_Knight
                 //ADD cencorship?
             }
             Functions.CursourLogLineClear(Username);
-            Render.RenderScreen("all");
+            Render.RenderBlankOutline(Globals.GSW,Globals.GSH);
+            Render.RenderOutline(Globals.GSW,Globals.GSH);
             Player_1 = new Player(Username);
 
             //writes out info
@@ -167,7 +165,7 @@ namespace Bonk_Knight
             Console.SetCursorPosition(Console.CursorLeft, Console.CursorTop + 1);
             Functions.CentedTextSubText("1 easy  ", " Weak Enemies-More gold", ConsoleColor.DarkGreen);
             Console.SetCursorPosition(Console.CursorLeft, Console.CursorTop + 1);
-            Functions.CentedTextSubText("2 medium", " ", ConsoleColor.DarkCyan);
+            Functions.CentedTextSubText("2 medium", "(recomended)", ConsoleColor.DarkCyan);
             Console.SetCursorPosition(Console.CursorLeft, Console.CursorTop + 1);
             Functions.CentedTextSubText("3 hard  ", " Hard Enemies-Less gold", ConsoleColor.Red);
 
@@ -181,17 +179,18 @@ namespace Bonk_Knight
                 Globals.GameDifficulty = Console.ReadLine().ToLower();
             }
             Functions.CursourLogLineClear(Globals.GameDifficulty);
+            Render.RenderBlankOutline(Globals.GSW, Globals.GSH);
+            Render.RenderOutline(Globals.GSW, Globals.GSH);
             GameMap = new Map(Globals.GameDifficulty);
-            Render.RenderScreen("all");
 
             Functions.resetCursor();
             Console.Write("Animation Speeds: ");
             Console.SetCursorPosition(Console.CursorLeft, Console.CursorTop + 1);
             Functions.CentedTextSubText("1 slow  ", "half speed", ConsoleColor.DarkCyan);
             Console.SetCursorPosition(Console.CursorLeft, Console.CursorTop + 1);
-            Functions.CentedTextSubText("2 normal", "x1 speed (recomended)");
+            Functions.CentedTextSubText("2 normal", "x1 speed ");
             Console.SetCursorPosition(Console.CursorLeft, Console.CursorTop + 1);
-            Functions.CentedTextSubText("3 fast  ", "x2 speed", ConsoleColor.DarkYellow);
+            Functions.CentedTextSubText("3 fast  ", "x2 speed (recomended)", ConsoleColor.DarkYellow);
             Console.SetCursorPosition(Console.CursorLeft, Console.CursorTop + 1);
             Functions.CentedTextSubText("4 ZOOM  ", "ZOOOOOOOOOOOOOOOOOOOOOOOOOOM", ConsoleColor.Red);
             Functions.CursourLogLineWrite("Speed: ");
@@ -224,6 +223,7 @@ namespace Bonk_Knight
                     Globals.GameSpeed = 0.001;
                     break;
             }
+            Render.RenderBlankOutline(Globals.GSW, Globals.GSH);
             Render.RenderOutline(Globals.GSW, Globals.GSH);
             Render.RenderScreen("all");
         }

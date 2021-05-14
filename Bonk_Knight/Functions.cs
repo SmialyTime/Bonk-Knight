@@ -9,6 +9,13 @@ namespace Bonk_Knight
 {
     public class Functions
     {
+        public static void WriteHelp()
+        {
+            Console.SetCursorPosition(Globals.Ox + Globals.GSW + 2, Globals.Oy);
+            Console.ForegroundColor = ConsoleColor.DarkGray;
+            Console.WriteLine("h - help  ");
+            Console.ForegroundColor = ConsoleColor.White;
+        }
         public static void mc(int xPlus, int yPlus)
         {
             Console.SetCursorPosition(Console.CursorLeft + xPlus, Console.CursorTop + yPlus);

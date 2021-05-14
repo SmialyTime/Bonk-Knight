@@ -31,7 +31,7 @@ namespace Bonk_Knight
             this.Health = 100;
             this.BaseDamage = 40;
             //game dev hack
-            if (this.UserName == "Bonk Knigh")
+            if (this.UserName.ToLower() == "bonkknight"||this.UserName.ToLower() == "nolan")
             {
                 this.BaseDamage = 1000;
                 this.Health = 500;
@@ -67,7 +67,7 @@ namespace Bonk_Knight
                     }
                     else
                     {
-                        Animate.ControlableEntityAni(this.Position, this.Position + 1, Animations.PlayerAni("WalkRightHammerUp"),10);
+                        Animate.ControlableEntityAni(this.Position, this.Position + 1, Animations.PlayerAni("WalkRightHammerUp"), 80);
                     }
                     this.Position++;
                     MainClass.PlayerEventSystem.MadeMove("right");
@@ -92,7 +92,7 @@ namespace Bonk_Knight
                 }
                 else
                 {
-                    Animate.ControlableEntityAni(this.Position - 1, this.Position - 1, Animations.PlayerAni("WalkLeftHammerUp"), 10);
+                    Animate.ControlableEntityAni(this.Position - 1, this.Position - 1, Animations.PlayerAni("WalkLeftHammerUp"), 80);
                 }
                 this.Position--;
                 MainClass.PlayerEventSystem.MadeMove("left");
