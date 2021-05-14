@@ -63,7 +63,11 @@ namespace Bonk_Knight
         {
             //ADD differnt attack types - heavy,normal,projectile
             //IMPROVE
-            double dmgMultiplier = AtkStrength / this.Defence;
+            double dmgMultiplier = 1;
+            if (this.Defence != 0)
+            {
+                dmgMultiplier = AtkStrength / this.Defence;
+            }
             dmgMultiplier *= Crit()? 2 : 1;
             dmgMultiplier *= RandomMultiplier();
             //EVENT dodge or item activated??

@@ -31,7 +31,7 @@ namespace Bonk_Knight
             this.Health = 100;
             this.BaseDamage = 40;
             //game dev hack
-            if (this.UserName == "Bonk Knight")
+            if (this.UserName == "Bonk Knigh")
             {
                 this.BaseDamage = 1000;
                 this.Health = 500;
@@ -251,7 +251,7 @@ namespace Bonk_Knight
             double enemyDiff = MainClass.GameMap.GameSectionMap[MainClass.GameMap.CurrentSection].EnemyDifficulty;
             int moneyLoot = Convert.ToInt32((extraMoney + (new Random()).Next(1, 31) * enemyDiff)*Globals.MoneyMultiplier);
             this.Money += moneyLoot;
-            Log.UpdateLog($"Looted ₿{moneyLoot} Purse ₿{this.Money}");
+            Log.UpdateLog($"Looted ₿{moneyLoot} purse ₿{this.Money}");
         }
     }
     public class Item

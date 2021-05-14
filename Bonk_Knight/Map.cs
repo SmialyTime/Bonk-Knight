@@ -48,16 +48,19 @@ namespace Bonk_Knight
                 case "easy":
                 case "1":
                     dif = 1;
+                    Globals.GameDifficulty = "easy";
                     Globals.MoneyMultiplier = 2;
                     break;
                 case "medium":
                 case "2":
                     dif = 2;
+                    Globals.GameDifficulty = "medium";
                     Globals.MoneyMultiplier = 1;
                     break;
                 case "hard":
                 case "3":
                     dif = 3;
+                    Globals.GameDifficulty = "hard";
                     Globals.MoneyMultiplier = 0.5;
                     break;
             }
@@ -217,7 +220,6 @@ namespace Bonk_Knight
             this.GameSectionMap = new List<Section>() { };
             //basic hard coded layout home -> Mountains -> Cave -> Forest -> Village -> Castle -> throneRoom
             //home
-            //add tutorial to home??
             Section home = new Section();
                 home.Enemies = 0;
                 home.EnemyDifficulty = 0;
@@ -233,6 +235,7 @@ namespace Bonk_Knight
             this.GameSectionMap.Add(Mount);
 
             //older code
+
             //Mountain,Cave,Forest,Village,Kingdom,ThroneRoom
             //List<String> typetst = new List<string>() { "Mountain", "Cave", "Forest", "Village", "Kingdom", "ThroneRoom" };
             //Section Tester = new Section();
@@ -305,6 +308,7 @@ namespace Bonk_Knight
             this.GameSectionMap.Add(ThroneRoom);
 
         }
+
     }
 
     public class Log

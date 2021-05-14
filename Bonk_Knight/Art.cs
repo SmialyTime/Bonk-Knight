@@ -330,6 +330,11 @@ namespace Bonk_Knight
                                 @"          %" +
                                 @"          %";
                     break;
+                case "blankH":
+                    EnemyBack = @"          %" +
+                                @"          %" +
+                                @"          %";
+                    break;
                 case "Player":
                     EnemyBack = @"   █┬█%" +
                                 @" (τ)| %" +
@@ -359,8 +364,7 @@ namespace Bonk_Knight
                                 @"  / \%" ;
                     break;
                 case "Tiller":
-                    EnemyBack = @" _ _ %" +
-                                @"´|´O`%" +
+                    EnemyBack = @"´|´O`%" +
                                 @" |/|\%" +
                                 @"  / \%" ;
                     break;
@@ -395,9 +399,9 @@ namespace Bonk_Knight
                                 @"/.-\_/-.\%" ;
                     break;
                 case "Knight":
-                    EnemyBack = @"|[╦]%" +
-                                @"+/|\%" +
-                                @" / \%";
+                    EnemyBack = @" |[╦]%" +
+                                @" +/|\%" +
+                                @"  / \%";
                     break;
                 case "Archer":
                     EnemyBack = @",┐ o %" +
@@ -405,10 +409,10 @@ namespace Bonk_Knight
                                 @"`┘/ \%";
                     break;
                 case "King":
-                    EnemyBack = @"| |~%" +
-                                @"$╕╬╒%" +
-                                @"┼/|\%" +
-                                @" / \%";
+                    EnemyBack = @"   |~%" +
+                                @" $╕╬╒%" +
+                                @" ┼/|\%" +
+                                @"  / \%";
                     break;
                 default:
                     Functions.MakeErrorMessage($"name of Enemy unidentified - {Type}");
@@ -498,6 +502,24 @@ namespace Bonk_Knight
                                      @"                              %" +
                                      @"                              %" +
                                      @"                              %";
+                    break;
+                case "tips":
+                case "Tips":
+                case "tip":
+                case "Tip":
+                    GameScreenBack = @"┌──────────────────────────────┐%" +
+                                     @"│           Tip 1:             │%" +
+                                     @"│      look at help menu       │%" +
+                                     @"│           Tip 2:             │%" +
+                                     @"│use log menu after enemy death│%" +
+                                     @"│           Tip 3:             │%" +
+                                     @"│spend money in shop regularly │%" +
+                                     @"│                              │%" +
+                                     @"│           Tip 4:             │%" +
+                                     @"│  if enemy is attacking dodge │%" +
+                                     @"│                              │%" +
+                                     @"│                              │%" +
+                                     @"└──────────────────────────────┘%";
                     break;
                 case "FillerTEST":
                     GameScreenBack = @"123456789012345678901234567890%" +

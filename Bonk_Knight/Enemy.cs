@@ -189,7 +189,7 @@ namespace Bonk_Knight
         {
             if (this.living == false)
             {
-                //deLoadIndicator();
+                Animate.ControlableEntityPlace(this.Position, Art.Enemy("blankH"));
                 MainClass.PlayerEventSystem.MadeCombatMove -= PlayerEventSystem_MadeCombatMove;
             }
         }
@@ -223,14 +223,15 @@ namespace Bonk_Knight
             switch (this.PlanedMove.ToLower())
             {
                 case "dodge":
-                    this.Dodging = true;
+                    //this.Dodging = true;
+                    System.Diagnostics.Debug.Write("D");
                     break;
                 case "debuff":
                     //do nothing
                     break;
                 case "move":
                     //this.Position -= 1; not working
-                    Animate.ControlableEntityPlace(this.Position,Art.Enemy("blank"));
+                    Animate.ControlableEntityPlace(this.Position, Art.Enemy("blank"));
                     bool spaceInfrontAvalible = true;
                     foreach (Enemy spaceInfrontAvalibleToCheck in MainClass.GameMap.CurrentEnemies)
                     {
@@ -329,6 +330,7 @@ namespace Bonk_Knight
             if (this.debuff == true)
             {
                 this.PlanedMove = "debuff";
+                this.debuff = false;
             }
             else
             {
@@ -391,7 +393,7 @@ namespace Bonk_Knight
                             //ranged enemies (high charge) 80% attack 20% dodge/debuf
                             case "archer":
                                 if (RandomRandUntilNewRand(0, 10) <= 8) { this.PlanedMove = "Attack"; }
-                                else { this.PlanedMove = "dodge"; }
+                                else { this.PlanedMove = "debuff"; }
                                 break;
                             //special enemies 90% attack 10% dodge
                             case "king":

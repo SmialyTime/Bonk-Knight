@@ -63,10 +63,10 @@ namespace Bonk_Knight
             Player_1.RenderEntity();
             Globals.GameGoing = true;
             char Continue = keyInput();
-            //Render.CursorBellowScreen();
-            //Console.ForegroundColor = ConsoleColor.DarkGray;
-            //Console.WriteLine("         h - help  ");
-            //Console.ForegroundColor = ConsoleColor.White;
+            Console.SetCursorPosition(Globals.Ox + Globals.GSW + 2,Globals.Oy);
+            Console.ForegroundColor = ConsoleColor.DarkGray;
+            Console.WriteLine("h - help  ");
+            Console.ForegroundColor = ConsoleColor.White;
             Log.UpdateLog("'Darlig I'm sick' - wife");
             while (Globals.GameGoing == true)
             {
@@ -91,22 +91,18 @@ namespace Bonk_Knight
                         case 'm':
                             //displays Map Screen
                             GameWindow MapScn = new GameWindow("Map");
-                            //make it so any button after changes to the normal screen
                             break;
                         case 'l':
-                            //displays Map Screen
+                            //displays log Screen
                             GameWindow LogScn = new GameWindow("log");
-                            //make it so any button after changes to the normal screen
                             break;
                         case 'b':
                             //displays Map Screen
                             GameWindow ShopScn = new GameWindow("shop");
-                            //make it so any button after changes to the normal screen
                             break;
                         case 'h':
-                            //displays Map Screen
+                            //displays help Screen
                             GameWindow HelpScn = new GameWindow("help");
-                            //make it so any button after changes to the normal screen
                             break;
                         /*spacebar*/
                         case '▭':
@@ -114,7 +110,7 @@ namespace Bonk_Knight
                             Player_1.Attack();
                             break;
                         case 't':
-                            //TESTAni.RunWalkCycle();
+                            GameWindow tipScn = new GameWindow("tip");
                             break;
                         case ''/*Esc*/:
                             Globals.GameGoing = false;
@@ -279,18 +275,11 @@ namespace Bonk_Knight
             Render.RenderBlankOutline(Globals.GSW, Globals.GSH);
             Render.RenderMapOutline(Art.GameUI("Cover"));
 
-            //check for key inputs to return to main
-            var CoverOpen = true;
-            var KeyBack = '㊀';
-            while (CoverOpen)
-            {
-                KeyBack = keyInput();
-                if (KeyBack != '㊀')
-                {
-                    CoverOpen = false;
-                }
-            }
+            //check for key inputs to go to next screen
+            Functions.ClearKeyIntputs();
+            Console.ReadKey();
 
+            GameWindow tipWin = new GameWindow("tip");
             GameWindow HelpScn = new GameWindow("help");
         }
     }

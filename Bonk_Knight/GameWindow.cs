@@ -26,6 +26,10 @@ namespace Bonk_Knight
                 case "log":
                     LogWindow();
                     break;
+                case "tip":
+                case "tips":
+                    TipWindow();
+                    break;
                 case "shop":
                     shopWindow();
                     break;
@@ -46,9 +50,18 @@ namespace Bonk_Knight
             }
 
         }
+        public void TipWindow()
+        {
+            //load custom screen
+            Render.RenderMapOutline(Art.GameUI("tips"));
+
+            //check for key inputs to return to main
+            Functions.ClearKeyIntputs();
+            Console.ReadKey();
+            CloseScreen();
+        }
         public void HelpWindow()
         {
-            Functions.ClearKeyIntputs();
             //load custom map screen
             Render.RenderBlankOutline(Globals.GSW,Globals.GSH);
             Console.SetCursorPosition(Globals.Sx, Globals.Sy);
@@ -82,14 +95,8 @@ namespace Bonk_Knight
             LineWithSubText("ϟ", "", ConsoleColor.Yellow);
 
             //check for key inputs to return to main
-            while (this.WindowOpen)
-            {
-                this.KeyBack = MainClass.keyInput();
-                if (this.KeyBack != '㊀')
-                {
-                    this.WindowOpen = false;
-                }
-            }
+            Functions.ClearKeyIntputs();
+            Console.ReadKey();
             CloseScreen();
         }
         public void EndWinWindow(){
@@ -102,15 +109,9 @@ namespace Bonk_Knight
                                      $@"{MainClass.Player_1.UserName} stated his %"+
                                      $@"long journey home past%"+
                                      $@" all the fallen foe   %",4);
-            //check for key inputs to return to main
-            while (this.WindowOpen)
-            {
-                this.KeyBack = MainClass.keyInput();
-                if (this.KeyBack != '㊀')
-                {
-                    this.WindowOpen = false;
-                }
-            }
+            //check for key inputs to reurn to main
+            Functions.ClearKeyIntputs();
+            Console.ReadKey();
             CloseScreen();
         }
         public void EndStoryWindow(){
@@ -148,15 +149,9 @@ namespace Bonk_Knight
                                              $@"sickness (unlucky)", 12, 20, ConsoleColor.DarkGray);
                 }
             }
-            //check for key inputs to reBonk king lives on%turn to main
-            while (this.WindowOpen)
-            {
-                this.KeyBack = MainClass.keyInput();
-                if (this.KeyBack != '㊀')
-                {
-                    this.WindowOpen = false;
-                }
-            }
+            //check for key inputs to reurn to main
+            Functions.ClearKeyIntputs();
+            Console.ReadKey();
             CloseScreen();
         }
         public void LogWindow()
@@ -196,14 +191,10 @@ namespace Bonk_Knight
             Console.ForegroundColor = ConsoleColor.White;
 
             //wait till input to return to main
-            while (this.WindowOpen)
-            {
-                this.KeyBack = MainClass.keyInput();
-                if (this.KeyBack != '㊀' && this.KeyBack != '㊅')
-                {
-                    this.WindowOpen = false;
-                }
-            }
+
+            //check for key inputs to return to main
+            Functions.ClearKeyIntputs();
+            Console.ReadKey();
             CloseScreen();
         }
         public void shopWindow()
@@ -214,6 +205,10 @@ namespace Bonk_Knight
             Render.RenderScreen("all");
             //actual shop screen
             Functions.resetCursor();
+            Console.SetCursorPosition(Console.CursorLeft + 4, Console.CursorTop);
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.Write($"₿{MainClass.Player_1.Money}");
+            Console.ForegroundColor = ConsoleColor.White;
             Console.SetCursorPosition(Console.CursorLeft, Console.CursorTop + 1);
             Functions.CentedTextSubText("Increase Attack", $"Cost ₿{Convert.ToInt32(MainClass.Player_1.Strength*10)} Type: 'buy Attack'", ConsoleColor.DarkRed);
             Console.SetCursorPosition(Console.CursorLeft, Console.CursorTop + 1);
@@ -239,6 +234,8 @@ namespace Bonk_Knight
                         MainClass.Player_1.Money -= cost;
                         MainClass.Player_1.Strength += 0.1;
                         Log.UpdateLog("bougth +10 percent attack");
+                        Console.SetCursorPosition(Globals.Sx + 4, Globals.Sy);
+                        Functions.CentedTextSubText($"    ₿{MainClass.Player_1.Money}", $"", ConsoleColor.Green);
                     }
                 }
                 else if (TextInputToScreen == "defence" || TextInputToScreen == "increase defence" || TextInputToScreen == "buy defence" || TextInputToScreen == "'defence'" || TextInputToScreen == "'buy defence'")
@@ -249,6 +246,8 @@ namespace Bonk_Knight
                         MainClass.Player_1.Money -= cost;
                         MainClass.Player_1.Defence += 0.1;
                         Log.UpdateLog("bougth +10percent defence");
+                        Console.SetCursorPosition(Globals.Sx + 4, Globals.Sy);
+                        Functions.CentedTextSubText($"    ₿{MainClass.Player_1.Money}", $"", ConsoleColor.Green);
                     }
                 }
                 else if (TextInputToScreen == "health" || TextInputToScreen == "buy health" || TextInputToScreen == "max health" || TextInputToScreen == "buy max health" || TextInputToScreen == "maxhealth" || TextInputToScreen == "buy maxhealth" || TextInputToScreen == "increase health" || TextInputToScreen == "'health'" || TextInputToScreen == "'buy health'")
@@ -260,20 +259,24 @@ namespace Bonk_Knight
                         MainClass.Player_1.MaxHealth += 20;
                         MainClass.Player_1.Health += 20;
                         Log.UpdateLog("Bought 20 Health");
+                        Console.SetCursorPosition(Globals.Sx + 4, Globals.Sy);
+                        Functions.CentedTextSubText($"    ₿{MainClass.Player_1.Money}", $"", ConsoleColor.Green);
                     }
                 }
                 else if (TextInputToScreen == "crit chance" || TextInputToScreen == "buy crit chance" || TextInputToScreen == "'crit chance'" || TextInputToScreen == "'buy crit chance'" ||TextInputToScreen == "critchance" || TextInputToScreen == "buy critchance" || TextInputToScreen == "'critchance'" || TextInputToScreen == "'buy critchance'" || TextInputToScreen == "crit" || TextInputToScreen == "buy crit" || TextInputToScreen == "'crit'" || TextInputToScreen == "'buy crit'")
                 {
-                    cost = Convert.ToInt32(MainClass.Player_1.CritChance * 500);
+                    cost = Convert.ToInt32(MainClass.Player_1.CritChance * 200);
                     if (MainClass.Player_1.Money >= cost)
                     {
                         MainClass.Player_1.Money -= cost;
                         MainClass.Player_1.CritChance += 0.1;
                         Log.UpdateLog("Bought +10 percent crit");
+                        Console.SetCursorPosition(Globals.Sx + 4, Globals.Sy);
+                        Functions.CentedTextSubText($"    ₿{MainClass.Player_1.Money}", $"", ConsoleColor.Green);
                     }
                 }
                 //check if player wants to exit screen
-                if (TextInputToScreen == "exit" || TextInputToScreen == "e" || TextInputToScreen == "'exit'" || TextInputToScreen == "esc" || TextInputToScreen == "stop" || TextInputToScreen == "leave" || TextInputToScreen == "end")
+                if (/*MainClass.Player_1.Money < 10 ||*/ TextInputToScreen == "exit" || TextInputToScreen == "e" || TextInputToScreen == "'exit'" || TextInputToScreen == "esc" || TextInputToScreen == "stop" || TextInputToScreen == "leave" || TextInputToScreen == "end")
                 {
                     this.WindowOpen = false;
                 }
@@ -458,14 +461,9 @@ namespace Bonk_Knight
             Console.ForegroundColor = ConsoleColor.White;
 
             //stoping map feature
-            while (this.WindowOpen)
-            {
-                this.KeyBack = MainClass.keyInput();
-                if (this.KeyBack != '㊀' && this.KeyBack != '㊅')
-                {
-                    this.WindowOpen = false;
-                }
-            }
+            //check for key inputs to reurn to main
+            Functions.ClearKeyIntputs();
+            Console.ReadKey();
             CloseScreen();
         }
         public void NormalWindow()
@@ -496,6 +494,8 @@ namespace Bonk_Knight
         }
         public void CloseScreen()
         {
+            Functions.CursorBellowScreen();
+            Console.WriteLine("                        ");
             Globals.ExtraScreenOpen = "Game";
             Render.RenderOutline(Globals.GSW, Globals.GSH);
             MainClass.GameMap?.LoadCurrentScreen();

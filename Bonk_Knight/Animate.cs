@@ -270,6 +270,7 @@ namespace Bonk_Knight
             Console.SetCursorPosition(oXCur + 20, oYCur + 20);
 
         }
+        //older test of animation
         public static void MovingCloud(int ofSetY)
         {
             //clears input so doesn't automatically stop
