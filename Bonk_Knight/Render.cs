@@ -43,15 +43,17 @@ namespace Bonk_Knight
                         {
                             for (int ROW = Bounderies[0]; ROW <= Bounderies[2]; ROW++)
                             {
-                                //setColor(Globals.Screen[ROW, CLM]);-----------------------------------------------------------
+                                //setColor(Globals.Screen[ROW, CLM]);
                                 if (Globals.Screen[ROW, CLM] == '◇')
                                 {
-                                    setColor(Globals.CurrentBackground[ROW, CLM]);
+                                    setColor(Globals.CurrentBackground[ROW, CLM], '◇');
                                     Console.Write(Globals.CurrentBackground[ROW, CLM]); //-1 because 0 indexed
                                     Console.ForegroundColor = ConsoleColor.White;
                                 }
                                 else
                                 {
+                                    //setColor('₹');//red
+                                    setColor('w');//red
                                     Console.Write(Globals.Screen[ROW, CLM]); //-1 because 0 indexed
                                 }
                                 Console.SetCursorPosition(Console.CursorLeft-1, Console.CursorTop + 1);
@@ -83,7 +85,7 @@ namespace Bonk_Knight
                         //to ref the screen multi-array use Screen[row][columb] in double nested for loops
                         if (Globals.Screen[rw, cl] == '◇')
                         {
-                            setColor(Globals.CurrentBackground[rw, cl]);
+                            setColor(Globals.CurrentBackground[rw, cl], '◇');
                             Console.Write(Globals.CurrentBackground[rw, cl]); //-1 because 0 indexed
                             Console.ForegroundColor = ConsoleColor.White;
                         }
@@ -265,13 +267,16 @@ namespace Bonk_Knight
                 }
             }
         }
-        public static void setColor(char inChar)
+        public static void setColor(char inChar, char currentChar = ' ')
         {
             ConsoleColor forgColor;
             switch (inChar)
             {
                 case '*':
                     forgColor = Functions.GC("?");
+                    break;
+                case '₹':
+                    forgColor = Functions.GC("r");
                     break;
                 case 'τ':
                     forgColor = Functions.GC("c");
@@ -319,12 +324,14 @@ namespace Bonk_Knight
                     forgColor = Functions.GC("E");
                     break;
                 default:
+                case 'w':
+                case 'W':
                     forgColor = Functions.GC("w");
                     break;
             }
 
             //set for specific terrains
-            if (Globals.AnimationRunning != true)
+            if (Globals.AnimationRunning != true || currentChar == '◇')
             {
                 switch (Globals.Terrain)
                 {

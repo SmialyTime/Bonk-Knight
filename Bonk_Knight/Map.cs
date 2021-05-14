@@ -144,11 +144,14 @@ namespace Bonk_Knight
             //IMPROVE - null case?
             if (CurrentSection < this.GameSectionMap.Count - 1 && MainClass.Player_1.Position == 6 && this.CurrentEnemies.Count == 0)
             {
+                //checks when in new section
                 var oldBiome = this.GameSectionMap[CurrentSection].Type;
                 this.CurrentSection++;
                 if (this.GameSectionMap[CurrentSection].Type != oldBiome)
                 {
                     Log.UpdateLog($"Entered {this.GameSectionMap[CurrentSection].Type}");
+                    //heals player
+                    MainClass.Player_1.Health = MainClass.Player_1.MaxHealth;
                 }
                 Render.ChangeBackground(this);
                 //System.Diagnostics.Debug.WriteLine($"{this.this.CurrentSection}: {this.GameSectionMap[this.this.CurrentSection].SectionName}");
